@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="another test commit">
-      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/HelloController.java" afterDir="false" />
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="one more test commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,16 +13,29 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectId" id="2MJeb98NmiLl67U2WCkkZbl1HcC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  }
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -31,7 +44,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677249339228</updated>
-      <workItem from="1677249341132" duration="1114000" />
+      <workItem from="1677249341132" duration="1482000" />
+      <workItem from="1677490195084" duration="645000" />
+      <workItem from="1677490974531" duration="128000" />
+      <workItem from="1677510744099" duration="1058000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>
@@ -54,7 +70,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677250156360</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="one more test commit">
+      <created>1677250475582</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677250475582</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -75,6 +98,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="test commit" />
     <MESSAGE value="another test commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="another test commit" />
+    <MESSAGE value="one more test commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="one more test commit" />
   </component>
 </project>
