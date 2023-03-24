@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="documentation">
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="documentation update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/TourPlanner_Specification.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/TourPlanner_Specification.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,13 +30,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/jassi/OneDrive/Dokumente/FH/BIF/2023_SS/REQEN/REQ-Practise",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -49,7 +52,9 @@
       <workItem from="1677490974531" duration="128000" />
       <workItem from="1677510744099" duration="1058000" />
       <workItem from="1678725519146" duration="55000" />
-      <workItem from="1678863586246" duration="610000" />
+      <workItem from="1678863586246" duration="991000" />
+      <workItem from="1678869168302" duration="24000" />
+      <workItem from="1679335420341" duration="106000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>
@@ -86,7 +91,35 @@
       <option name="project" value="LOCAL" />
       <updated>1678725560988</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="documentation update">
+      <created>1678865760797</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678865760797</updated>
+    </task>
+    <task id="LOCAL-00007" summary="documentation update">
+      <created>1678865836696</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1678865836696</updated>
+    </task>
+    <task id="LOCAL-00008" summary="documentation update">
+      <created>1678865964114</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1678865964114</updated>
+    </task>
+    <task id="LOCAL-00009" summary="documentation update">
+      <created>1678866040624</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678866040624</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +142,7 @@
     <MESSAGE value="another test commit" />
     <MESSAGE value="one more test commit" />
     <MESSAGE value="documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="documentation" />
+    <MESSAGE value="documentation update" />
+    <option name="LAST_COMMIT_MESSAGE" value="documentation update" />
   </component>
 </project>
