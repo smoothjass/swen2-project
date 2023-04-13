@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="documentation update">
-      <change afterPath="$PROJECT_DIR$/documentation/database/clear_database.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentation/database/database.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentation/database/tour_planner_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="database files added (credit to Lorenz)&#10;documentation structured">
+      <change beforePath="$PROJECT_DIR$/documentation/database/clear_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/database/clear_database.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +38,12 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\specification" />
+      <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\diagrams" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,7 +64,7 @@
       <workItem from="1679905671076" duration="1000" />
       <workItem from="1680242730464" duration="584000" />
       <workItem from="1681308568385" duration="816000" />
-      <workItem from="1681365757393" duration="212000" />
+      <workItem from="1681365757393" duration="450000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>
@@ -140,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681312943528</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="database files added (credit to Lorenz)&#10;documentation structured">
+      <created>1681366068764</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681366068764</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +174,7 @@
     <MESSAGE value="one more test commit" />
     <MESSAGE value="documentation" />
     <MESSAGE value="documentation update" />
-    <option name="LAST_COMMIT_MESSAGE" value="documentation update" />
+    <MESSAGE value="database files added (credit to Lorenz)&#10;documentation structured" />
+    <option name="LAST_COMMIT_MESSAGE" value="database files added (credit to Lorenz)&#10;documentation structured" />
   </component>
 </project>
