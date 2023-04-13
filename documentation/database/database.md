@@ -1,0 +1,1 @@
+docker run --rm --detach --name tour_planner -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin-pw  -v tour_planner:/var/lib/postgresql/data -p 5431:5432 postgres
