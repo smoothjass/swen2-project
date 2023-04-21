@@ -10,8 +10,4 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MapSubviewController"
             prefHeight="400.0" prefWidth="600.0">
-
-    <Label fx:id="request test route"/>
-    <Button text="Hello!" onAction="#onTestRouteButtonClick"/>
-
 </VBox>
