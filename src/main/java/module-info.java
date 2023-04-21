@@ -5,4 +5,6 @@ module fhtw.swen2.duelli.duvivie.swen2project {
 
     opens fhtw.swen2.duelli.duvivie.swen2project to javafx.fxml;
     exports fhtw.swen2.duelli.duvivie.swen2project;
+    exports fhtw.swen2.duelli.duvivie.swen2project.Controller;
+    opens fhtw.swen2.duelli.duvivie.swen2project.Controller to javafx.fxml;
 }

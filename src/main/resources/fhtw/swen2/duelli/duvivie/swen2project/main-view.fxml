@@ -6,11 +6,14 @@
 
 <?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.HelloController">
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MainViewController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <Label fx:id="welcomeText"/>
     <Button text="Hello!" onAction="#onHelloButtonClick"/>
+
+    <fx:include fx:id="map-subview" source="map-subview.fxml"> </fx:include>
+
 </VBox>
