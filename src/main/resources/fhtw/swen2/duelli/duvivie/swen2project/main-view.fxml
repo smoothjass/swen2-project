@@ -14,6 +14,6 @@
     <Label fx:id="welcomeText"/>
     <Button text="Hello!" onAction="#onHelloButtonClick"/>
 
-    <fx:include fx:id="map-subview" source="map-subview.fxml"> </fx:include>
+    <fx:include source="map-subview.fxml"> </fx:include>
 
 </VBox>

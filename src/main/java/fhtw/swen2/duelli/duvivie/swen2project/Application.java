@@ -15,7 +15,7 @@ public class Application extends javafx.application.Application {
         FXMLLoader fxmlLoader = getFxmlLoader(factory);
         System.out.println(fxmlLoader);
         Scene scene = new Scene(fxmlLoader.load(), 620, 580);
-        //stage.setMaximized(true);
+        stage.setMaximized(true);
         stage.setTitle("Products List View Example");
         stage.setScene(scene);
         stage.show();
