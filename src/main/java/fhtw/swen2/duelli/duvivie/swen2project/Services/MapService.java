@@ -19,28 +19,30 @@ import java.util.concurrent.ExecutionException;
 public class MapService {
     private String URL;
     public static final String testRequest = "https://www.mapquestapi.com/directions/v2/route" +
-            "?key=9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA";
+            "?key=9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK&from=ClarendonBlvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA";
 
-    // obviously the real method won't retourn the WHOLE response object but
-    // for just trying the async request we'll have it that way
-    /*
 public static Object getTestRoute() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
-    CompletableFuture<Object> yieldFact = sendRequest();
+    // get the route
+    CompletableFuture<Object> yieldFact = sendRequest(testRequest);
     System.out.println("Waiting for fact"); // TODO make spinner here
     while(!yieldFact.isDone()) {
         System.out.print(".");
         Thread.sleep(250);
     }
     System.out.println("Fact received :" + yieldFact);
-    return yieldFact;
+    // get bounding box, session id and distance from the response
+    // TODO some magic
+    // send another request to get the static map
+    // TODO some magic
+    return "whatever makes sense to return here, not sure yet";
     }
 
-private static CompletableFuture<Object> sendRequest() throws URISyntaxException, JsonProcessingException {
+private static CompletableFuture<Object> sendRequest(String url) throws URISyntaxException, JsonProcessingException {
     HttpClient httpClient = HttpClient.newHttpClient();
-    HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(testRequest)).build();
+    HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(url)).build();
     return httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
             .thenApply(
                     HttpResponse::body);
 }
-*/
+
 }

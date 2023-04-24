@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="halb eingefügter button delete">
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/MapService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/map-subview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/map-subview.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +106,8 @@
       <workItem from="1682068182628" duration="165000" />
       <workItem from="1682068370815" duration="36000" />
       <workItem from="1682068422109" duration="537000" />
-      <workItem from="1682152981585" duration="1141000" />
+      <workItem from="1682152981585" duration="1189000" />
+      <workItem from="1682336068271" duration="1063000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>
@@ -217,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682090461063</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an">
+      <created>1682154171414</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682154171414</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,6 +247,7 @@
     <MESSAGE value="database files added (credit to Lorenz)&#10;documentation structured" />
     <MESSAGE value="test commit" />
     <MESSAGE value="halb eingefügter button delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="halb eingefügter button delete" />
+    <MESSAGE value="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an" />
+    <option name="LAST_COMMIT_MESSAGE" value="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an" />
   </component>
 </project>

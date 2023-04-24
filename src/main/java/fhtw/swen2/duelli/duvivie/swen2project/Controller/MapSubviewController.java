@@ -25,7 +25,7 @@ public class MapSubviewController implements Initializable {
 
     public void onRequestRouteButton(ActionEvent actionEvent) {
         requestRoute.setText("the button works");
-        /*
+
         try {
             requestRoute.setText((String) MapService.getTestRoute());
         } catch (IOException e) {
@@ -37,6 +37,6 @@ public class MapSubviewController implements Initializable {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
-        */
+
     }
 }

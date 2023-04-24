@@ -12,5 +12,5 @@
             prefHeight="400.0" prefWidth="600.0">
 
     <Label fx:id="requestRoute"/>
-    <Button text="Hello!" onAction="#onRequestRouteButton"/>
+    <Button text="request route" onAction="#onRequestRouteButton"/>
 </VBox>
