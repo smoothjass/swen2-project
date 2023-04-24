@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+    <VBox xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourFormController">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <Label style="-fx-font-size: 18;"  text="Tour Details"/>
+
+        <GridPane hgap="10" vgap="10" maxHeight="Infinity" maxWidth="Infinity">
+
+            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="Tour name:"/>
+                <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="tourName"/>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="To:"/>
+                <TextField fx:id="to"/>
+            </VBox>
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="From:"/>
+                <TextField fx:id="from"/>
+            </VBox>
+
+            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="Transport type:"/>
+                <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="transportType"/>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="Tour Distance:"/>
+                <TextField fx:id="tourDistance"/>
+            </VBox>
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="Estimated time:"/>
+                <TextField fx:id="estimatedTime"/>
+            </VBox>
+
+        </GridPane>
+
+        <Label text="Description"/>
+        <TextArea fx:id="description"/>
+
+    </VBox>

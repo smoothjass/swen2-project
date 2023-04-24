@@ -1,0 +1,18 @@
+.search-bar {
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.search-icon {
+    -fx-background-color: white;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 5;
+}
+
+.search-field {
+    -fx-background-color: white;
+    -fx-border-width: 0 0 0 1;
+    -fx-padding: 5;
+    -fx-prompt-text-fill: gray;
+}

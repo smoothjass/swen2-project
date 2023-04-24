@@ -4,16 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="halb eingefügter button delete" />
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="halb eingefügter button delete">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourDetailsSubviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourFormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourListSubviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourDetailsSubviewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourFormModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourListSubviewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/stylesheets/searchbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-details-subview.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-form.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-list-subview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/ControllerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/ControllerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/map-subview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/map-subview.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="lorenz" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,8 +61,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;first__layout&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/lodu/IdeaProjects/swen2-project&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -50,6 +80,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="fhtw.swen2.duelli.duvivie.swen2project.Models" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\specification" />
       <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\diagrams" />
@@ -100,6 +133,15 @@
       <workItem from="1682068182628" duration="165000" />
       <workItem from="1682068370815" duration="36000" />
       <workItem from="1682068422109" duration="537000" />
+      <workItem from="1682090614220" duration="161000" />
+      <workItem from="1682151122585" duration="22299000" />
+      <workItem from="1682175779069" duration="1883000" />
+      <workItem from="1682178410424" duration="5688000" />
+      <workItem from="1682191757267" duration="2613000" />
+      <workItem from="1682268287665" duration="26000" />
+      <workItem from="1682268327672" duration="3534000" />
+      <workItem from="1682344691148" duration="102000" />
+      <workItem from="1682347457472" duration="2865000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>
@@ -210,7 +252,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -226,5 +274,15 @@
     <MESSAGE value="test commit" />
     <MESSAGE value="halb eingefügter button delete" />
     <option name="LAST_COMMIT_MESSAGE" value="halb eingefügter button delete" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.reflect.InvocationTargetException" package="java.lang.reflect" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
