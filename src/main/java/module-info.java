@@ -4,6 +4,7 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     requires java.net.http;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
+    requires java.sql;
 
 
     opens fhtw.swen2.duelli.duvivie.swen2project to javafx.fxml;
