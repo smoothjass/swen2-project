@@ -9,4 +9,7 @@
 <VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MapSubviewController">
+
+    <Label fx:id="requestRoute"/>
+    <Button text="request route" onAction="#onRequestRouteButton"/>
 </VBox>

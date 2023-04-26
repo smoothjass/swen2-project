@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="small changes to the tour-details-form">
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="basic request funktioniert but lots of magic needs to be done still (see TODOs)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/RawResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/DatabaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/DatabaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/map-subview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/map-subview.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +19,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
-        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -26,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="database-connection" />
+        <entry key="$PROJECT_DIR$" value="lorenz" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,15 +47,13 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/lodu/IdeaProjects/swen2-project&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -65,9 +63,6 @@
   }
 }</component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="fhtw.swen2.duelli.duvivie.swen2project.Models" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\specification" />
       <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\diagrams" />
@@ -75,6 +70,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="18" />
       <option name="MAIN_CLASS_NAME" value="fhtw.swen2.duelli.duvivie.swen2project.Application" />
       <module name="swen2-project" />
       <extension name="coverage">
@@ -118,20 +114,8 @@
       <workItem from="1682068182628" duration="165000" />
       <workItem from="1682068370815" duration="36000" />
       <workItem from="1682068422109" duration="537000" />
-      <workItem from="1682090614220" duration="161000" />
-      <workItem from="1682151122585" duration="22299000" />
-      <workItem from="1682175779069" duration="1883000" />
-      <workItem from="1682178410424" duration="5688000" />
-      <workItem from="1682191757267" duration="2613000" />
-      <workItem from="1682268287665" duration="26000" />
-      <workItem from="1682268327672" duration="3534000" />
-      <workItem from="1682344691148" duration="102000" />
-      <workItem from="1682347457472" duration="2865000" />
-      <workItem from="1682424127544" duration="94000" />
-      <workItem from="1682424386037" duration="83000" />
-      <workItem from="1682424486945" duration="71000" />
-      <workItem from="1682452705735" duration="19000" />
-      <workItem from="1682498164235" duration="196000" />
+      <workItem from="1682152981585" duration="1189000" />
+      <workItem from="1682336068271" duration="1063000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>
@@ -231,45 +215,43 @@
       <option name="project" value="LOCAL" />
       <updated>1682090373706</updated>
     </task>
-    <task id="LOCAL-00015" summary="database connection added">
-      <created>1682406124563</created>
+    <task id="LOCAL-00015" summary="halb eingefügter button delete">
+      <created>1682090461063</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1682406124563</updated>
+      <updated>1682090461063</updated>
     </task>
-    <task id="LOCAL-00016" summary="small change">
-      <created>1682406469212</created>
+    <task id="LOCAL-00016" summary="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an">
+      <created>1682154171414</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1682406469212</updated>
+      <updated>1682154171414</updated>
     </task>
-    <task id="LOCAL-00017" summary="small changes to the tour-details-form">
-      <created>1682407658408</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1682407658408</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -284,19 +266,7 @@
     <MESSAGE value="database files added (credit to Lorenz)&#10;documentation structured" />
     <MESSAGE value="test commit" />
     <MESSAGE value="halb eingefügter button delete" />
-    <MESSAGE value="database connection added" />
-    <MESSAGE value="small change" />
-    <MESSAGE value="small changes to the tour-details-form" />
-    <option name="LAST_COMMIT_MESSAGE" value="small changes to the tour-details-form" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.reflect.InvocationTargetException" package="java.lang.reflect" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an" />
+    <option name="LAST_COMMIT_MESSAGE" value="wollte den async request ausprobieren, funktioniert nicht, ur viele errors, hab jetzt leider keine zeit mehr. hab's auskommentiert und schau es mir später an" />
   </component>
 </project>
