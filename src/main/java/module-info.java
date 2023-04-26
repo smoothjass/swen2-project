@@ -6,6 +6,8 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     requires com.fasterxml.jackson.databind;
     requires java.sql;
 
+    opens fhtw.swen2.duelli.duvivie.swen2project.Services to com.fasterxml.jackson.databind;
+    exports fhtw.swen2.duelli.duvivie.swen2project.Services;
 
     opens fhtw.swen2.duelli.duvivie.swen2project to javafx.fxml;
     exports fhtw.swen2.duelli.duvivie.swen2project;

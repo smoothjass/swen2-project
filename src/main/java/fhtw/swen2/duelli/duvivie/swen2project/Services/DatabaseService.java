@@ -1,9 +1,10 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Services;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 public class DatabaseService {
 
     private Connection connection;
