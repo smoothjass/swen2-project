@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 
-    <VBox xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourFormController">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourFormController">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
@@ -29,17 +29,26 @@
                 <TextField fx:id="from"/>
             </VBox>
 
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="Transport type:"/>
-                <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="transportType"/>
-            </VBox>
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Tour Distance:"/>
                 <TextField fx:id="tourDistance"/>
             </VBox>
-            <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
                 <Label text="Estimated time:"/>
                 <TextField fx:id="estimatedTime"/>
+            </VBox>
+
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="Transport type:"/>
+                <ChoiceBox fx:id="transportType">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="pedestrian"/>
+                            <String fx:value="bicycle"/>
+                            <String fx:value="car"/>
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
             </VBox>
 
             <VBox GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
