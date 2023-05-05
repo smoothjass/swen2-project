@@ -1,7 +1,11 @@
 package fhtw.swen2.duelli.duvivie.swen2project;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Controller.ControllerFactory;
+import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
@@ -9,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 public class Application extends javafx.application.Application {
 
@@ -16,7 +21,39 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        connectToDatabase();
+        // connectToDatabase();
+        // Create an EntityManagerFactory when you start the application.
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JavaHelps");
+        // Create the DAO object
+        TourDao dao = new TourDao(entityManagerFactory);
+
+        Tour testTour = new Tour();
+        testTour.setName("test");
+        testTour.setDescription("description");
+        testTour.setDistance(5.0F);
+        testTour.setFrom("uranus");
+        testTour.setTo("joemama");
+        dao.create(testTour);
+
+        List<Tour> tours = dao.findAll();
+        if (tours != null) {
+            for (Tour tour : tours) {
+                System.out.println(tour);
+            }
+        }
+
+        dao.delete(1);
+
+        tours = dao.findAll();
+        if (tours != null) {
+            for (Tour tour : tours) {
+                System.out.println(tour);
+            }
+        }
+
+        // Never forget to close the entityManagerFactory
+        entityManagerFactory.close();
+
         ControllerFactory factory = new ControllerFactory();
         FXMLLoader fxmlLoader = getFxmlLoader(factory);
         System.out.println(fxmlLoader);

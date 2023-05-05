@@ -1,16 +1,20 @@
+DROP TABLE IF EXISTS logs;
+DROP TABLE IF EXISTS tours;
+DROP TABLE IF EXISTS transport_types;
+
 CREATE TABLE "tours" (
-                       "id" int PRIMARY KEY,
+                       "tour_id" serial PRIMARY KEY,
                        "name" varchar(50),
                        "description" varchar(1000),
                        "from" varchar(100),
                        "to" varchar(100),
-                       "fk_transport_type" int,
-                       "distance" float,
-                       "time" interval
+                       "transport_type_id" int,
+                       "distance" float
+                       --,"time" interval
 );
 
 CREATE TABLE "logs" (
-                      "id" int PRIMARY KEY,
+                      "log_id" serial PRIMARY KEY,
                       "fk_tours_id" int,
                       "starting_time" timestamp,
                       "comment" varchar(1000),
@@ -20,14 +24,14 @@ CREATE TABLE "logs" (
                       "picture_path" varchar(150)
 );
 
-CREATE TABLE "transport_type" (
-                                "id" int PRIMARY KEY,
+CREATE TABLE "transport_types" (
+                                "transport_type_id" serial PRIMARY KEY,
                                 "type" varchar(50)
 );
 
-ALTER TABLE "logs" ADD FOREIGN KEY ("fk_tours_id") REFERENCES "tours" ("id");
-ALTER TABLE "tours" ADD FOREIGN KEY ("fk_transport_type") REFERENCES "transport_type" ("id");
+ALTER TABLE "logs" ADD FOREIGN KEY ("fk_tours_id") REFERENCES "tours" ("tour_id");
+ALTER TABLE "tours" ADD FOREIGN KEY ("transport_type_id") REFERENCES "transport_types" ("transport_type_id");
 
-INSERT INTO transport_type (type) VALUES ('pedestrian');
-INSERT INTO transport_type (type) VALUES ('bicycle');
-INSERT INTO transport_type (type) VALUES ('car');
+INSERT INTO transport_types (type) VALUES ('pedestrian');
+INSERT INTO transport_types (type) VALUES ('bicycle');
+INSERT INTO transport_types (type) VALUES ('car');
