@@ -2,38 +2,38 @@ package fhtw.swen2.duelli.duvivie.swen2project.Entities;
 
 import jakarta.persistence.*;
 
-import java.time.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Tour")
 @Table(name = "tours")
 public class Tour {
     @Id
-    @Column(name = "tour_id", unique = true)
-    private Integer tour_id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "tour_id")
+    public int tour_id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    public String name;
 
     @Column(name = "description", nullable = false)
-    private String description;
+    public String description;
 
-    @Column(name = "from", nullable = false)
-    private String from;
+    @Column(name = "point_a", nullable = false)
+    public String from;
 
-    @Column(name = "to", nullable = false)
-    private String to;
+    @Column(name = "point_b", nullable = false)
+    public String to;
 
     @ManyToOne
     @JoinColumn(name = "transport_type_id")
-    private TransportType transportType;
+    public TransportType transportType;
 
     @Column(name = "distance", nullable = false)
-    private Float distance;
+    public Float distance;
 
-    //@Column(name = "time", nullable = false, columnDefinition = "interval")
-    //private Duration time;
+    @Column(name = "duration", nullable = false)
+    public Integer duration;
 }

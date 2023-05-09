@@ -3,7 +3,7 @@ package fhtw.swen2.duelli.duvivie.swen2project;
 import fhtw.swen2.duelli.duvivie.swen2project.Controller.ControllerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
-import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import javafx.fxml.FXMLLoader;
@@ -12,48 +12,50 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.List;
 
 public class Application extends javafx.application.Application {
 
-    private Connection connection;
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        // connectToDatabase();
+    public void testFunction() {
         // Create an EntityManagerFactory when you start the application.
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JavaHelps");
         // Create the DAO object
-        TourDao dao = new TourDao(entityManagerFactory);
+        TourDao tourDao = new TourDao(entityManagerFactory);
 
-        Tour testTour = new Tour();
-        testTour.setName("test");
-        testTour.setDescription("description");
-        testTour.setDistance(5.0F);
-        testTour.setFrom("uranus");
-        testTour.setTo("joemama");
-        dao.create(testTour);
+        //These transportypes need to be added to every new or updated tour
+        TransportType pedestrian = new TransportType();
+        pedestrian.setTransport_type_id(1);
+        pedestrian.setType("pedestrian");
 
-        List<Tour> tours = dao.findAll();
-        if (tours != null) {
-            for (Tour tour : tours) {
-                System.out.println(tour);
-            }
-        }
+        TransportType car = new TransportType();
+        pedestrian.setTransport_type_id(2);
+        car.setType("car");
 
-        dao.delete(1);
+        TransportType bike = new TransportType();
+        pedestrian.setTransport_type_id(3);
+        bike.setType("bike");
 
-        tours = dao.findAll();
-        if (tours != null) {
-            for (Tour tour : tours) {
-                System.out.println(tour);
-            }
-        }
+        // Create a new tour
+        Tour tour = new Tour();
+        tour.setName("TestTour");
+        tour.setDescription("TestDescription");
+        tour.setFrom("TestFrom");
+        tour.setTo("TestTo");
+        tour.setDistance(100F);
+        tour.setDuration(100);
+        tour.setTransportType(pedestrian);
+
+        // Persist the tour object
+        tourDao.create(tour);
+
+        //tourDao.deleteAll();
 
         // Never forget to close the entityManagerFactory
         entityManagerFactory.close();
+    }
 
+    @Override
+    public void start(Stage stage) throws IOException {
+        testFunction();
         ControllerFactory factory = new ControllerFactory();
         FXMLLoader fxmlLoader = getFxmlLoader(factory);
         System.out.println(fxmlLoader);
@@ -80,18 +82,6 @@ public class Application extends javafx.application.Application {
                         });
         return fxmlLoader;
     }
-
-    private void connectToDatabase() {
-        try{
-            connection = new DatabaseService().getConnection();
-            System.out.println("Database connection established");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            //Stop the application if the database connection fails
-            System.exit(1);
-        }
-   }
 
     public static void main(String[] args) {
         launch();

@@ -27,7 +27,7 @@ public class TourDao {
             transaction.begin();
 
             // Get all students from the table.
-            // Note that the SQL is selecting from "Student" entity not the "student" table
+            // Note that the SQL is selecting from "Tour" entity not the "tours" table
             tours = manager.createQuery("SELECT tour FROM Tour tour", Tour.class)
                     .getResultList();
 
@@ -38,8 +38,6 @@ public class TourDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            // TODO: Decide how you want to handle this exception.
-            //  Since this is a hello world project, we throw the exception.
             throw new RuntimeException(ex);
         } finally {
             // Close the EntityManager
@@ -58,7 +56,7 @@ public class TourDao {
             transaction = manager.getTransaction();
             // Begin the transaction
             transaction.begin();
-            // Save the student object
+            // Save the tour object
             manager.persist(tour);
             // Commit the transaction
             transaction.commit();
@@ -67,8 +65,6 @@ public class TourDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            // TODO: Decide how you want to handle this exception.
-            //  Since this is a hello world project, we throw the exception.
             throw new RuntimeException(ex);
         } finally {
             // Close the EntityManager
@@ -92,6 +88,12 @@ public class TourDao {
             if (tour != null) {
                 // Note that the id cannot be changed
                 tour.setName(newTourWithSameId.getName());
+                tour.setDescription(newTourWithSameId.getDescription());
+                tour.setFrom(newTourWithSameId.getFrom());
+                tour.setTo(newTourWithSameId.getTo());
+                tour.setTransportType(newTourWithSameId.getTransportType());
+                tour.setDistance(newTourWithSameId.getDistance());
+                tour.setDuration(newTourWithSameId.getDuration());
                 // Save the changes
                 manager.persist(tour);
             }
@@ -102,8 +104,6 @@ public class TourDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            // TODO: Decide how you want to handle this exception.
-            //  Since this is a hello world project, we throw the exception.
             throw new RuntimeException(ex);
         } finally {
             // Close the EntityManager
@@ -134,8 +134,6 @@ public class TourDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            // TODO: Decide how you want to handle this exception.
-            //  Since this is a hello world project, we throw the exception.
             throw new RuntimeException(ex);
         } finally {
             // Close the EntityManager
@@ -163,8 +161,6 @@ public class TourDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            // TODO: Decide how you want to handle this exception.
-            //  Since this is a hello world project, we throw the exception.
             throw new RuntimeException(ex);
         } finally {
             // Close the EntityManager

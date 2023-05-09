@@ -6,11 +6,11 @@ CREATE TABLE "tours" (
                        "tour_id" serial PRIMARY KEY,
                        "name" varchar(50),
                        "description" varchar(1000),
-                       "from" varchar(100),
-                       "to" varchar(100),
+                       "point_a" varchar(100),
+                       "point_b" varchar(100),
                        "transport_type_id" int,
-                       "distance" float
-                       --,"time" interval
+                       "distance" float,
+                       "duration" int
 );
 
 CREATE TABLE "logs" (
@@ -25,13 +25,13 @@ CREATE TABLE "logs" (
 );
 
 CREATE TABLE "transport_types" (
-                                "transport_type_id" serial PRIMARY KEY,
+                                "transport_type_id" int PRIMARY KEY,
                                 "type" varchar(50)
 );
 
 ALTER TABLE "logs" ADD FOREIGN KEY ("fk_tours_id") REFERENCES "tours" ("tour_id");
 ALTER TABLE "tours" ADD FOREIGN KEY ("transport_type_id") REFERENCES "transport_types" ("transport_type_id");
 
-INSERT INTO transport_types (type) VALUES ('pedestrian');
-INSERT INTO transport_types (type) VALUES ('bicycle');
-INSERT INTO transport_types (type) VALUES ('car');
+INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (1, 'bike');
+INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (2, 'car');
+INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (3, 'pedestrian');

@@ -7,6 +7,7 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     requires java.sql;
     requires jakarta.persistence;
     requires lombok;
+    requires org.hibernate.orm.core;
 
     opens fhtw.swen2.duelli.duvivie.swen2project.Services to com.fasterxml.jackson.databind;
     exports fhtw.swen2.duelli.duvivie.swen2project.Services;
