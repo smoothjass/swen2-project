@@ -13,15 +13,15 @@
 
     <HBox>
         <Button fx:id="tourDetailsButton" prefWidth="${tourDetailsButton.parent.width}" text="Details"/>
-        <Button fx:id="logEntriesButton"  prefWidth="${logEntriesButton.parent.width}" text="Log entries"/>
+        <Button fx:id="logEntriesButton" prefWidth="${logEntriesButton.parent.width}" text="Log entries"/>
         <Button fx:id="picturesButton" prefWidth="${picturesButton.parent.width}" text="Pictures"/>
     </HBox>
 
     <fx:include fx:id="tourContentArea" source="tour-form.fxml"></fx:include>
 
     <HBox >
-        <Button fx:id="deleteButton" prefWidth="${deleteButton.parent.width}" text="Delete tour"/>
-        <Button fx:id="saveButton" prefWidth="${saveButton.parent.width}" text="Save tour"/>
+        <Button fx:id="deleteButton" prefWidth="${deleteButton.parent.width}" text="Delete"/>
+        <Button fx:id="saveButton" onAction="#saveNewTourData" prefWidth="${saveButton.parent.width}" text="Save"/>
         <Button fx:id="singleReportButton" prefWidth="${singleReportButton.parent.width}" text="Create tour report"/>
     </HBox>
 

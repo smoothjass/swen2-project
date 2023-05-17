@@ -18,7 +18,7 @@
 
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Tour name:"/>
-                <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="tourName"/>
+                <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="name"/>
             </VBox>
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="To:"/>
@@ -31,11 +31,11 @@
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Tour Distance:"/>
-                <TextField fx:id="tourDistance"/>
+                <TextField fx:id="distance"/>
             </VBox>
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
                 <Label text="Estimated time:"/>
-                <TextField fx:id="estimatedTime"/>
+                <TextField fx:id="duration"/>
             </VBox>
 
             <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">

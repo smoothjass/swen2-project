@@ -9,13 +9,20 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 public class TourListSubviewController implements Initializable {
-    private TourListSubviewModel tourListSubviewModel;
 
     @FXML
-    private VBox tourListButtons;
+    public VBox tourListButtons;
+
+    private TourListSubviewModel tourListSubviewModel;
+
+    public TourListSubviewController(TourListSubviewModel tourListSubviewModel) {
+        this.tourListSubviewModel = tourListSubviewModel;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         VBox.setVgrow(tourListButtons, Priority.ALWAYS);
         tourListButtons.setAlignment(Pos.BOTTOM_CENTER);
     }
 }
+

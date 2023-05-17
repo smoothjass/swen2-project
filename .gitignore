@@ -40,3 +40,4 @@ build/
 ### additional ###
 .idea/workspace.xml
 .idea/dataSources
+.idea/shelf

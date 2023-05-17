@@ -4,17 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="tutorial in tourepository to get rid of springboot and use inly hibernate">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Daos/TourDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Entities/Tour.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Entities/TransportType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+    <list default="true" id="4d9d0fe3-a73c-42a5-8415-daa11a762c83" name="Changes" comment="hibernate implementation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/LogsListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/LogsListModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Repositories/TourRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/icons/add-list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/icons/export.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/icons/import.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/icons/list-search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/logs-list.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/database/tour_planner_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/database/tour_planner_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/ControllerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/ControllerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/MapSubviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourDetailsSubviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourDetailsSubviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourListSubviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Controller/TourListSubviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Daos/TourDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Daos/TourDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourDetailsSubviewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourDetailsSubviewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourFormModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourFormModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourListSubviewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fhtw/swen2/duelli/duvivie/swen2project/Models/TourListSubviewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/icons/search.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/icons/search.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/stylesheets/searchbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/stylesheets/searchbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-details-subview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-details-subview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-form.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-form.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-list-subview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tour-list-subview.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +41,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -45,32 +62,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/jassi/OneDrive/Dokumente/FH/BIF/2023_SS/SWEN2/java_tutorials",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;persistence__tour__implementation&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jassi/OneDrive/Dokumente/FH/BIF/2023_SS/SWEN2/java_tutorials&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lodu\IdeaProjects\swen2-project\src\main\resources\fhtw\swen2\duelli\duvivie\swen2project" />
+      <recent name="C:\Users\lodu\IdeaProjects\swen2-project\src\main\resources\fhtw\swen2\duelli\duvivie\swen2project\icons" />
       <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\specification" />
       <recent name="C:\Users\jassi\OneDrive\Dokumente\FH\BIF\2023_SS\SWEN2\swen2-project\documentation\diagrams" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="fhtw.swen2.duelli.duvivie.swen2project" />
     </key>
   </component>
   <component name="RunManager">
@@ -121,6 +143,17 @@
       <workItem from="1682068422109" duration="537000" />
       <workItem from="1682152981585" duration="1189000" />
       <workItem from="1682336068271" duration="1063000" />
+      <workItem from="1683645454901" duration="1333000" />
+      <workItem from="1683648647596" duration="2131000" />
+      <workItem from="1683800893090" duration="1376000" />
+      <workItem from="1683805043955" duration="1287000" />
+      <workItem from="1683815490791" duration="442000" />
+      <workItem from="1683817882234" duration="762000" />
+      <workItem from="1683827017642" duration="3470000" />
+      <workItem from="1683871186233" duration="6026000" />
+      <workItem from="1683878864461" duration="2752000" />
+      <workItem from="1683899288225" duration="1892000" />
+      <workItem from="1684304457252" duration="755000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677249750527</created>

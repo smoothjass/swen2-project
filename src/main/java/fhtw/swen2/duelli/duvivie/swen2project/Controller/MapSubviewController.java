@@ -18,6 +18,10 @@ public class MapSubviewController implements Initializable {
     public Label requestRoute;
     private MapSubviewModel mapSubviewModel;
 
+    public MapSubviewController(MapSubviewModel mapSubviewModel) {
+        this.mapSubviewModel = mapSubviewModel;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

@@ -27,12 +27,16 @@ public class Application extends javafx.application.Application {
         pedestrian.setType("pedestrian");
 
         TransportType car = new TransportType();
-        pedestrian.setTransport_type_id(2);
+        car.setTransport_type_id(2);
         car.setType("car");
 
         TransportType bike = new TransportType();
-        pedestrian.setTransport_type_id(3);
+        bike.setTransport_type_id(3);
         bike.setType("bike");
+
+        TransportType secondPedestrian = new TransportType();
+        secondPedestrian.setTransport_type_id(1);
+        secondPedestrian.setType("pedestrian");
 
         // Create a new tour
         Tour tour = new Tour();
@@ -44,10 +48,20 @@ public class Application extends javafx.application.Application {
         tour.setDuration(100);
         tour.setTransportType(pedestrian);
 
+        Tour tourB = new Tour();
+        tourB.setName("sdhifo");
+        tourB.setDescription("asdijfopasdf");
+        tourB.setFrom("s^dfghjk");
+        tourB.setTo("tgfbnmkiuzgv");
+        tourB.setDistance(456789F);
+        tourB.setDuration(3467890);
+        tourB.setTransportType(secondPedestrian);
+
         // Persist the tour object
         tourDao.create(tour);
+        tourDao.create(tourB);
 
-        //tourDao.deleteAll();
+        tourDao.deleteAll();
 
         // Never forget to close the entityManagerFactory
         entityManagerFactory.close();

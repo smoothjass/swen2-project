@@ -167,4 +167,38 @@ public class TourDao {
             manager.close();
         }
     }
+
+    public Tour getTourById(int id) {
+        // Create a new EntityManager
+        EntityManager manager = this.entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        Tour tour;
+        try {
+            // Get a transaction
+            transaction = manager.getTransaction();
+            // Begin the transaction
+            transaction.begin();
+
+            // Get all students from the table.
+            // Note that the SQL is selecting from "Tour" entity not the "tours" table
+            tour = manager.createQuery("SELECT tour FROM Tour tour WHERE tour.tour_id = :id", Tour.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+            // Commit the transaction
+            transaction.commit();
+        } catch (RollbackException ex) {
+            // Commit failed. Rollback the transaction
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(ex);
+        } catch (Exception ex) {
+            tour = null;
+        } finally {
+            // Close the EntityManager
+            manager.close();
+        }
+        return tour;
+    }
 }
