@@ -57,7 +57,7 @@ private static CompletableFuture<RawResponse> getRoute(String url) throws URISyn
 private static RawResponse parseResponse(String toParse) throws JsonProcessingException {
     RawResponse response;
     var objectMapper = new ObjectMapper();
-    // System.out.println(toParse);
+    System.out.println(toParse);
     objectMapper.addHandler(new DeserializationProblemHandler() {
     @Override
     public boolean handleUnknownProperty(
