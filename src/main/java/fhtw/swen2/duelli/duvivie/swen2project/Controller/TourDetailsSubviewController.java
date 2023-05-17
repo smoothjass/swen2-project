@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 public class TourDetailsSubviewController implements Initializable {
     private TourDetailsSubviewModel tourDetailsSubviewModel;
+    private TourFormController tourFormController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}

@@ -19,11 +19,26 @@ public class TourFormController implements Initializable {
 
     private final TourFormModel tourFormModel;
 
+    public TextField name;
+    public TextField distance;
+    public TextField duration;
+    public TextField to;
+    public TextField from;
+    public TextArea description;
+    //public ChoiceBox<String> transportType;
+
     public TourFormController(TourFormModel tourFormModel) {
         this.tourFormModel = tourFormModel;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.name.textProperty().bindBidirectional(tourFormModel.getName());
+        this.distance.textProperty().bindBidirectional(tourFormModel.getDistance());
+        this.duration.textProperty().bindBidirectional(tourFormModel.getDuration());
+        this.to.textProperty().bindBidirectional(tourFormModel.getTo());
+        this.from.textProperty().bindBidirectional(tourFormModel.getFrom());
+        this.description.textProperty().bindBidirectional(tourFormModel.getDescription());
+        //this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
     }
 }

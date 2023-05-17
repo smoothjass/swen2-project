@@ -12,4 +12,13 @@ import java.nio.charset.StandardCharsets;
 
 @Getter
 @Setter
-public class TourFormModel {}
+public class TourFormModel {
+    public StringProperty name = new SimpleStringProperty();
+    public StringProperty distance = new SimpleStringProperty();
+    public StringProperty duration = new SimpleStringProperty();
+    public StringProperty to = new SimpleStringProperty();
+    public StringProperty from = new SimpleStringProperty();
+    public StringProperty description = new SimpleStringProperty();
+    //public  transportType = new SimpleStringProperty();
+
+}
