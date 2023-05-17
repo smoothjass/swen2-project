@@ -38,6 +38,4 @@ build/
 .DS_Store
 
 ### additional ###
-.idea/workspace.xml
-.idea/dataSources
-.idea/shelf
+.idea/
