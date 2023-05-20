@@ -2,11 +2,13 @@ package fhtw.swen2.duelli.duvivie.swen2project.Models;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
+import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 
 import java.nio.charset.StandardCharsets;
 

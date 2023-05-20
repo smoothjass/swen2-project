@@ -116,7 +116,7 @@ public class Application extends javafx.application.Application {
         tourDao.create(tour);
         tourDao.create(tourB);
 
-        tourDao.deleteAll();
+        //tourDao.deleteAll();
 
         // Never forget to close the entityManagerFactory
         entityManagerFactory.close();

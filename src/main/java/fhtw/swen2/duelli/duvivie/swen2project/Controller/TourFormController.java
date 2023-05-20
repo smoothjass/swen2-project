@@ -3,6 +3,8 @@ package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourFormModel;
+import javafx.beans.property.Property;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -29,6 +31,14 @@ public class TourFormController implements Initializable {
 
     public TourFormController(TourFormModel tourFormModel) {
         this.tourFormModel = tourFormModel;
+    }
+
+    public void saveNewTourData(ActionEvent actionEvent) {
+        // TODO input validation
+        // display error, if applicable
+
+        // model aufrufen
+        tourFormModel.saveTour();
     }
 
     @Override
