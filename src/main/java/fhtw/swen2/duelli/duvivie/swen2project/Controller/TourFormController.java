@@ -27,7 +27,7 @@ public class TourFormController implements Initializable {
     public TextField to;
     public TextField from;
     public TextArea description;
-    //public ChoiceBox<String> transportType;
+    public ChoiceBox<String> transportType;
 
     public TourFormController(TourFormModel tourFormModel) {
         this.tourFormModel = tourFormModel;
@@ -49,6 +49,6 @@ public class TourFormController implements Initializable {
         this.to.textProperty().bindBidirectional(tourFormModel.getTo());
         this.from.textProperty().bindBidirectional(tourFormModel.getFrom());
         this.description.textProperty().bindBidirectional(tourFormModel.getDescription());
-        //this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
+        this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
     }
 }

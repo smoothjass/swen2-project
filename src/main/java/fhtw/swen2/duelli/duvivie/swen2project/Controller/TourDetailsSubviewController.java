@@ -17,9 +17,4 @@ public class TourDetailsSubviewController implements Initializable {
     public TourDetailsSubviewController(TourDetailsSubviewModel tourDetailsSubviewModel) {
         this.tourDetailsSubviewModel = tourDetailsSubviewModel;
     }
-
-    public void saveNewTourData(ActionEvent actionEvent) {
-        //save new tour data to database
-
-    }
 }

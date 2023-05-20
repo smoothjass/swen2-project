@@ -21,6 +21,46 @@ public class TourFormModel {
     public StringProperty to = new SimpleStringProperty();
     public StringProperty from = new SimpleStringProperty();
     public StringProperty description = new SimpleStringProperty();
-    //public  transportType = new SimpleStringProperty();
+    public StringProperty transportType = new SimpleStringProperty();
 
+    private DatabaseService databaseService = new DatabaseService();
+
+    public void saveTour() {
+        // TODO invoke MapService to get distance and duration
+        // for now hardcoded
+        Float tempDistance = 0.0F;
+        Integer tempDuration = 0;
+        /*
+        // debug messages
+        System.out.println(name);
+        System.out.println(distance);
+        System.out.println(duration);
+        System.out.println(to);
+        System.out.println(from);
+        System.out.println(description);
+        System.out.println(transportType);
+        */
+
+        // build entity
+        Tour newTour = new Tour();
+        newTour.setName(name.getValue());
+        newTour.setDistance(tempDistance);
+        newTour.setDuration(tempDuration);
+        newTour.setTo(to.getValue());
+        newTour.setFrom(from.getValue());
+        newTour.setDescription(description.getValue());
+        TransportType newTransportType = new TransportType();
+        newTransportType.setType(transportType.getValue());
+        switch (newTransportType.getType()) {
+            case "bike" -> newTransportType.setTransport_type_id(1);
+            case "car" -> newTransportType.setTransport_type_id(2);
+            case "pedestrian" -> newTransportType.setTransport_type_id(3);
+        }
+        newTour.setTransportType(newTransportType);
+        System.out.println(newTour.getTransportType().getTransport_type_id());
+        System.out.println(newTour.getTransportType().getType());
+
+        // give to database service
+        databaseService.saveTour(newTour);
+    }
 }

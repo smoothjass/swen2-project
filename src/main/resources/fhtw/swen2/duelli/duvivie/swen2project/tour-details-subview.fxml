@@ -21,7 +21,6 @@
 
     <HBox >
         <Button fx:id="deleteButton" prefWidth="${deleteButton.parent.width}" text="Delete"/>
-        <Button fx:id="saveButton" onAction="#saveNewTourData" prefWidth="${saveButton.parent.width}" text="Save"/>
         <Button fx:id="singleReportButton" prefWidth="${singleReportButton.parent.width}" text="Create tour report"/>
     </HBox>
 

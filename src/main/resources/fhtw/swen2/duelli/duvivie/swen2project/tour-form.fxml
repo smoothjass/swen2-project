@@ -31,11 +31,11 @@
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Tour Distance:"/>
-                <TextField fx:id="distance"/>
+                <TextField disable="true" fx:id="distance"/>
             </VBox>
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
                 <Label text="Estimated time:"/>
-                <TextField fx:id="duration"/>
+                <TextField disable="true" fx:id="duration"/>
             </VBox>
 
             <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
@@ -44,7 +44,7 @@
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="pedestrian"/>
-                            <String fx:value="bicycle"/>
+                            <String fx:value="bike"/>
                             <String fx:value="car"/>
                         </FXCollections>
                     </items>
@@ -55,6 +55,8 @@
                 <Label text="Description"/>
                 <TextArea fx:id="description"/>
             </VBox>
+
+            <Button fx:id="saveButton" alignment="BOTTOM_RIGHT" onAction="#saveNewTourData" text="Save"/>
 
         </GridPane>
     </VBox>
