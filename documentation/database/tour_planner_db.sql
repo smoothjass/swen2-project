@@ -19,7 +19,7 @@ CREATE TABLE "logs" (
                       "starting_time" timestamp,
                       "comment" varchar(1000),
                       "difficulty" smallint,
-                      "total_time" interval,
+                      "total_time" int,
                       "rating" smallint,
                       "picture_path" varchar(150)
 );

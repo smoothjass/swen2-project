@@ -68,8 +68,22 @@
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
         </dependency>
+        <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>kernel</artifactId>
+          <version>RELEASE</version>
+        </dependency>
+        <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>io</artifactId>
+          <version>RELEASE</version>
+        </dependency>
+        <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>layout</artifactId>
+          <version>RELEASE</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

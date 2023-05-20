@@ -2,20 +2,75 @@ package fhtw.swen2.duelli.duvivie.swen2project;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Controller.ControllerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
+import fhtw.swen2.duelli.duvivie.swen2project.Services.ReportService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import javafx.beans.binding.ObjectExpression;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application extends javafx.application.Application {
 
-    public void testFunction() {
+    public void testFunctionSingleReport(){
+        TransportType pedestrian = new TransportType();
+        pedestrian.setTransport_type_id(1);
+        pedestrian.setType("pedestrian");
+
+        // Create a new tour
+        Tour tour = new Tour();
+        tour.setName("TestTour");
+        tour.setDescription("TestDescription");
+        tour.setFrom("TestFrom");
+        tour.setTo("TestTo");
+        tour.setDistance(100F);
+        tour.setDuration(100);
+        tour.setTransportType(pedestrian);
+
+        Log logA = new Log();
+
+        logA.setLog_id(1);
+        logA.setDifficulty(1);
+        logA.setComment("vghjkl");
+        logA.setRating(1);
+        logA.setPicture_path("vbnjklö");
+        logA.setStarting_time(new Timestamp(12));
+        logA.setTotal_time(12);
+
+        Log logB = new Log();
+
+        logB.setLog_id(2);
+        logB.setComment("vghjkl");
+        logB.setDifficulty(100);
+        logB.setPicture_path("vbnjklö");
+        logB.setStarting_time(new Timestamp(12));
+        logB.setTotal_time(12);
+
+        ArrayList<Log> logList = new ArrayList<Log>();
+
+        logList.add(logA);
+        logList.add(logB);
+
+        ReportService reportService = new ReportService();
+
+        try {
+            System.out.println(reportService.genereateSingleTourPdf(tour, logList, "google_maps.PNG"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void testFunctionDatabase() {
         // Create an EntityManagerFactory when you start the application.
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JavaHelps");
         // Create the DAO object
@@ -69,7 +124,8 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        testFunction();
+        //testFunctionDatabase();
+        //testFunctionSingleReport();
         ControllerFactory factory = new ControllerFactory();
         FXMLLoader fxmlLoader = getFxmlLoader(factory);
         System.out.println(fxmlLoader);

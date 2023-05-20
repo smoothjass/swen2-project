@@ -9,6 +9,7 @@
         <!-- Entity classes -->
         <class>fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour</class>
         <class>fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType</class>
+        <class>fhtw.swen2.duelli.duvivie.swen2project.Entities.Log</class>
 
         <properties>
             <!-- The JDBC URL to the database instance -->
