@@ -44,7 +44,7 @@
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="pedestrian"/>
-                            <String fx:value="bike"/>
+                            <String fx:value="bicycle"/>
                             <String fx:value="car"/>
                         </FXCollections>
                     </items>

@@ -18,6 +18,7 @@ public class Log {
 
     @Column(name = "fk_tours_id")
     public int tour_id;
+    // so lassen
 
     @Column(name = "starting_time", nullable = false)
     public Timestamp starting_time;

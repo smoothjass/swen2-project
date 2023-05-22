@@ -15,9 +15,11 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
 
     private MainViewModel mainViewModel;
-    private TourListSubviewModel tourListSubviewModel;
-    private TourDetailsSubviewModel tourDetailsSubviewModel;
-    private MapSubviewModel mapSubviewModel;
+
+    // jeder controller sollte nur sein eigenes model haben
+    // private TourListSubviewModel tourListSubviewModel;
+    // private TourDetailsSubviewModel tourDetailsSubviewModel;
+    // private MapSubviewModel mapSubviewModel;
 
     public MainViewController(MainViewModel mainViewModel){
         this.mainViewModel = mainViewModel;
