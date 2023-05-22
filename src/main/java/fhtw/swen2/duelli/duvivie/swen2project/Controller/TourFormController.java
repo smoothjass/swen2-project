@@ -39,6 +39,8 @@ public class TourFormController implements Initializable {
 
         // model aufrufen
         tourFormModel.saveTour();
+
+        // todo fire event so that mainview controller updates currentlySelectedTour
     }
 
     @Override

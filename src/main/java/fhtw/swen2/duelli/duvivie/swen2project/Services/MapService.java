@@ -26,7 +26,7 @@ public class MapService {
 
     public static void getTestRoute() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
         // get the route
-        CompletableFuture<RawResponse> yieldFact = requestRouteFromAPI(testRequest);
+        CompletableFuture<DirectionsResponse> yieldFact = requestRouteFromAPI(testRequest);
         System.out.println("Waiting for fact"); // TODO make spinner here
         while(!yieldFact.isDone()) {
             // System.out.print(".");
@@ -46,6 +46,9 @@ public class MapService {
         //TODO some magic
     }
     public void getRoute(String from, String to, String transportType) throws IOException, URISyntaxException, InterruptedException, ExecutionException{
+        // replace white spaces
+        from = from.replaceAll("\\s", "");
+        to = to.replaceAll("\\s", "");
         // create the URL
         String getRequest = "https://www.mapquestapi.com/directions/v2/route" +
                 "?key=" + key +
@@ -55,25 +58,26 @@ public class MapService {
             // car is default, bycicle and pedestrian need to be specified
             getRequest = getRequest + "&routeType=" + transportType;
         }
+        System.out.println(getRequest);
 
         // get the route
-        CompletableFuture<RawResponse> yieldFact = requestRouteFromAPI(getRequest);
+        CompletableFuture<DirectionsResponse> yieldDirections = requestRouteFromAPI(getRequest);
         System.out.println("Waiting for fact"); // TODO make spinner here
-        while(!yieldFact.isDone()) {
+        while(!yieldDirections.isDone()) {
             // System.out.print(".");
             Thread.sleep(250);
         }
-        // System.out.println("Fact received :" + yieldFact);
+        // System.out.println("Fact received :" + yieldDirections);
 
         // get bounding box, session id, distance and duration (time) from the response
-        JsonNode tempBoundingBox= yieldFact.get().getRoute().get("boundingBox");
+        JsonNode tempBoundingBox= yieldDirections.get().getRoute().get("boundingBox");
         String boundingBox = tempBoundingBox.get("ul").get("lat") + "," +
                 tempBoundingBox.get("ul").get("lng") + "," +
                 tempBoundingBox.get("lr").get("lat") + "," +
                 tempBoundingBox.get("lr").get("lng");
-        String sessionId = String.valueOf(yieldFact.get().getRoute().get("sessionId")).replace("\"", "");
-        Float distance = Float.valueOf(String.valueOf(yieldFact.get().getRoute().get("distance")));
-        Integer time = Integer.valueOf(String.valueOf(yieldFact.get().getRoute().get("time"))); //seconds
+        String sessionId = String.valueOf(yieldDirections.get().getRoute().get("sessionId")).replace("\"", "");
+        Float distance = Float.valueOf(String.valueOf(yieldDirections.get().getRoute().get("distance")));
+        Integer time = Integer.valueOf(String.valueOf(yieldDirections.get().getRoute().get("time"))); //seconds
 /*
         System.out.println(boundingBox);
         System.out.println(sessionId);
@@ -82,23 +86,79 @@ public class MapService {
 */
 
         // send another request with key, start, end, bounding box coordinates and sessionId to get the static map
+        getRequest = "https://www.mapquestapi.com/staticmap/v5/map" +
+                "?key=" + key +
+                "&start=" +  from +
+                "&end=" + to +
+                "&boundingBox=" + boundingBox +
+                "&sessionId=" + sessionId;
+        System.out.println(getRequest);
+        // get the image
+        CompletableFuture<StaticMapResponse> yieldImage = requestImageFromAPI(getRequest);
+        System.out.println("Waiting for fact"); // TODO make spinner here
+        while(!yieldImage.isDone()) {
+            // System.out.print(".");
+            Thread.sleep(250);
+        }
+        System.out.println("Fact received :" + yieldImage);
+        System.out.println("Fact received :" + yieldImage.get());
         //TODO some magic
     }
 
-    private static CompletableFuture<RawResponse> requestRouteFromAPI(String url) throws URISyntaxException, JsonProcessingException {
+    private static CompletableFuture<StaticMapResponse> requestImageFromAPI(String getRequest) throws URISyntaxException {
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(url)).build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(getRequest)).build();
         return httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString()).thenApply(stringHttpResponse -> {
             try {
-                return parseResponse(stringHttpResponse.body());
+                return parseImageResponse(stringHttpResponse.body());
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
             return null;
         });
     }
-    private static RawResponse parseResponse(String toParse) throws JsonProcessingException {
-        RawResponse response;
+
+    private static StaticMapResponse parseImageResponse(String body) throws JsonProcessingException {
+        StaticMapResponse response;
+        var objectMapper = new ObjectMapper();
+        System.out.println(body);
+        // bis hierher ok
+        // TODO parsen fixen, geht nicht. das da oben ist bild in bytes
+        /*
+        objectMapper.addHandler(new DeserializationProblemHandler() {
+            @Override
+            public boolean handleUnknownProperty(
+                    DeserializationContext ctxt,
+                    JsonParser p,
+                    JsonDeserializer<?> deserializer,
+                    Object beanOrClass,
+                    String propertyName) throws IOException {
+                if(beanOrClass.getClass().equals(StaticMapResponse.class)) {
+                    p.skipChildren();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        */
+        return objectMapper.readValue(body, StaticMapResponse.class);
+    }
+
+    private static CompletableFuture<DirectionsResponse> requestRouteFromAPI(String getRequest) throws URISyntaxException {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(getRequest)).build();
+        return httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString()).thenApply(stringHttpResponse -> {
+            try {
+                return parseDirectionsResponse(stringHttpResponse.body());
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
+    }
+    private static DirectionsResponse parseDirectionsResponse(String toParse) throws JsonProcessingException {
+        DirectionsResponse response;
         var objectMapper = new ObjectMapper();
         System.out.println(toParse);
         objectMapper.addHandler(new DeserializationProblemHandler() {
@@ -109,7 +169,7 @@ public class MapService {
             JsonDeserializer<?> deserializer,
             Object beanOrClass,
             String propertyName) throws IOException {
-            if(beanOrClass.getClass().equals(RawResponse.class)) {
+            if(beanOrClass.getClass().equals(DirectionsResponse.class)) {
                 p.skipChildren();
                 return true;
             } else {
@@ -117,7 +177,7 @@ public class MapService {
             }
         }
         });
-        return objectMapper.readValue(toParse, RawResponse.class);
+        return objectMapper.readValue(toParse, DirectionsResponse.class);
     }
 
 }
