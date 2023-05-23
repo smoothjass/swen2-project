@@ -11,6 +11,7 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     requires io;
     requires kernel;
     requires layout;
+    requires java.desktop;
 
     opens fhtw.swen2.duelli.duvivie.swen2project.Services to com.fasterxml.jackson.databind;
     exports fhtw.swen2.duelli.duvivie.swen2project.Services;

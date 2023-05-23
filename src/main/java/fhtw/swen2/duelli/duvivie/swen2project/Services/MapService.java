@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -94,7 +96,7 @@ public class MapService {
                 "&sessionId=" + sessionId;
         System.out.println(getRequest);
         // get the image
-        CompletableFuture<StaticMapResponse> yieldImage = requestImageFromAPI(getRequest);
+        CompletableFuture<BufferedImage> yieldImage = requestImageFromAPI(getRequest);
         System.out.println("Waiting for fact"); // TODO make spinner here
         while(!yieldImage.isDone()) {
             // System.out.print(".");
@@ -105,44 +107,17 @@ public class MapService {
         //TODO some magic
     }
 
-    private static CompletableFuture<StaticMapResponse> requestImageFromAPI(String getRequest) throws URISyntaxException {
+    private static CompletableFuture<BufferedImage> requestImageFromAPI(String getRequest) throws URISyntaxException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(getRequest)).build();
-        return httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString()).thenApply(stringHttpResponse -> {
+        return httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofInputStream()).thenApply(stringHttpResponse -> {
             try {
-                return parseImageResponse(stringHttpResponse.body());
-            } catch (JsonProcessingException e) {
+                return ImageIO.read(stringHttpResponse.body());
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
         });
-    }
-
-    private static StaticMapResponse parseImageResponse(String body) throws JsonProcessingException {
-        StaticMapResponse response;
-        var objectMapper = new ObjectMapper();
-        System.out.println(body);
-        // bis hierher ok
-        // TODO parsen fixen, geht nicht. das da oben ist bild in bytes
-        /*
-        objectMapper.addHandler(new DeserializationProblemHandler() {
-            @Override
-            public boolean handleUnknownProperty(
-                    DeserializationContext ctxt,
-                    JsonParser p,
-                    JsonDeserializer<?> deserializer,
-                    Object beanOrClass,
-                    String propertyName) throws IOException {
-                if(beanOrClass.getClass().equals(StaticMapResponse.class)) {
-                    p.skipChildren();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-        */
-        return objectMapper.readValue(body, StaticMapResponse.class);
     }
 
     private static CompletableFuture<DirectionsResponse> requestRouteFromAPI(String getRequest) throws URISyntaxException {
@@ -157,6 +132,7 @@ public class MapService {
             return null;
         });
     }
+
     private static DirectionsResponse parseDirectionsResponse(String toParse) throws JsonProcessingException {
         DirectionsResponse response;
         var objectMapper = new ObjectMapper();
