@@ -46,7 +46,7 @@ public class TourDao {
         return tours;
     }
 
-    public void create(Tour tour) {
+    public Tour create(Tour tour) {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -70,6 +70,7 @@ public class TourDao {
             // Close the EntityManager
             manager.close();
         }
+        return tour;
     }
 
     public void update(Tour newTourWithSameId) {

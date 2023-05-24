@@ -14,6 +14,7 @@ import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Getter
@@ -33,30 +34,18 @@ public class TourFormModel {
     public void saveTour() {
         // TODO invoke MapService to get distance, duration and picture
         // return type for getRoute?
+        Object[] array = new Object[3];
         try {
-            mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
+            array = mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
         } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
-        // for now hardcoded
-        Float tempDistance = 0.0F;
-        Integer tempDuration = 0;
-        /*
-        // debug messages
-        System.out.println(name);
-        System.out.println(distance);
-        System.out.println(duration);
-        System.out.println(to);
-        System.out.println(from);
-        System.out.println(description);
-        System.out.println(transportType);
-        */
 
         // build entity
         Tour newTour = new Tour();
         newTour.setName(name.getValue());
-        newTour.setDistance(tempDistance);
-        newTour.setDuration(tempDuration);
+        newTour.setDistance((Float) array[0]);
+        newTour.setDuration((Integer) array[1]);
         newTour.setTo(to.getValue());
         newTour.setFrom(from.getValue());
         newTour.setDescription(description.getValue());
@@ -72,6 +61,10 @@ public class TourFormModel {
         System.out.println(newTour.getTransportType().getType());
 
         // give to database service
-        databaseService.saveTour(newTour);
+        Tour tour = databaseService.saveTour(newTour);
+        // TODO update currently selected id
+
+        this.getDistance().setValue(Float.toString(tour.getDistance()) + " km");
+        this.getDuration().setValue(Integer.toString(tour.getDuration()) + " seconds");
     }
 }

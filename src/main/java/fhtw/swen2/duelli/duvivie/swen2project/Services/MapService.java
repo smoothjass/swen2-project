@@ -47,7 +47,7 @@ public class MapService {
         // send another request to get the static map
         //TODO some magic
     }
-    public void getRoute(String from, String to, String transportType) throws IOException, URISyntaxException, InterruptedException, ExecutionException{
+    public Object[] getRoute(String from, String to, String transportType) throws IOException, URISyntaxException, InterruptedException, ExecutionException{
         // replace white spaces
         from = from.replaceAll("\\s", "");
         to = to.replaceAll("\\s", "");
@@ -104,7 +104,14 @@ public class MapService {
         }
         System.out.println("Fact received :" + yieldImage);
         System.out.println("Fact received :" + yieldImage.get());
-        //TODO some magic
+
+        Object[] array = new Object[3];
+
+        array[0] = distance;
+        array[1] = time;
+        array[2] = yieldImage.get();
+
+        return array;
     }
 
     private static CompletableFuture<BufferedImage> requestImageFromAPI(String getRequest) throws URISyntaxException {

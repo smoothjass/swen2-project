@@ -16,7 +16,7 @@ public class DatabaseService {
         // TODO other DAOS
     }
 
-    public void saveTour(Tour newTour) {
-        tourDao.create(newTour);
+    public Tour saveTour(Tour newTour) {
+        return tourDao.create(newTour);
     }
 }
