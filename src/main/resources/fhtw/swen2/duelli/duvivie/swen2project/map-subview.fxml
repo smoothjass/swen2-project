@@ -6,10 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MapSubviewController">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MapSubviewController">
 
-    <Label fx:id="requestRoute"/>
-    <Button text="request route" onAction="#onRequestRouteButton"/>
+    <ImageView fx:id="imageView">
+
+    </ImageView>
 </VBox>

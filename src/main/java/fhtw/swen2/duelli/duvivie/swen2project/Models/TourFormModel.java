@@ -31,9 +31,8 @@ public class TourFormModel {
     private DatabaseService databaseService = new DatabaseService();
     private MapService mapService = new MapService();
 
-    public void saveTour() {
-        // TODO invoke MapService to get distance, duration and picture
-        // return type for getRoute?
+    public Tour saveTour() {
+        // invoke MapService to get distance, duration and picture
         Object[] array = new Object[3];
         try {
             array = mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
@@ -63,8 +62,8 @@ public class TourFormModel {
         // give to database service
         Tour tour = databaseService.saveTour(newTour);
         // TODO update currently selected id
-
         this.getDistance().setValue(Float.toString(tour.getDistance()) + " km");
         this.getDuration().setValue(Integer.toString(tour.getDuration()) + " seconds");
+        return tour;
     }
 }

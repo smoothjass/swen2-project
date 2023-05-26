@@ -64,7 +64,7 @@ public class MapService {
 
         // get the route
         CompletableFuture<DirectionsResponse> yieldDirections = requestRouteFromAPI(getRequest);
-        System.out.println("Waiting for fact"); // TODO make spinner here
+        System.out.println("Waiting for route"); // TODO make spinner here
         while(!yieldDirections.isDone()) {
             // System.out.print(".");
             Thread.sleep(250);
@@ -97,13 +97,13 @@ public class MapService {
         System.out.println(getRequest);
         // get the image
         CompletableFuture<BufferedImage> yieldImage = requestImageFromAPI(getRequest);
-        System.out.println("Waiting for fact"); // TODO make spinner here
+        System.out.println("Waiting for image"); // TODO make spinner here
         while(!yieldImage.isDone()) {
             // System.out.print(".");
             Thread.sleep(250);
         }
-        System.out.println("Fact received :" + yieldImage);
-        System.out.println("Fact received :" + yieldImage.get());
+        // System.out.println("Fact received :" + yieldImage);
+        // System.out.println("Fact received :" + yieldImage.get());
 
         Object[] array = new Object[3];
 
@@ -143,7 +143,7 @@ public class MapService {
     private static DirectionsResponse parseDirectionsResponse(String toParse) throws JsonProcessingException {
         DirectionsResponse response;
         var objectMapper = new ObjectMapper();
-        System.out.println(toParse);
+        // System.out.println(toParse);
         objectMapper.addHandler(new DeserializationProblemHandler() {
         @Override
         public boolean handleUnknownProperty(

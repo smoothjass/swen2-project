@@ -1,9 +1,10 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
-import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.*;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+
+import java.util.concurrent.Flow;
+import java.util.concurrent.SubmissionPublisher;
 
 public class ControllerFactory {
 
@@ -13,6 +14,9 @@ public class ControllerFactory {
     private final MapSubviewModel mapSubviewModel;
     private final TourListSubviewModel tourListSubviewModel;
     private final LogsListModel logsListModel;
+
+    public SubmissionPublisher<Tour> publisher = new SubmissionPublisher<>();
+    private MainViewController mainViewController;
 
     public ControllerFactory() {
         this.mainViewModel = new MainViewModel();
@@ -25,7 +29,9 @@ public class ControllerFactory {
 
     public Object create(Class<?> controllerClass) throws Exception {
         if (controllerClass == MainViewController.class) {
-            return new MainViewController(this.mainViewModel);
+            this.mainViewController = new MainViewController(this.mainViewModel);
+            publisher.subscribe(this.mainViewController);
+            return mainViewController;
         }
         else if (controllerClass == MapSubviewController.class) {
             return new MapSubviewController(this.mapSubviewModel);
@@ -37,7 +43,7 @@ public class ControllerFactory {
             return new TourListSubviewController(this.tourListSubviewModel);
         }
         else if (controllerClass == TourFormController.class) {
-            return new TourFormController(this.tourFormModel);
+            return new TourFormController(this.tourFormModel, publisher);
         }
         else if (controllerClass == LogsListController.class){
             return new LogsListController(this.logsListModel);
