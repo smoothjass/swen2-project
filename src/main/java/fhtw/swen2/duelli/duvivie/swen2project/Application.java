@@ -8,6 +8,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
+import fhtw.swen2.duelli.duvivie.swen2project.Services.CSVService;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.ReportService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -21,7 +22,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Application extends javafx.application.Application {
 
@@ -143,9 +146,93 @@ public class Application extends javafx.application.Application {
         }
     }
 
+    public void testFunctionCSVExport(){
+         TransportType pedestrian = new TransportType();
+        pedestrian.setTransport_type_id(1);
+        pedestrian.setType("pedestrian");
+
+        Tour tourA = new Tour();
+        tourA.setTour_id(1);
+        tourA.setName("TestTourA");
+        tourA.setDescription("TestDescriptionA");
+        tourA.setFrom("TestFromA");
+        tourA.setTo("TestToA");
+        tourA.setDistance(100F);
+        tourA.setDuration(100);
+        tourA.setTransportType(pedestrian);
+
+         Log logA1 = new Log();
+        logA1.setLog_id(1);
+        logA1.setDifficulty(1);
+        logA1.setComment("vghjkl");
+        logA1.setTotal_time(100);
+        logA1.setStarting_time(new Timestamp(100));
+        logA1.setRating(10);
+        logA1.setTour_id(tourA.tour_id);
+
+        Log logA2 = new Log();
+        logA2.setLog_id(2);
+        logA2.setDifficulty(2);
+        logA2.setComment("vghjkl");
+        logA2.setTotal_time(200);
+        logA2.setRating(20);
+        logA2.setStarting_time(new Timestamp(200));
+
+        logA2.setTour_id(tourA.tour_id);
+
+        List<Log> logList = new ArrayList<>();
+        logList.add(logA1);
+        logList.add(logA2);
+
+        CSVService csvService = new CSVService();
+        try {
+            csvService.export(tourA, logList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void testImportCSV(){
+
+         Map<Tour, List<Log>> result;
+
+        CSVService csvService = new CSVService();
+        try {
+            result = csvService.importCSV();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //print out the result
+        for (Map.Entry<Tour, List<Log>> entry : result.entrySet()) {
+            Tour resultTour = entry.getKey();
+
+            System.out.println(resultTour.tour_id);
+            System.out.println(resultTour.getName());
+            System.out.println(resultTour.getDescription());
+            System.out.println(resultTour.getFrom());
+            System.out.println(resultTour.getTo());
+            System.out.println(resultTour.getTransportType().getType());
+            System.out.println(resultTour.getDistance());
+            System.out.println(resultTour.getDuration());
+
+            for (Log log : entry.getValue()) {
+                //print out the log values
+                System.out.println(log.log_id);
+                System.out.println(log.tour_id);
+                System.out.println(log.starting_time);
+                System.out.println(log.comment);
+                System.out.println(log.difficulty);
+                System.out.println(log.total_time);
+                System.out.println(log.rating);
+
+            }
+        }
+    }
+
      @Override
     public void start(Stage stage) throws IOException {
-         //testFunctionSummaryReport();
         ControllerFactory factory = new ControllerFactory();
         FXMLLoader fxmlLoader = getFxmlLoader(factory);
         System.out.println(fxmlLoader);

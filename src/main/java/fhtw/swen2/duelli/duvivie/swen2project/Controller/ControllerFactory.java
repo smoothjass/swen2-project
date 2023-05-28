@@ -15,6 +15,7 @@ public class ControllerFactory {
     private final LogsListModel logsListModel;
     private final TourListItemModel tourListItemModel;
     private final PictureGalleryModel pictureGalleryModel;
+    private final LogListItemModel logListItemModel;
 
     public ControllerFactory() {
         this.mainViewModel = new MainViewModel();
@@ -25,6 +26,7 @@ public class ControllerFactory {
         this.logsListModel = new LogsListModel();
         this.tourListItemModel = new TourListItemModel();
         this.pictureGalleryModel = new PictureGalleryModel();
+        this.logListItemModel = new LogListItemModel();
     }
 
     public Object create(Class<?> controllerClass) throws Exception {
@@ -51,6 +53,9 @@ public class ControllerFactory {
         }
         else if (controllerClass == PictureGalleryController.class){
             return new PictureGalleryController(this.pictureGalleryModel);
+        }
+        else if (controllerClass == LogListItemController.class){
+            return new LogListItemController(this.logListItemModel);
         }
         else {
             throw new Exception("Controller not supported " + controllerClass.getName());

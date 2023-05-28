@@ -22,10 +22,10 @@
         <GridPane hgap="10" vgap="10" maxHeight="Infinity" maxWidth="Infinity">
 
             <Label GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 18; -fx-padding: 0 0 10 0"  text="Tour Details"/>
-            <Button GridPane.halignment="RIGHT"  GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="saveButton" alignment="TOP_RIGHT" onAction="#saveNewTourData" text="Save">
+            <Button GridPane.halignment="RIGHT"  GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="saveButton" alignment="TOP_RIGHT" onAction="#saveNewTourData">
             <graphic>
                 <ImageView>
-                    <Image url="@icons/add-list.png" />
+                    <Image url="@icons/save.png" />
                 </ImageView>
             </graphic>
             </Button>

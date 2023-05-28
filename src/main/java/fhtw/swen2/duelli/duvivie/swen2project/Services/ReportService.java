@@ -89,7 +89,7 @@ public class ReportService {
 
         // Open the save dialog window
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save PDF");
+        fileChooser.setTitle("Save Report");
         fileChooser.setInitialFileName(fileName);
         File file = fileChooser.showSaveDialog(null);
 
@@ -190,7 +190,7 @@ public class ReportService {
 
         // Open the save dialog window
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save PDF");
+        fileChooser.setTitle("Save Report");
         fileChooser.setInitialFileName(fileName);
         File file = fileChooser.showSaveDialog(null);
 
