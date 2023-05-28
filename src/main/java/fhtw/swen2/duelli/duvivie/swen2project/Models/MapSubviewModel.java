@@ -43,7 +43,7 @@ public class MapSubviewModel {
 
             // convert to Image
             // https://stackoverflow.com/questions/30970005/bufferedimage-to-javafx-image
-           Image image = convertToFxImage(bufferedImage);
+            Image image = convertToFxImage(bufferedImage);
             this.getImageView().setValue(image);
             System.out.println(image +" image");
             System.out.println(this.getImageView()+ " imageproperty");

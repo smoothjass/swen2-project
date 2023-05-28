@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +18,7 @@ import static java.lang.Integer.parseInt;
 public class TourFormController implements Initializable {
 
     private final TourFormModel tourFormModel;
+    public ImageView imageView;
     private SubmissionPublisher<Tour> publisher;
 
     public TextField name;
@@ -55,5 +57,6 @@ public class TourFormController implements Initializable {
         this.from.textProperty().bindBidirectional(tourFormModel.getFrom());
         this.description.textProperty().bindBidirectional(tourFormModel.getDescription());
         this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
+        this.imageView.imageProperty().bindBidirectional(tourFormModel.getImageView());
     }
 }

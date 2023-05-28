@@ -4,13 +4,20 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.MapService;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +34,7 @@ public class TourFormModel {
     public StringProperty from = new SimpleStringProperty();
     public StringProperty description = new SimpleStringProperty();
     public StringProperty transportType = new SimpleStringProperty();
+    public ObjectProperty<Image> imageView = new SimpleObjectProperty<>();
 
     private DatabaseService databaseService = new DatabaseService();
     private MapService mapService = new MapService();
@@ -64,6 +72,21 @@ public class TourFormModel {
         // TODO update currently selected id
         this.getDistance().setValue(Float.toString(tour.getDistance()) + " km");
         this.getDuration().setValue(Integer.toString(tour.getDuration()) + " seconds");
+        this.getImageView().setValue(convertToFxImage((BufferedImage) array[2]));
         return tour;
+    }
+
+    private static Image convertToFxImage(BufferedImage image) {
+        WritableImage wr = null;
+        if (image != null) {
+            wr = new WritableImage(image.getWidth(), image.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < image.getWidth(); x++) {
+                for (int y = 0; y < image.getHeight(); y++) {
+                    pw.setArgb(x, y, image.getRGB(x, y));
+                }
+            }
+        }
+        return new ImageView(wr).getImage();
     }
 }
