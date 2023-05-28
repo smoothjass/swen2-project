@@ -12,12 +12,16 @@
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourDetailsSubviewController">
 
     <HBox>
-        <Button fx:id="tourDetailsButton" prefWidth="${tourDetailsButton.parent.width}" text="Details"/>
-        <Button fx:id="logEntriesButton" prefWidth="${logEntriesButton.parent.width}" text="Log entries"/>
-        <Button fx:id="picturesButton" prefWidth="${picturesButton.parent.width}" text="Pictures"/>
+        <Button fx:id="tourDetailsButton"  onAction="#showTourForm"  prefWidth="${tourDetailsButton.parent.width}" text="Details"/>
+        <Button fx:id="logEntriesButton" onAction="#showLogList"  prefWidth="${logEntriesButton.parent.width}" text="Log entries"/>
+        <Button fx:id="picturesButton" onAction="#showPictureGallery" prefWidth="${picturesButton.parent.width}" text="Pictures"/>
     </HBox>
 
-    <fx:include fx:id="tourContentArea" source="tour-form.fxml"></fx:include>
+    <VBox fx:id="detailsContentArea">
+        <fx:include visible="true" managed="true" source="tour-form.fxml"></fx:include>
+        <fx:include visible="false" managed="false" source="logs-list.fxml"></fx:include>
+        <fx:include visible="false" managed="false" source="picture-gallery.fxml"></fx:include>
+    </VBox>
 
     <HBox >
         <Button fx:id="deleteButton" prefWidth="${deleteButton.parent.width}" text="Delete"/>

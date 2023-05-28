@@ -1,5 +1,8 @@
 package fhtw.swen2.duelli.duvivie.swen2project;
 
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.layout.element.Image;
 import fhtw.swen2.duelli.duvivie.swen2project.Controller.ControllerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
@@ -22,61 +25,7 @@ import java.util.List;
 
 public class Application extends javafx.application.Application {
 
-    public void testFunctionSingleReport(){
-        TransportType pedestrian = new TransportType();
-        pedestrian.setTransport_type_id(1);
-        pedestrian.setType("pedestrian");
-
-        // Create a new tour
-        Tour tour = new Tour();
-        tour.setName("TestTour");
-        tour.setDescription("TestDescription");
-        tour.setFrom("TestFrom");
-        tour.setTo("TestTo");
-        tour.setDistance(100F);
-        tour.setDuration(100);
-        tour.setTransportType(pedestrian);
-
-        Log logA = new Log();
-
-        logA.setLog_id(1);
-        logA.setDifficulty(1);
-        logA.setComment("vghjkl");
-        logA.setRating(1);
-        logA.setPicture_path("vbnjklö");
-        logA.setStarting_time(new Timestamp(12));
-        logA.setTotal_time(12);
-
-        Log logB = new Log();
-
-        logB.setLog_id(2);
-        logB.setComment("vghjkl");
-        logB.setDifficulty(100);
-        logB.setPicture_path("vbnjklö");
-        logB.setStarting_time(new Timestamp(12));
-        logB.setTotal_time(12);
-
-        ArrayList<Log> logList = new ArrayList<Log>();
-
-        logList.add(logA);
-        logList.add(logB);
-
-        ReportService reportService = new ReportService();
-
-        try {
-            System.out.println(reportService.genereateSingleTourPdf(tour, logList, "google_maps.PNG"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void testFunctionDatabase() {
-        // Create an EntityManagerFactory when you start the application.
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JavaHelps");
-        // Create the DAO object
-        TourDao tourDao = new TourDao(entityManagerFactory);
-
-        //These transportypes need to be added to every new or updated tour
+     public void testFunctionSummaryReport(){
         TransportType pedestrian = new TransportType();
         pedestrian.setTransport_type_id(1);
         pedestrian.setType("pedestrian");
@@ -85,47 +34,118 @@ public class Application extends javafx.application.Application {
         car.setTransport_type_id(2);
         car.setType("car");
 
-        TransportType bike = new TransportType();
-        bike.setTransport_type_id(3);
-        bike.setType("bike");
-
-        TransportType secondPedestrian = new TransportType();
-        secondPedestrian.setTransport_type_id(1);
-        secondPedestrian.setType("pedestrian");
-
         // Create a new tour
-        Tour tour = new Tour();
-        tour.setName("TestTour");
-        tour.setDescription("TestDescription");
-        tour.setFrom("TestFrom");
-        tour.setTo("TestTo");
-        tour.setDistance(100F);
-        tour.setDuration(100);
-        tour.setTransportType(pedestrian);
+        Tour tourA = new Tour();
+        tourA.setTour_id(1);
+        tourA.setName("TestTourA");
+        tourA.setDescription("TestDescriptionA");
+        tourA.setFrom("TestFromA");
+        tourA.setTo("TestToA");
+        tourA.setDistance(100F);
+        tourA.setDuration(100);
+        tourA.setTransportType(pedestrian);
 
         Tour tourB = new Tour();
-        tourB.setName("sdhifo");
-        tourB.setDescription("asdijfopasdf");
-        tourB.setFrom("s^dfghjk");
-        tourB.setTo("tgfbnmkiuzgv");
-        tourB.setDistance(456789F);
-        tourB.setDuration(3467890);
-        tourB.setTransportType(secondPedestrian);
+        tourB.setTour_id(2);
+        tourB.setName("TestTourB");
+        tourB.setDescription("TestDescriptionB");
+        tourB.setFrom("TestFromB");
+        tourB.setTo("TestToB");
+        tourB.setDistance(200F);
+        tourB.setDuration(200);
+        tourB.setTransportType(car);
 
-        // Persist the tour object
-        tourDao.create(tour);
-        tourDao.create(tourB);
+        Tour tourC = new Tour();
+        tourC.setTour_id(3);
+        tourC.setName("TestTourC");
+        tourC.setDescription("TestDescriptionC");
+        tourC.setFrom("TestFromC");
+        tourC.setTo("TestToC");
+        tourC.setDistance(300F);
+        tourC.setDuration(300);
+        tourC.setTransportType(pedestrian);
 
-        //tourDao.deleteAll();
+        List<Tour> tourList = new ArrayList<>();
+        tourList.add(tourA);
+        tourList.add(tourB);
+        tourList.add(tourC);
 
-        // Never forget to close the entityManagerFactory
-        entityManagerFactory.close();
+        Log logA1 = new Log();
+        logA1.setLog_id(1);
+        logA1.setDifficulty(1);
+        logA1.setComment("vghjkl");
+        logA1.setTotal_time(100);
+        logA1.setStarting_time(new Timestamp(100));
+        logA1.setRating(10);
+        logA1.setTour_id(tourA.tour_id);
+
+        Log logA2 = new Log();
+        logA2.setLog_id(2);
+        logA2.setDifficulty(2);
+        logA2.setComment("vghjkl");
+        logA2.setTotal_time(200);
+        logA2.setRating(20);
+        logA2.setStarting_time(new Timestamp(200));
+
+        logA2.setTour_id(tourA.tour_id);
+
+        Log logB1 = new Log();
+        logB1.setLog_id(3);
+        logB1.setDifficulty(3);
+        logB1.setComment("vghjkl");
+        logB1.setTotal_time(300);
+        logB1.setStarting_time(new Timestamp(300));
+        logB1.setRating(30);
+        logB1.setTour_id(tourB.tour_id);
+
+        Log logB2 = new Log();
+        logB2.setLog_id(4);
+        logB2.setDifficulty(4);
+        logB2.setComment("vghjkl");
+        logB2.setTotal_time(400);
+        logB2.setStarting_time(new Timestamp(400));
+        logB2.setRating(40);
+        logB2.setTour_id(tourB.tour_id);
+
+        Log logC1 = new Log();
+        logC1.setLog_id(5);
+        logC1.setDifficulty(5);
+        logC1.setComment("vghjkl");
+        logC1.setTotal_time(500);
+        logC1.setStarting_time(new Timestamp(500));
+        logC1.setRating(50);
+        logC1.setTour_id(tourC.tour_id);
+
+        Log logC2 = new Log();
+        logC2.setLog_id(6);
+        logC2.setDifficulty(6);
+        logC2.setComment("vghjkl");
+        logC2.setTotal_time(600);
+        logC2.setStarting_time(new Timestamp(600));
+        logC2.setRating(60);
+        logC2.setTour_id(tourC.tour_id);
+
+        //create a list of logs
+        List<Log> logList = new ArrayList<>();
+        logList.add(logA1);
+        logList.add(logA2);
+        logList.add(logB1);
+        logList.add(logB2);
+        logList.add(logC1);
+        logList.add(logC2);
+
+        ReportService reportService = new ReportService();
+
+        try {
+            reportService.createSummaryReport(tourList, logList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @Override
+     @Override
     public void start(Stage stage) throws IOException {
-        //testFunctionDatabase();
-        //testFunctionSingleReport();
+         //testFunctionSummaryReport();
         ControllerFactory factory = new ControllerFactory();
         FXMLLoader fxmlLoader = getFxmlLoader(factory);
         System.out.println(fxmlLoader);

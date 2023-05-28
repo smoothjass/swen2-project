@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourListItemController">
+
+    <children>
+                <Label  fx:id="name" style="-fx-label-padding: 10; -fx-alignment: center-left"/>
+    </children>
+
+</VBox>

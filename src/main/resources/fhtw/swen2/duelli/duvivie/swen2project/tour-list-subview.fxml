@@ -49,6 +49,8 @@
         </Button>
     </HBox>
 
+    <ListView fx:id="tours"/>
+
     <VBox fx:id="tourListButtons">
         <HBox>
             <Button fx:id="exportTourData" prefWidth="${exportTourData.parent.width}" text="Export tour data"/>

@@ -13,6 +13,8 @@ public class ControllerFactory {
     private final MapSubviewModel mapSubviewModel;
     private final TourListSubviewModel tourListSubviewModel;
     private final LogsListModel logsListModel;
+    private final TourListItemModel tourListItemModel;
+    private final PictureGalleryModel pictureGalleryModel;
 
     public ControllerFactory() {
         this.mainViewModel = new MainViewModel();
@@ -21,6 +23,8 @@ public class ControllerFactory {
         this.mapSubviewModel = new MapSubviewModel();
         this.tourListSubviewModel = new TourListSubviewModel();
         this.logsListModel = new LogsListModel();
+        this.tourListItemModel = new TourListItemModel();
+        this.pictureGalleryModel = new PictureGalleryModel();
     }
 
     public Object create(Class<?> controllerClass) throws Exception {
@@ -41,6 +45,12 @@ public class ControllerFactory {
         }
         else if (controllerClass == LogsListController.class){
             return new LogsListController(this.logsListModel);
+        }
+        else if (controllerClass == TourListItemController.class){
+            return new TourListItemController(this.tourListItemModel);
+        }
+        else if (controllerClass == PictureGalleryController.class){
+            return new PictureGalleryController(this.pictureGalleryModel);
         }
         else {
             throw new Exception("Controller not supported " + controllerClass.getName());
