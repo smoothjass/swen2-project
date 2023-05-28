@@ -8,11 +8,16 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Rectangle?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MapSubviewController">
-
-    <ImageView fx:id="imageView">
-
-    </ImageView>
+    <TextField fx:id="test"/>
+    <HBox>
+        <ImageView fx:id="imageView" fitWidth="400" fitHeight="333">
+            <clip>
+                <Rectangle arcWidth="30" arcHeight="30" width="400" height="333"/>
+            </clip>
+        </ImageView>
+    </HBox>
 </VBox>
