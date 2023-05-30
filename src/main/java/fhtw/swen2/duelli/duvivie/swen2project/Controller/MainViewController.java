@@ -1,6 +1,8 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.MainViewModel;
 import javafx.fxml.Initializable;
 
@@ -17,6 +19,8 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     private Flow.Subscription subscription;
     private Tour currentlySelected;
     private LogViewController logViewController;
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+
     public MainViewController(MainViewModel mainViewModel, LogViewController logViewController){
         this.mainViewModel = mainViewModel;
         this.logViewController = logViewController;
@@ -30,6 +34,11 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
         this.subscription = subscription;
+        // testing loger
+        logger.debug("subscribed");
+        logger.warn("warning");
+        logger.error("error");
+        logger.fatal("fatal");
         subscription.request(1);
     }
 

@@ -12,6 +12,7 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     requires kernel;
     requires layout;
     requires java.desktop;
+    requires org.apache.logging.log4j;
 
     opens fhtw.swen2.duelli.duvivie.swen2project.Services to com.fasterxml.jackson.databind;
     exports fhtw.swen2.duelli.duvivie.swen2project.Services;

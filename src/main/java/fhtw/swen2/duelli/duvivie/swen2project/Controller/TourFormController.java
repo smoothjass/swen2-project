@@ -1,6 +1,8 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourFormModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -19,6 +21,7 @@ import java.util.concurrent.SubmissionPublisher;
 import static java.lang.Integer.parseInt;
 
 public class TourFormController implements Initializable {
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
     private final TourFormModel tourFormModel;
     public ImageView imageView;
@@ -35,6 +38,7 @@ public class TourFormController implements Initializable {
     public TourFormController(TourFormModel tourFormModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourFormModel = tourFormModel;
         this.publisher = publisher;
+        logger.fatal("tourFormController constructor");
     }
 
     public void saveNewTourData(ActionEvent actionEvent) {
