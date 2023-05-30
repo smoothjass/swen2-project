@@ -32,6 +32,6 @@ CREATE TABLE "transport_types" (
 ALTER TABLE "logs" ADD FOREIGN KEY ("fk_tours_id") REFERENCES "tours" ("tour_id");
 ALTER TABLE "tours" ADD FOREIGN KEY ("transport_type_id") REFERENCES "transport_types" ("transport_type_id");
 
-INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (1, 'bike');
+INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (1, 'bicycle');
 INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (2, 'car');
 INSERT INTO "transport_types" ("transport_type_id", "type") VALUES (3, 'pedestrian');

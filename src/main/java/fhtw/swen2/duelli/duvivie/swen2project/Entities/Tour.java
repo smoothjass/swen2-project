@@ -30,6 +30,7 @@ public class Tour {
     @ManyToOne
     @JoinColumn(name = "transport_type_id")
     public TransportType transportType;
+    // so lassen
 
     @Column(name = "distance", nullable = false)
     public Float distance;

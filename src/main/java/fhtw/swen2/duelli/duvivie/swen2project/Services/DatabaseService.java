@@ -22,8 +22,8 @@ public class DatabaseService {
         this.logDao = new LogDao(entityManagerFactory);
     }
 
-    public void saveTour(Tour newTour) {
-        tourDao.create(newTour);
+    public Tour saveTour(Tour newTour) {
+        return tourDao.create(newTour);
     }
 
     public List<Tour> getTours() {
