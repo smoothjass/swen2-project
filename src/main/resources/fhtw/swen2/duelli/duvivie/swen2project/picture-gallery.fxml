@@ -7,11 +7,19 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.PictureGalleryController"
-            prefHeight="400.0" prefWidth="600.0">
-
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.PictureGalleryController"
+      prefHeight="400.0" prefWidth="600.0">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <HBox alignment="CENTER">
+        <ImageView fx:id="imageView" fitHeight="300">
+        </ImageView>
+    </HBox>
     <Text>:-)</Text>
 
 </VBox>

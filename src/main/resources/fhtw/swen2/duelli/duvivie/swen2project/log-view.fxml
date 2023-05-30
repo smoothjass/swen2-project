@@ -18,19 +18,22 @@
     <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-
+    <HBox alignment="BASELINE_RIGHT">
+        <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="saveLogButton">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/save.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
+    <HBox alignment="CENTER">
+        <ImageView fx:id="imageView" fitHeight="300">
+        </ImageView>
+    </HBox>
     <VBox>
-        <HBox alignment="BASELINE_RIGHT">
-            <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
-            <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="saveLogButton">
-                <graphic>
-                    <ImageView>
-                        <Image url="@icons/save.png" />
-                    </ImageView>
-                </graphic>
-            </Button>
-        </HBox>
 
         <HBox spacing="10">
            <ListView fx:id="logListView" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">

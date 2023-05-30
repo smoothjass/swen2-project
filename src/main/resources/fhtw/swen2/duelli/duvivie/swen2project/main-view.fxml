@@ -14,7 +14,6 @@
         <items>
             <fx:include fx:id="tourListSubview" maxWidth="500" source="tour-list-subview.fxml"> </fx:include>
             <SplitPane orientation="VERTICAL">
-                <!--<fx:include  fx:id = "mapSubview"  minHeight="300" source="map-subview.fxml"> </fx:include>-->
                 <fx:include fx:id="tourDetailsSubview" source="tour-details-subview.fxml"> </fx:include>
             </SplitPane>
         </items>

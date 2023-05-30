@@ -21,7 +21,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Getter
@@ -39,7 +41,7 @@ public class TourFormModel {
     private DatabaseService databaseService = new DatabaseService();
     private MapService mapService = new MapService();
 
-    public Tour saveTour() {
+    public Map<Tour, Image> saveTour() {
         // invoke MapService to get distance, duration and picture
         Object[] array = new Object[3];
         try {
@@ -74,10 +76,13 @@ public class TourFormModel {
         // TODO convert the time to a reasonable format to display
         this.getDistance().setValue(Float.toString(tour.getDistance()) + " km");
         this.getDuration().setValue(Integer.toString(tour.getDuration()) + " seconds");
-        this.getImageView().setValue(convertToFxImage((BufferedImage) array[2]));
+        Image image = convertToFxImage((BufferedImage) array[2]);
+        this.getImageView().setValue(image);
 
         // return the tour so it can be updated whereever needed
-        return tour;
+        Map<Tour, Image> tourImageMap = new HashMap<>();
+        tourImageMap.put(tour, image);
+        return tourImageMap;
     }
 
     private static Image convertToFxImage(BufferedImage image) {

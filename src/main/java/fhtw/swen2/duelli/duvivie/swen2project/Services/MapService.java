@@ -63,7 +63,7 @@ public class MapService {
                 "&start=" +  from +
                 "&end=" + to +
                 "&boundingBox=" + boundingBox +
-                "&size=534,300" +
+                "&size=1000,300" +
                 "&sessionId=" + sessionId;
         System.out.println(getRequest);
         // request the image from the static map api

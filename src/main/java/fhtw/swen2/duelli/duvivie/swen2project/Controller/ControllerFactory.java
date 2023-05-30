@@ -3,6 +3,9 @@ package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.*;
 
+import javafx.scene.image.Image;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
@@ -11,36 +14,32 @@ public class ControllerFactory {
     private final MainViewModel mainViewModel;
     private final TourDetailsSubviewModel tourDetailsSubviewModel;
     private final TourFormModel tourFormModel;
-    private final MapSubviewModel mapSubviewModel;
     private final TourListSubviewModel tourListSubviewModel;
     private final LogViewModel logViewModel;
     private final TourListItemModel tourListItemModel;
     private final PictureGalleryModel pictureGalleryModel;
     private final LogListItemModel logListItemModel;
-
-    public SubmissionPublisher<Tour> publisher = new SubmissionPublisher<>();
+    private LogViewController logViewController;
+    public SubmissionPublisher<Map<Tour, Image>> publisher = new SubmissionPublisher<>();
     private MainViewController mainViewController;
 
     public ControllerFactory() {
         this.mainViewModel = new MainViewModel();
         this.tourDetailsSubviewModel = new TourDetailsSubviewModel();
         this.tourFormModel = new TourFormModel();
-        this.mapSubviewModel = new MapSubviewModel();
         this.tourListSubviewModel = new TourListSubviewModel();
         this.logViewModel = new LogViewModel();
         this.tourListItemModel = new TourListItemModel();
         this.pictureGalleryModel = new PictureGalleryModel();
         this.logListItemModel = new LogListItemModel();
+        logViewController = new LogViewController(this.logViewModel);
     }
 
     public Object create(Class<?> controllerClass) throws Exception {
         if (controllerClass == MainViewController.class) {
-            this.mainViewController = new MainViewController(this.mainViewModel);
+            this.mainViewController = new MainViewController(this.mainViewModel, logViewController);
             publisher.subscribe(this.mainViewController);
             return mainViewController;
-        }
-        else if (controllerClass == MapSubviewController.class) {
-            return new MapSubviewController(this.mapSubviewModel);
         }
         else if (controllerClass == TourDetailsSubviewController.class) {
             return new TourDetailsSubviewController(this.tourDetailsSubviewModel);
@@ -52,7 +51,7 @@ public class ControllerFactory {
             return new TourFormController(this.tourFormModel, publisher);
         }
         else if (controllerClass == LogViewController.class){
-            return new LogViewController(this.logViewModel);
+            return logViewController;
         }
         else if (controllerClass == TourListItemController.class){
             return new TourListItemController(this.tourListItemModel);
