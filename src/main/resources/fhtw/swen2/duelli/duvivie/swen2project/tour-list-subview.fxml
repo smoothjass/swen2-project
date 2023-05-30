@@ -12,13 +12,14 @@
 <?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourListSubviewController">
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourListSubviewController"
+>
 
     <stylesheets>
         <URL value="@stylesheets/searchbar.css" />
     </stylesheets>
 
-    <HBox>
+    <HBox alignment="BOTTOM_CENTER">
         <HBox fx:id="searchField" prefWidth="${searchField.parent.width}" styleClass="search-bar">
         <Label graphicTextGap="5" styleClass="search-icon">
             <graphic>
@@ -49,7 +50,7 @@
         </Button>
     </HBox>
 
-    <ListView fx:id="tours"/>
+    <ListView VBox.vgrow="ALWAYS" fx:id="tours"/>
 
     <VBox fx:id="tourListButtons">
         <HBox>

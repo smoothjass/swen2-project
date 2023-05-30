@@ -1,16 +1,11 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
-import fhtw.swen2.duelli.duvivie.swen2project.Models.LogsListModel;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourDetailsSubviewModel;
-import fhtw.swen2.duelli.duvivie.swen2project.Models.TourFormModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

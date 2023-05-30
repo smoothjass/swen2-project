@@ -28,14 +28,12 @@ public class TourListSubviewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        VBox.setVgrow(tourListButtons, Priority.ALWAYS);
-        tourListButtons.setAlignment(Pos.BOTTOM_CENTER);
 
-        //load all tours and create a TourListItemModel for each tour
+       //load all tours and create a TourListItemModel for each tour
         tourListSubviewModel.getTours().forEach(tour -> {
             TourListItemModel tourListItemModel = new TourListItemModel();
             tourListItemModel.name.setValue(tour.getName());
-            //tourListItemModel.setName(new SimpleStringProperty(tour.getName()));
+            tourListItemModel.setName(new SimpleStringProperty(tour.getName()));
             tours.getItems().add(tourListItemModel);
             System.out.println(tourListItemModel.getName().getValue());
         });

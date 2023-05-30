@@ -11,6 +11,8 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     requires io;
     requires kernel;
     requires layout;
+    requires javafx.base;
+    requires javafx.graphics;
 
     opens fhtw.swen2.duelli.duvivie.swen2project.Services to com.fasterxml.jackson.databind;
     exports fhtw.swen2.duelli.duvivie.swen2project.Services;
@@ -22,5 +24,4 @@ module fhtw.swen2.duelli.duvivie.swen2project {
     exports fhtw.swen2.duelli.duvivie.swen2project;
     exports fhtw.swen2.duelli.duvivie.swen2project.Controller;
     opens fhtw.swen2.duelli.duvivie.swen2project.Controller to javafx.fxml;
-
 }

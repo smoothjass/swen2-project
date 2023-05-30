@@ -1,6 +1,5 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
-import fhtw.swen2.duelli.duvivie.swen2project.Models.LogsListModel;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.PictureGalleryModel;
 import javafx.fxml.Initializable;
 

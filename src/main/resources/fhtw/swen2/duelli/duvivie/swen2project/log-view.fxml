@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.SpinnerValueFactory.LocalTimeSpinnerValueFactory?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.LogViewController">
+    <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <VBox>
+        <HBox alignment="BASELINE_RIGHT">
+            <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="saveLogButton">
+                <graphic>
+                    <ImageView>
+                        <Image url="@icons/save.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+
+        <HBox spacing="10">
+           <ListView fx:id="logListView" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                    <TextField>log entry (Comment, start time ... ) : edit | delete </TextField>
+                    <TextField>log entry (Comment, start time ... ) : edit | delete </TextField>
+                    <TextField>log entry (Comment, start time ... ) : edit | delete </TextField>
+           </ListView>
+
+        <!-- a form to add and edit a log entry-->
+           <VBox maxWidth="200" VBox.vgrow="ALWAYS">
+               <Label text="Date and time:"/>
+               <TextField disable="true" fx:id="timestamp"/>
+               <Label text="Difficulty:"/>
+               <!--an input field for a difficulty -->
+               <ChoiceBox prefWidth="${difficulty.parent.width}" fx:id="difficulty">
+                   <items>
+                       <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="1 = very easy"/>
+                           <String fx:value="2"/>
+                           <String fx:value="3"/>
+                           <String fx:value="4"/>
+                           <String fx:value="5 = extremly difficult"/>
+                       </FXCollections>
+                   </items>
+               </ChoiceBox>
+
+               <Label text="Rating:"/>
+               <ChoiceBox prefWidth="${transportType.parent.width}" fx:id="transportType">
+                   <items>
+                       <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="1 star"/>
+                           <String fx:value="2 stars"/>
+                           <String fx:value="3 stars"/>
+                           <String fx:value="4 stars"/>
+                           <String fx:value="5 stars"/>
+                       </FXCollections>
+                   </items>
+               </ChoiceBox>
+
+               <Label text="Days:" />
+               <TextField maxWidth="40" fx:id="days"></TextField>
+
+               <Label text="Hours:"/>
+               <TextField maxWidth="40" fx:id="hours"></TextField>
+
+               <Label text="minutes:"/>
+               <TextField maxWidth="40" fx:id="minutes"></TextField>
+
+               <Label text="Comment:"/>
+               <TextArea fx:id="commentField"/>
+            </VBox>
+        </HBox>
+    </VBox>
+</VBox>

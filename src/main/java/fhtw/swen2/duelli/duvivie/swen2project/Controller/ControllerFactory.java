@@ -1,9 +1,6 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
-import fhtw.swen2.duelli.duvivie.swen2project.Daos.TourDao;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.*;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class ControllerFactory {
 
@@ -12,7 +9,7 @@ public class ControllerFactory {
     private final TourFormModel tourFormModel;
     private final MapSubviewModel mapSubviewModel;
     private final TourListSubviewModel tourListSubviewModel;
-    private final LogsListModel logsListModel;
+    private final LogViewModel logViewModel;
     private final TourListItemModel tourListItemModel;
     private final PictureGalleryModel pictureGalleryModel;
     private final LogListItemModel logListItemModel;
@@ -23,7 +20,7 @@ public class ControllerFactory {
         this.tourFormModel = new TourFormModel();
         this.mapSubviewModel = new MapSubviewModel();
         this.tourListSubviewModel = new TourListSubviewModel();
-        this.logsListModel = new LogsListModel();
+        this.logViewModel = new LogViewModel();
         this.tourListItemModel = new TourListItemModel();
         this.pictureGalleryModel = new PictureGalleryModel();
         this.logListItemModel = new LogListItemModel();
@@ -45,8 +42,8 @@ public class ControllerFactory {
         else if (controllerClass == TourFormController.class) {
             return new TourFormController(this.tourFormModel);
         }
-        else if (controllerClass == LogsListController.class){
-            return new LogsListController(this.logsListModel);
+        else if (controllerClass == LogViewController.class){
+            return new LogViewController(this.logViewModel);
         }
         else if (controllerClass == TourListItemController.class){
             return new TourListItemController(this.tourListItemModel);

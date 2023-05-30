@@ -19,7 +19,7 @@
 
     <VBox fx:id="detailsContentArea">
         <fx:include visible="true" managed="true" source="tour-form.fxml"></fx:include>
-        <fx:include visible="false" managed="false" source="logs-list.fxml"></fx:include>
+        <fx:include visible="false" managed="false" source="log-view.fxml"></fx:include>
         <fx:include visible="false" managed="false" source="picture-gallery.fxml"></fx:include>
     </VBox>
 

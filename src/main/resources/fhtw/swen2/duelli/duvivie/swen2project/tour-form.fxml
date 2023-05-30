@@ -14,45 +14,43 @@
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
 
-        <HBox>
-
-
+        <HBox alignment="BASELINE_RIGHT">
+            <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="saveButton" >
+                <graphic>
+                    <ImageView>
+                        <Image url="@icons/save.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
         </HBox>
 
         <GridPane hgap="10" vgap="10" maxHeight="Infinity" maxWidth="Infinity">
 
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 18; -fx-padding: 0 0 10 0"  text="Tour Details"/>
-            <Button GridPane.halignment="RIGHT"  GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="saveButton" alignment="TOP_RIGHT" onAction="#saveNewTourData">
-            <graphic>
-                <ImageView>
-                    <Image url="@icons/save.png" />
-                </ImageView>
-            </graphic>
-            </Button>
-
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Tour name:"/>
                 <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="name"/>
             </VBox>
-            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="To:"/>
                 <TextField fx:id="to"/>
             </VBox>
-            <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="From:"/>
                 <TextField fx:id="from"/>
             </VBox>
 
-            <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Tour Distance:"/>
                 <TextField disable="true" fx:id="distance"/>
             </VBox>
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
+            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
                 <Label text="Estimated time:"/>
                 <TextField disable="true" fx:id="duration"/>
             </VBox>
 
-            <VBox GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label text="Transport type:"/>
                 <ChoiceBox fx:id="transportType">
                     <items>
@@ -63,6 +61,15 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
+            </VBox>
+
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
+                <Label text="Popularity:"/>
+                <TextField disable="true" fx:id="popularity"/>
+            </VBox>
+            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
+                <Label text="Child-friendliness:"/>
+                <TextField disable="true" fx:id="childFriendliness"/>
             </VBox>
 
             <VBox GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">

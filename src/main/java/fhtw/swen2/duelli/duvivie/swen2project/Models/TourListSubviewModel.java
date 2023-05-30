@@ -2,6 +2,7 @@ package fhtw.swen2.duelli.duvivie.swen2project.Models;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Priority;
