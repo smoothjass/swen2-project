@@ -21,15 +21,6 @@ public class MainViewController implements Initializable, Flow.Subscriber<Tour> 
     private Flow.Subscription subscription;
     private Tour currentlySelected;
 
-    // TODO keep checking if this keeps working or if we need to inject the mapsubviewcontroller
-    // from the controller factory
-    private MapSubviewController mapSubviewController = new MapSubviewController(new MapSubviewModel());
-
-    // jeder controller sollte nur sein eigenes model haben
-    // private TourListSubviewModel tourListSubviewModel;
-    // private TourDetailsSubviewModel tourDetailsSubviewModel;
-    // private MapSubviewModel mapSubviewModel;
-
     public MainViewController(MainViewModel mainViewModel){
         this.mainViewModel = mainViewModel;
     }
@@ -49,7 +40,9 @@ public class MainViewController implements Initializable, Flow.Subscriber<Tour> 
     public void onNext(Tour item) {
         System.out.println("Received Tour: " + item);
         currentlySelected = item;
-        mapSubviewController.requestImage(item);
+        // mapSubView has some trouble with binding and we have no idea why, maybe we injected the controller wrong
+        // mapSubviewController.requestImage(item);
+        // TODO update currently selected in other controllers / publish it, so they can update whatever they need to
         subscription.request(1);
     }
 

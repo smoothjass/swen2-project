@@ -22,36 +22,13 @@ import java.util.concurrent.ExecutionException;
 
 public class MapService {
     private String URL;
-    public static final String testRequest = "https://www.mapquestapi.com/directions/v2/route" +
-            "?key=9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK&from=ClarendonBlvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA";
-    public static final String key = "9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK";
+    private static final String key = "9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK";
 
-    public static void getTestRoute() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
-        // get the route
-        CompletableFuture<DirectionsResponse> yieldFact = requestRouteFromAPI(testRequest);
-        System.out.println("Waiting for fact"); // TODO make spinner here
-        while(!yieldFact.isDone()) {
-            // System.out.print(".");
-            Thread.sleep(250);
-        }
-        System.out.println("Fact received :" + yieldFact);
-        // get start and end from model
-        // get bounding box, session id, distance and duration (time) from the response
-
-        JsonNode boundingBox = yieldFact.get().getRoute().get("boundingBox");
-        String sessionId = String.valueOf(yieldFact.get().getRoute().get("sessionId")).replace("\"", "");
-        Float distance = Float.valueOf(String.valueOf(yieldFact.get().getRoute().get("distance")));
-        System.out.println(boundingBox);
-        System.out.println(sessionId);
-        System.out.println(distance);
-        // send another request to get the static map
-        //TODO some magic
-    }
     public Object[] getRoute(String from, String to, String transportType) throws IOException, URISyntaxException, InterruptedException, ExecutionException{
         // replace white spaces
         from = from.replaceAll("\\s", "");
         to = to.replaceAll("\\s", "");
-        // create the URL
+        // create the URL for the directions api
         String getRequest = "https://www.mapquestapi.com/directions/v2/route" +
                 "?key=" + key +
                 "&from=" + from +
@@ -61,10 +38,9 @@ public class MapService {
             getRequest = getRequest + "&routeType=" + transportType;
         }
         System.out.println(getRequest);
-
-        // get the route
+        // request the route from the api
         CompletableFuture<DirectionsResponse> yieldDirections = requestRouteFromAPI(getRequest);
-        System.out.println("Waiting for route"); // TODO make spinner here
+        System.out.println("Waiting for route");
         while(!yieldDirections.isDone()) {
             // System.out.print(".");
             Thread.sleep(250);
@@ -80,24 +56,19 @@ public class MapService {
         String sessionId = String.valueOf(yieldDirections.get().getRoute().get("sessionId")).replace("\"", "");
         Float distance = Float.valueOf(String.valueOf(yieldDirections.get().getRoute().get("distance")));
         Integer time = Integer.valueOf(String.valueOf(yieldDirections.get().getRoute().get("time"))); //seconds
-/*
-        System.out.println(boundingBox);
-        System.out.println(sessionId);
-        System.out.println(distance);
-        System.out.println(time);
-*/
 
-        // send another request with key, start, end, bounding box coordinates and sessionId to get the static map
+        // build another request string with key, start, end, bounding box coordinates and sessionId to get the static map
         getRequest = "https://www.mapquestapi.com/staticmap/v5/map" +
                 "?key=" + key +
                 "&start=" +  from +
                 "&end=" + to +
                 "&boundingBox=" + boundingBox +
+                "&size=534,300" +
                 "&sessionId=" + sessionId;
         System.out.println(getRequest);
-        // get the image
+        // request the image from the static map api
         CompletableFuture<BufferedImage> yieldImage = requestImageFromAPI(getRequest);
-        System.out.println("Waiting for image"); // TODO make spinner here
+        System.out.println("Waiting for image");
         while(!yieldImage.isDone()) {
             // System.out.print(".");
             Thread.sleep(250);
@@ -164,4 +135,3 @@ public class MapService {
     }
 
 }
-// change

@@ -12,7 +12,12 @@
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
+    <HBox>
+        <ImageView fx:id="imageView" fitHeight="300">
 
+        </ImageView>
+    </HBox>
+    <!--TODO layout-->
         <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0"  text="Tour Details"/>
 
         <GridPane hgap="10" vgap="10" maxHeight="Infinity" maxWidth="Infinity">
@@ -60,9 +65,4 @@
             <Button fx:id="saveButton" alignment="BOTTOM_RIGHT" onAction="#saveNewTourData" text="Save"/>
 
         </GridPane>
-    <HBox>
-        <ImageView fx:id="imageView">
-
-        </ImageView>
-    </HBox>
     </VBox>

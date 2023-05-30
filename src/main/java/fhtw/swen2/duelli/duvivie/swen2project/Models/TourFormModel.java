@@ -48,7 +48,7 @@ public class TourFormModel {
             throw new RuntimeException(e);
         }
 
-        // build entity
+        // build entity for db
         Tour newTour = new Tour();
         newTour.setName(name.getValue());
         newTour.setDistance((Float) array[0]);
@@ -69,14 +69,19 @@ public class TourFormModel {
 
         // give to database service
         Tour tour = databaseService.saveTour(newTour);
-        // TODO update currently selected id
+
+        // update bound values
+        // TODO convert the time to a reasonable format to display
         this.getDistance().setValue(Float.toString(tour.getDistance()) + " km");
         this.getDuration().setValue(Integer.toString(tour.getDuration()) + " seconds");
         this.getImageView().setValue(convertToFxImage((BufferedImage) array[2]));
+
+        // return the tour so it can be updated whereever needed
         return tour;
     }
 
     private static Image convertToFxImage(BufferedImage image) {
+        // https://stackoverflow.com/questions/30970005/bufferedimage-to-javafx-image
         WritableImage wr = null;
         if (image != null) {
             wr = new WritableImage(image.getWidth(), image.getHeight());

@@ -37,15 +37,12 @@ public class TourFormController implements Initializable {
     public void saveNewTourData(ActionEvent actionEvent) {
         // TODO input validation
         // display error, if applicable
-
-        // model aufrufen
+        // TODO display spinner
+        // invoke model to request directions & image & save tour to db
         Tour tour = tourFormModel.saveTour();
+        // fire event so that mainview controller updates currentlySelectedTour
         publisher.submit(tour);
-        // todo fire event so that mainview controller updates currentlySelectedTour and displays image
-        // right now, image is retrieved when saving the tour but it would make more sense if the mapsubviewmodel would
-        // be invoked by the mainviewcontroller (via the mapsubviewcontroller) and then the mapsubviewcontroller called
-        // the mapservice to get and display the image (with the information it can get about the tour using the
-        // currently selected tour id TODO this ^
+        // TODO remove spinner
     }
 
     @Override
