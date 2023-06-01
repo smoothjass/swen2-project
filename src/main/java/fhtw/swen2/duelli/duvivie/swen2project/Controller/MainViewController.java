@@ -19,11 +19,13 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     private Flow.Subscription subscription;
     private Tour currentlySelected;
     private LogViewController logViewController;
+    private TourListSubviewController tourListSubviewController;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
-    public MainViewController(MainViewModel mainViewModel, LogViewController logViewController){
+    public MainViewController(MainViewModel mainViewModel, LogViewController logViewController, TourListSubviewController tourListSubviewController){
         this.mainViewModel = mainViewModel;
         this.logViewController = logViewController;
+        this.tourListSubviewController = tourListSubviewController;
     }
 
     @Override
@@ -45,10 +47,12 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     @Override
     public void onNext(Map<Tour, Image> item) {
         System.out.println("Received Tour: " + item);
+        // TODO check if null and invoke respectively
         currentlySelected = item.entrySet().iterator().next().getKey();
         Image image = item.get(currentlySelected);
         logViewController.updateImage(image);
         // TODO refresh tour list in tourListSubviewController
+        tourListSubviewController.updateList(currentlySelected);
         // mapSubView had some trouble with binding and we have no idea why, maybe we injected the controller wrong
         // TODO update currently selected in other controllers / publish it, so they can update whatever they need to
         subscription.request(1);
@@ -56,6 +60,7 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
 
     @Override
     public void onError(Throwable error) {
+        // TODO log
         System.out.println("Error Occurred: " + error.getMessage());
     }
 

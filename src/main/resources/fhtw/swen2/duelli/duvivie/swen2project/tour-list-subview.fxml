@@ -30,7 +30,7 @@
         </Label>
         <TextField styleClass="search-field" promptText="Search..." />
         </HBox>
-        <Button fx:id="addNewTourButton" minWidth="70"  prefHeight="${addNewTourButton.parent.height}">
+        <Button fx:id="addNewTourButton" minWidth="70"  prefHeight="${addNewTourButton.parent.height}" onAction="#addTour">
             <graphic>
                 <ImageView>
                     <Image url="@icons/add-list.png" />

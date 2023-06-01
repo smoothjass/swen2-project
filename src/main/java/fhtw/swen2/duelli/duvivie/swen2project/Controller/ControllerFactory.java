@@ -22,6 +22,7 @@ public class ControllerFactory {
     private final PictureGalleryModel pictureGalleryModel;
     private final LogListItemModel logListItemModel;
     private LogViewController logViewController;
+    private TourListSubviewController tourListSubviewController;
     public SubmissionPublisher<Map<Tour, Image>> publisher = new SubmissionPublisher<>();
     private MainViewController mainViewController;
 
@@ -35,11 +36,12 @@ public class ControllerFactory {
         this.pictureGalleryModel = new PictureGalleryModel();
         this.logListItemModel = new LogListItemModel();
         logViewController = new LogViewController(this.logViewModel);
+        tourListSubviewController = new TourListSubviewController(this.tourListSubviewModel);
     }
 
     public Object create(Class<?> controllerClass) throws Exception {
         if (controllerClass == MainViewController.class) {
-            this.mainViewController = new MainViewController(this.mainViewModel, logViewController);
+            this.mainViewController = new MainViewController(this.mainViewModel, logViewController, tourListSubviewController);
             publisher.subscribe(this.mainViewController);
             return mainViewController;
         }
@@ -47,7 +49,7 @@ public class ControllerFactory {
             return new TourDetailsSubviewController(this.tourDetailsSubviewModel);
         }
         else if (controllerClass == TourListSubviewController.class) {
-            return new TourListSubviewController(this.tourListSubviewModel);
+            return tourListSubviewController;
         }
         else if (controllerClass == TourFormController.class) {
             return new TourFormController(this.tourFormModel, publisher);
