@@ -50,7 +50,7 @@
         </Button>
     </HBox>
 
-    <ListView VBox.vgrow="ALWAYS" fx:id="tours"/>
+    <ListView VBox.vgrow="ALWAYS" fx:id="tours" onMouseClicked="#handleMouseClick"/>
 
     <VBox fx:id="tourListButtons">
         <HBox>

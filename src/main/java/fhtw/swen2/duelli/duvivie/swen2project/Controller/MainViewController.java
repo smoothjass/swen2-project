@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.image.Image;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.Flow;
@@ -17,15 +18,17 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
 // https://www.appsdeveloperblog.com/reactive-programming-creating-publishers-and-subscribers-in-java/
     private MainViewModel mainViewModel;
     private Flow.Subscription subscription;
-    private Tour currentlySelected;
+    private Map<Tour, Image> currentlySelected = new HashMap<>();
     private LogViewController logViewController;
+    private TourFormController tourFormController;
     private TourListSubviewController tourListSubviewController;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
-    public MainViewController(MainViewModel mainViewModel, LogViewController logViewController, TourListSubviewController tourListSubviewController){
+    public MainViewController(MainViewModel mainViewModel, LogViewController logViewController, TourListSubviewController tourListSubviewController, TourFormController tourFormController){
         this.mainViewModel = mainViewModel;
         this.logViewController = logViewController;
         this.tourListSubviewController = tourListSubviewController;
+        this.tourFormController = tourFormController;
     }
 
     @Override
@@ -47,14 +50,19 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     @Override
     public void onNext(Map<Tour, Image> item) {
         System.out.println("Received Tour: " + item);
-        // TODO check if null and invoke respectively
-        currentlySelected = item.entrySet().iterator().next().getKey();
+        // TODO check if tour/image are null and invoke respectively
+        Tour tour = item.entrySet().iterator().next().getKey();
         Image image = item.get(currentlySelected);
-        logViewController.updateImage(image);
-        // TODO refresh tour list in tourListSubviewController
-        tourListSubviewController.updateList(currentlySelected);
-        // mapSubView had some trouble with binding and we have no idea why, maybe we injected the controller wrong
-        // TODO update currently selected in other controllers / publish it, so they can update whatever they need to
+        if(image == null) {
+            // get image from api
+            image = tourFormController.requestImage(tour);
+        }
+        currentlySelected.clear();
+        currentlySelected.put(tour, image);
+        // update curentlyselected everywhere and then let the controllers invoke whatever they need
+        logViewController.setCurrentlySelected(currentlySelected);
+        tourFormController.setCurrentlySelected(currentlySelected);
+        tourListSubviewController.setCurrentlySelected(currentlySelected);
         subscription.request(1);
     }
 

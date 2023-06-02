@@ -40,7 +40,6 @@ public class TourFormModel {
 
     private DatabaseService databaseService = new DatabaseService();
     private MapService mapService = new MapService();
-
     public Map<Tour, Image> saveTour() {
         // invoke MapService to get distance, duration and picture
         Object[] array = new Object[3];
@@ -98,5 +97,15 @@ public class TourFormModel {
             }
         }
         return new ImageView(wr).getImage();
+    }
+
+    public Image requestImage(Tour tour) {
+        Object[] array = new Object[3];
+        try {
+            array = mapService.getRoute(tour.from, tour.to, tour.transportType.getType());
+        } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        return convertToFxImage((BufferedImage) array[2]);
     }
 }

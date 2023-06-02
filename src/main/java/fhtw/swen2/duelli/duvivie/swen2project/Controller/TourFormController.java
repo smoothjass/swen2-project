@@ -34,11 +34,11 @@ public class TourFormController implements Initializable {
     public TextField from;
     public TextArea description;
     public ChoiceBox<String> transportType;
+    private Map<Tour, Image> currentlySelected = new HashMap<>();
 
     public TourFormController(TourFormModel tourFormModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourFormModel = tourFormModel;
         this.publisher = publisher;
-        logger.fatal("tourFormController constructor");
     }
 
     public void saveNewTourData(ActionEvent actionEvent) {
@@ -65,5 +65,35 @@ public class TourFormController implements Initializable {
         this.description.textProperty().bindBidirectional(tourFormModel.getDescription());
         this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
         this.imageView.imageProperty().bindBidirectional(tourFormModel.getImageView());
+    }
+
+    public Image requestImage(Tour tour) {
+        return tourFormModel.requestImage(tour);
+    }
+
+    private void updateImage(Image image) {
+        // check if null
+        imageView.setImage(image);
+    }
+
+    public void setCurrentlySelected(Map<Tour, Image> item) {
+        currentlySelected = item;
+        if(currentlySelected.entrySet().iterator().next().getValue() != null) {
+            updateImage(currentlySelected.entrySet().iterator().next().getValue());
+        }
+        if(currentlySelected.entrySet().iterator().next().getKey() != null) {
+            autoFillTourData(currentlySelected.entrySet().iterator().next().getKey());
+        }
+    }
+
+    private void autoFillTourData(Tour tour) {
+        this.to.setText(tour.to);
+        this.from.setText(tour.from);
+        this.description.setText(tour.description);
+        // TODO set transport type, gotta check how
+        // this.transportType.setValue(String.valueOf(tour.transportType.getType()));
+        this.duration.setText(String.valueOf(tour.duration));
+        this.distance.setText(String.valueOf(tour.distance));
+        this.name.setText(tour.name);
     }
 }
