@@ -53,7 +53,7 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
         // TODO check if tour/image are null and invoke respectively
         Tour tour = item.entrySet().iterator().next().getKey();
         Image image = item.get(currentlySelected);
-        if(image == null) {
+        if(image == null & tour != null) {
             // get image from api
             image = tourFormController.requestImage(tour);
         }

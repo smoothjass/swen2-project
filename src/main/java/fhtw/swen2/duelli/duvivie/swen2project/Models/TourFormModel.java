@@ -108,4 +108,13 @@ public class TourFormModel {
         }
         return convertToFxImage((BufferedImage) array[2]);
     }
+
+    public Map<Tour, Image> updateTour(int tour_id) {
+        // TODO
+        //  fetch tour with id from db
+        //  compare
+        //  if to/from/transporttype changed >> request new directions and image, update in db, return new tour and new image
+        //  if something else changed >> only update in db, return new tour and null image (image will be reset to the old one in the controller)
+        return new HashMap<>();
+    }
 }

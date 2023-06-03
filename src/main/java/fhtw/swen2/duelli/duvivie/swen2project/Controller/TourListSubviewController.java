@@ -57,13 +57,6 @@ public class TourListSubviewController implements Initializable {
         tourMap.put(newTour.getTour_id(), newTour);
     }
 
-    public void addTour(ActionEvent actionEvent) {
-        // TODO somehow we need to get from here to the form
-        // maybe fire an event with a null item so mainviewcontroller checks if item is null and if yes, it sets
-        // currently selected to null and invokes controllers respectively
-        // OR PUT THAT BUTTON INTo TOUR-FORM! < TODO this
-    }
-
     @FXML public void handleMouseClick(MouseEvent mouseEvent) {
         String selected = tours.getSelectionModel().getSelectedItem();
         Integer selectedId = Integer.valueOf(selected.split(":")[0]);
@@ -74,7 +67,11 @@ public class TourListSubviewController implements Initializable {
 
     public void setCurrentlySelected(Map<Tour, Image> item) {
         currentlySelected = item;
-        if (!tourMap.containsKey(currentlySelected.entrySet().iterator().next().getKey().getTour_id())) {
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        if (tour == null) {
+            tours.getSelectionModel().clearSelection();
+        }
+        else if (!tourMap.containsKey(tour.getTour_id())) {
             updateList(currentlySelected.entrySet().iterator().next().getKey());
         }
     }

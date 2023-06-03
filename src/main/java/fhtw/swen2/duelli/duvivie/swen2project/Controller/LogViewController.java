@@ -2,6 +2,7 @@ package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.LogViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -37,14 +38,19 @@ public class LogViewController implements Initializable {
     }
 
     private void updateImage(Image image) {
-        // check if null
         imageView.setImage(image);
     }
 
     public void setCurrentlySelected(Map<Tour, Image> item) {
         currentlySelected = item;
-        if(currentlySelected.entrySet().iterator().next().getValue() != null) {
-            updateImage(currentlySelected.entrySet().iterator().next().getValue());
+        Image image = currentlySelected.entrySet().iterator().next().getValue();
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        updateImage(image);
+        if(tour == null) {
+            // TODO clear everything because a new tour is being created
         }
+    }
+
+    public void addLog(ActionEvent actionEvent) {
     }
 }

@@ -9,7 +9,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import java.net.URL?>
-<?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourListSubviewController"
@@ -30,24 +29,6 @@
         </Label>
         <TextField styleClass="search-field" promptText="Search..." />
         </HBox>
-        <Button fx:id="addNewTourButton" minWidth="70"  prefHeight="${addNewTourButton.parent.height}" onAction="#addTour">
-            <graphic>
-                <ImageView>
-                    <Image url="@icons/add-list.png" />
-                </ImageView>
-            </graphic>
-            <tooltip>
-        <Tooltip>
-            <graphic>
-                <Label text="This is a tooltip!">
-                    <font>
-                        <Font name="Arial" size="15" />
-                    </font>
-                </Label>
-            </graphic>
-        </Tooltip>
-    </tooltip>
-        </Button>
     </HBox>
 
     <ListView VBox.vgrow="ALWAYS" fx:id="tours" onMouseClicked="#handleMouseClick"/>
