@@ -40,7 +40,6 @@ public class TourFormModel {
 
     private DatabaseService databaseService = new DatabaseService();
     private MapService mapService = new MapService();
-
     public Map<Tour, Image> saveTour() {
         // invoke MapService to get distance, duration and picture
         Object[] array = new Object[3];
@@ -98,5 +97,24 @@ public class TourFormModel {
             }
         }
         return new ImageView(wr).getImage();
+    }
+
+    public Image requestImage(Tour tour) {
+        Object[] array = new Object[3];
+        try {
+            array = mapService.getRoute(tour.from, tour.to, tour.transportType.getType());
+        } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        return convertToFxImage((BufferedImage) array[2]);
+    }
+
+    public Map<Tour, Image> updateTour(int tour_id) {
+        // TODO
+        //  fetch tour with id from db
+        //  compare
+        //  if to/from/transporttype changed >> request new directions and image, update in db, return new tour and new image
+        //  if something else changed >> only update in db, return new tour and null image (image will be reset to the old one in the controller)
+        return new HashMap<>();
     }
 }

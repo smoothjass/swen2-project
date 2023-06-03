@@ -12,6 +12,7 @@
 <?import javafx.scene.control.SpinnerValueFactory.LocalTimeSpinnerValueFactory?>
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
+<?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.LogViewController">
@@ -21,12 +22,30 @@
     <HBox alignment="BASELINE_RIGHT">
         <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
         <Region HBox.hgrow="ALWAYS" />
-        <Button fx:id="saveLogButton">
+        <Button fx:id="saveLogButton" prefHeight="${addNewLogButton.parent.height}">
             <graphic>
                 <ImageView>
                     <Image url="@icons/save.png" />
                 </ImageView>
             </graphic>
+        </Button>
+        <Button fx:id="addNewLogButton" minWidth="70"  prefHeight="${addNewLogButton.parent.height}" onAction="#addLog">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/add-list.png" />
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="Create new log">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
         </Button>
     </HBox>
     <HBox alignment="CENTER">

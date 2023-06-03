@@ -34,11 +34,11 @@ public class TourFormController implements Initializable {
     public TextField from;
     public TextArea description;
     public ChoiceBox<String> transportType;
+    private Map<Tour, Image> currentlySelected = new HashMap<>();
 
     public TourFormController(TourFormModel tourFormModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourFormModel = tourFormModel;
         this.publisher = publisher;
-        logger.fatal("tourFormController constructor");
     }
 
     public void saveNewTourData(ActionEvent actionEvent) {
@@ -47,8 +47,20 @@ public class TourFormController implements Initializable {
 
         // TODO display spinner
 
-        // invoke model to request directions & image & save tour to db
-        Map<Tour, Image> tour = tourFormModel.saveTour();
+        Map<Tour, Image> tour = new HashMap<>();
+        // currentlySelected tour == null >> create new tour, otherwise update
+        if (currentlySelected.entrySet().iterator().next().getKey() == null){
+            // invoke model to request directions & image & save tour to db
+            tour = tourFormModel.saveTour();
+        }
+        else {
+            // temporarily save image here
+            Image image = currentlySelected.entrySet().iterator().next().getValue();
+            tour = tourFormModel.updateTour(currentlySelected.entrySet().iterator().next().getKey().getTour_id());
+            if(tour.entrySet().iterator().next().getValue() == null) {
+                tour.entrySet().iterator().next().setValue(image);
+            }
+        }
         // fire event so that mainview controller updates currentlySelectedTour
         publisher.submit(tour);
 
@@ -65,5 +77,43 @@ public class TourFormController implements Initializable {
         this.description.textProperty().bindBidirectional(tourFormModel.getDescription());
         this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
         this.imageView.imageProperty().bindBidirectional(tourFormModel.getImageView());
+    }
+
+    public Image requestImage(Tour tour) {
+        return tourFormModel.requestImage(tour);
+    }
+
+    private void updateImage(Image image) {
+        imageView.setImage(image);
+    }
+
+    public void setCurrentlySelected(Map<Tour, Image> item) {
+        currentlySelected = item;
+        Image image = currentlySelected.entrySet().iterator().next().getValue();
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        updateImage(image);
+        if (tour != null) {
+            autoFillTourData(tour);
+        }
+        else {
+            autoFillTourData(new Tour());
+        }
+    }
+
+    private void autoFillTourData(Tour tour) {
+        this.to.setText(tour.to);
+        this.from.setText(tour.from);
+        this.description.setText(tour.description);
+        // TODO set transport type, gotta check how
+        // this.transportType.setValue(String.valueOf(tour.transportType.getType()));
+        this.duration.setText(String.valueOf(tour.duration));
+        this.distance.setText(String.valueOf(tour.distance));
+        this.name.setText(tour.name);
+    }
+
+    public void addTour(ActionEvent actionEvent) {
+        currentlySelected = new HashMap<>();
+        currentlySelected.put(null, null);
+        publisher.submit(currentlySelected);
     }
 }
