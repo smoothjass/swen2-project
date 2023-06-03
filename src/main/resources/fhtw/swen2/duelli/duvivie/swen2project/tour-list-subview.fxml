@@ -57,6 +57,6 @@
             <Button fx:id="exportTourData" prefWidth="${exportTourData.parent.width}" text="Export tour data"/>
             <Button fx:id="importTourData" prefWidth="${importTourData.parent.width}"  text="Import tour data"/>
         </HBox>
-        <Button fx:id="SummaryReportButton" prefWidth="${SummaryReportButton.parent.width}" text="Generate summary report"/>
+        <Button fx:id="SummaryReportButton" onAction="#createSummary" prefWidth="${SummaryReportButton.parent.width}" text="Generate summary report"/>
     </VBox>
 </VBox>

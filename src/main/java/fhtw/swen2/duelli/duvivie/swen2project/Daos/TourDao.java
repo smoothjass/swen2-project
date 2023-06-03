@@ -202,4 +202,34 @@ public class TourDao {
         }
         return tour;
     }
+
+    public void deleteTourById(int tourId) {
+        // Create a new EntityManager
+        EntityManager manager = this.entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            // Get a transaction
+            transaction = manager.getTransaction();
+            // Begin the transaction
+            transaction.begin();
+            // First find the student
+            Tour tour = manager.find(Tour.class, tourId);
+            if (tour != null) {
+                // Remove the student
+                manager.remove(tour);
+            }
+            // Commit the transaction
+            transaction.commit();
+        } catch (RollbackException ex) {
+            // Commit failed. Rollback the transaction
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(ex);
+        } finally {
+            // Close the EntityManager
+            manager.close();
+        }
+    }
 }

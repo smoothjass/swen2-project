@@ -29,4 +29,16 @@ public class DatabaseService {
     public List<Tour> getTours() {
         return tourDao.findAll();
     }
+
+    public List<Log> getTourLogs() {
+        return logDao.findAll();
+    }
+
+    public List<Log> getAllLogsForTour(Tour currentlySelectedTour) {
+        return logDao.getAllByTourId(currentlySelectedTour.tour_id);
+    }
+
+    public void deleteTour(Tour currentlySelectedTour) {
+        tourDao.deleteTourById(currentlySelectedTour.tour_id);
+    }
 }

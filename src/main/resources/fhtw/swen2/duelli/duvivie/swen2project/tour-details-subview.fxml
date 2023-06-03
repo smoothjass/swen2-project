@@ -23,9 +23,9 @@
         <fx:include visible="false" managed="false" source="picture-gallery.fxml"></fx:include>
     </VBox>
 
-    <HBox >
-        <Button fx:id="deleteButton" prefWidth="${deleteButton.parent.width}" text="Delete"/>
-        <Button fx:id="singleReportButton" prefWidth="${singleReportButton.parent.width}" text="Create tour report"/>
+    <HBox>
+        <Button fx:id="deleteButton" onAction="#deleteCurrentTour" prefWidth="${deleteButton.parent.width}" text="Delete"/>
+        <Button fx:id="singleReportButton" onAction="#createSingleReport" prefWidth="${singleReportButton.parent.width}" text="Create tour report"/>
     </HBox>
 
 </VBox>

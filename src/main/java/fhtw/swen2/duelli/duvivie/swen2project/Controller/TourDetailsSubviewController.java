@@ -1,5 +1,6 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourDetailsSubviewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import java.util.ResourceBundle;
 public class TourDetailsSubviewController implements Initializable {
     private TourDetailsSubviewModel tourDetailsSubviewModel;
     private TourFormController tourFormController;
+
+    private Tour currentlySelectedTour;
 
     @FXML
     VBox detailsContentArea;
@@ -49,5 +52,19 @@ public class TourDetailsSubviewController implements Initializable {
         detailsContentArea.getChildren().get(1).setManaged(false);
         detailsContentArea.getChildren().get(2).setVisible(true);
         detailsContentArea.getChildren().get(2).setManaged(true);
+    }
+
+    public void setCurrentlySelectedTour(Tour tour) {
+        this.currentlySelectedTour = tour;
+    }
+
+    public void createSingleReport(ActionEvent actionEvent) {
+        tourDetailsSubviewModel.createSingleReport(currentlySelectedTour);
+    }
+
+    public void deleteCurrentTour(ActionEvent actionEvent) {
+        setCurrentlySelectedTour(null);
+
+        tourDetailsSubviewModel.deleteCurrentTour(currentlySelectedTour);
     }
 }

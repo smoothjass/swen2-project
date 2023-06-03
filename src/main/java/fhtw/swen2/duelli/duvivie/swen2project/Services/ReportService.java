@@ -1,7 +1,5 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Services;
 import com.itextpdf.io.font.constants.StandardFonts;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.*;
@@ -13,7 +11,6 @@ import com.itextpdf.layout.Document;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +21,7 @@ public class ReportService {
 
     public ReportService() {}
 
-    public void genereateSingleTourPdf(Tour tour, ArrayList<Log> logs, Image image) throws IOException {
-
+    public void createSingleReport(Tour tour, List<Log> logs, Image image) throws IOException {
         String fileName = tour.getName() + "-Report.pdf";
         String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedReports/singleReports/" + fileName;
 
@@ -67,24 +63,27 @@ public class ReportService {
                 .setFontColor(ColorConstants.BLACK);
         document.add(tableHeader);
 
-        Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
-        table.addHeaderCell("Starting Time");
-        table.addHeaderCell("Comment");
-        table.addHeaderCell("Difficulty");
-        table.addHeaderCell("Total Time");
-        table.addHeaderCell("Rating 1-5");
-        table.setFontSize(14).setBackgroundColor(ColorConstants.WHITE);
+        if(logs.isEmpty()) {
+            document.add(new Paragraph("No log entries available"));
+        } else {
+            Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
+            table.addHeaderCell("Starting Time");
+            table.addHeaderCell("Comment");
+            table.addHeaderCell("Difficulty");
+            table.addHeaderCell("Total Time");
+            table.addHeaderCell("Rating 1-5");
+            table.setFontSize(14).setBackgroundColor(ColorConstants.WHITE);
 
-        //for each log entry add a row to the table
-        for (Log log : logs) {
-            table.addCell(log.getStarting_time().toString());
-            table.addCell(log.getComment());
-            table.addCell(String.valueOf(log.getDifficulty()));
-            table.addCell(String.valueOf(log.getTotal_time()));
-            table.addCell(String.valueOf(log.getRating()));
+            //for each log entry add a row to the table
+            for (Log log : logs) {
+                table.addCell(log.getStarting_time().toString());
+                table.addCell(log.getComment());
+                table.addCell(String.valueOf(log.getDifficulty()));
+                table.addCell(String.valueOf(log.getTotal_time()));
+                table.addCell(String.valueOf(log.getRating()));
+            }
+            document.add(table);
         }
-
-        document.add(table);
         document.close();
 
         // Open the save dialog window
@@ -148,6 +147,7 @@ public class ReportService {
                     .setFontColor(ColorConstants.BLACK);
             document.add(tableHeader);
 
+
             //find all logs associated with the current tour in the logList and save them in a list and then remove them from the logList
             List<Log> tourLogs = new ArrayList<>();
             for (Log log : logList) {
@@ -156,6 +156,8 @@ public class ReportService {
                 }
             }
             logList.removeAll(tourLogs);
+
+            if(tourLogs.isEmpty()){
 
             // calculate the average time, -distance and rating over all associated tour-logs
             double averageTime = 0;
@@ -184,6 +186,11 @@ public class ReportService {
             document.add(table);
 
             document.add(new AreaBreak(NEXT_PAGE));
+            }
+            else {
+                document.add(new Paragraph("No logs found for this tour!"));
+                document.add(new AreaBreak(NEXT_PAGE));
+            }
         }
 
         document.close();

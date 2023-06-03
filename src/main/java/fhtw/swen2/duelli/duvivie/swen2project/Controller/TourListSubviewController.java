@@ -1,4 +1,5 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourListItemModel;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourListSubviewModel;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 public class TourListSubviewController implements Initializable {
@@ -21,6 +23,8 @@ public class TourListSubviewController implements Initializable {
     public ListView<TourListItemModel> tours;
 
     private TourListSubviewModel tourListSubviewModel;
+
+    private Tour currentylSelectedTour;
 
     public TourListSubviewController(TourListSubviewModel tourListSubviewModel) {
         this.tourListSubviewModel = tourListSubviewModel;
@@ -37,6 +41,10 @@ public class TourListSubviewController implements Initializable {
             tours.getItems().add(tourListItemModel);
             System.out.println(tourListItemModel.getName().getValue());
         });
+    }
+
+    public void createSummary(javafx.event.ActionEvent actionEvent) {
+        this.tourListSubviewModel.createSummary();
     }
 }
 

@@ -39,3 +39,6 @@ build/
 
 ### additional ###
 .idea/
+src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tourImages/*
+logs/*
+```

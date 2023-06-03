@@ -1,28 +1,119 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
+import javafx.animation.KeyFrame;
+import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.PictureGalleryModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
+import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PictureGalleryController implements Initializable {
     private PictureGalleryModel pictureGalleryModel;
+    private Tour currentlySelectedTour;
+
+    private int currentIndex = 0;
+
+    @FXML
+    private ImageView imageView;
+
+    private List<Image> images = new ArrayList<>();
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Test
+        Tour tour = new Tour();
+        tour.setTour_id(1);
+        currentlySelectedTour = tour;
+
+
+        if(currentlySelectedTour != null) {
+            List<Image> images = pictureGalleryModel.getImages(currentlySelectedTour);
+            putImages(images);
+        }
+    }
+
+    public void putImages(List<Image> tourImages) {
+
+        for (Image image : tourImages) {
+            images.add(image);
+        }
+
+        //set the first image as the current image
+        if (!images.isEmpty()) {
+            imageView.setImage(images.get(0));
+        }
+    }
+
+    @FXML
+    public void goToPreviousImage() {
+       if(images.isEmpty()){
+           return;
+       }
+
+        //if the current image is the first image, go to the last image
+        if (currentIndex == 0) {
+            currentIndex = (images.size() - 1);
+            imageView.setImage(images.get(currentIndex));
+        }
+        else {
+            currentIndex = (currentIndex - 1);
+            imageView.setImage(images.get(currentIndex));
+        }
+    }
+
+    @FXML
+    public void goToNextImage() {
+        if (images.isEmpty()) {
+            return;
+        }
+
+        //if the current image is the last image, go back to the first image
+        if (currentIndex == (images.size() - 1)) {
+            currentIndex = 0;
+            imageView.setImage(images.get(currentIndex));
+            return;
+        }
+        else {
+            currentIndex = (currentIndex + 1);
+            imageView.setImage(images.get(currentIndex));
+        }
+    }
 
     public PictureGalleryController(PictureGalleryModel pictureGalleryModel) {
         this.pictureGalleryModel = pictureGalleryModel;
     }
+
+    public void setCurrentlySelectedTour(Tour currentlySelectedTour) {
+        images.clear();
+        this.currentlySelectedTour = currentlySelectedTour;
+        putImages(pictureGalleryModel.getImages(currentlySelectedTour));
+    }
+
+    public void deleteAssociatedImages(Tour associatedTour) {
+        pictureGalleryModel.deleteAssociatedImages(associatedTour);
+    }
+
+    public void addNewPicture(ActionEvent actionEvent) {
+        Image newImage = pictureGalleryModel.addNewPicture(currentlySelectedTour);
+
+        if(newImage != null) {
+            images.add(newImage);
+            imageView.setImage(newImage);
+        }
+    }
 }
 
-/*
-            // write to disk
-            // https://docs.oracle.com/javase/tutorial/2d/images/saveimage.html
-            String path = "C:\\Users\\jassi\\OneDrive\\Dokumente\\FH\\BIF\\2023_SS\\SWEN2\\swen2-project\\src\\main\\" +
-                    "java\\fhtw\\swen2\\duelli\\duvivie\\swen2project\\Controller\\saved.png";
-            File outputfile = new File(path);
-            ImageIO.write(bufferedImage, "png", outputfile);
-            this.imageProperty.set(new Image(path));
-            this.imageProperty.setValue(new Image(path));
-*/
