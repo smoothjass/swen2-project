@@ -18,36 +18,22 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PictureGalleryController implements Initializable {
     private PictureGalleryModel pictureGalleryModel;
-    private Tour currentlySelectedTour;
-
+    private Map<Tour, Image> currentlySelected;
     private int currentIndex = 0;
-
     @FXML
     private ImageView imageView;
 
     private List<Image> images = new ArrayList<>();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //Test
-        Tour tour = new Tour();
-        tour.setTour_id(1);
-        currentlySelectedTour = tour;
-
-
-        if(currentlySelectedTour != null) {
-            List<Image> images = pictureGalleryModel.getImages(currentlySelectedTour);
-            putImages(images);
-        }
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     public void putImages(List<Image> tourImages) {
-
         for (Image image : tourImages) {
             images.add(image);
         }
@@ -55,6 +41,9 @@ public class PictureGalleryController implements Initializable {
         //set the first image as the current image
         if (!images.isEmpty()) {
             imageView.setImage(images.get(0));
+        }
+        else {
+            imageView.setImage(null);
         }
     }
 

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class CSVService {
+public class TXTService {
     public void export(Tour tour, List<Log> logs) throws IOException {
             String fileName = tour.getName() + "-Export.csv";
             String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedCSVs/" + fileName;

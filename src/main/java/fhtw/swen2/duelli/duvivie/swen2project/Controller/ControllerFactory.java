@@ -24,6 +24,8 @@ public class ControllerFactory {
     private LogViewController logViewController;
     private TourFormController tourFormController;
     private TourListSubviewController tourListSubviewController;
+    private PictureGalleryController pictureGalleryController;
+    private TourDetailsSubviewController tourDetailsSubviewController;
     public SubmissionPublisher<Map<Tour, Image>> publisher = new SubmissionPublisher<>();
     private MainViewController mainViewController;
 
@@ -39,16 +41,19 @@ public class ControllerFactory {
         logViewController = new LogViewController(this.logViewModel);
         tourFormController = new TourFormController(this.tourFormModel, publisher);
         tourListSubviewController = new TourListSubviewController(this.tourListSubviewModel, publisher);
+        pictureGalleryController = new PictureGalleryController(this.pictureGalleryModel);
+        tourDetailsSubviewController = new TourDetailsSubviewController(this.tourDetailsSubviewModel, publisher);
     }
 
     public Object create(Class<?> controllerClass) throws Exception {
         if (controllerClass == MainViewController.class) {
-            this.mainViewController = new MainViewController(this.mainViewModel, logViewController, tourListSubviewController, tourFormController);
+            this.mainViewController = new MainViewController(this.mainViewModel, logViewController,
+                    tourListSubviewController, tourFormController, pictureGalleryController, tourDetailsSubviewController);
             publisher.subscribe(this.mainViewController);
             return mainViewController;
         }
         else if (controllerClass == TourDetailsSubviewController.class) {
-            return new TourDetailsSubviewController(this.tourDetailsSubviewModel);
+            return tourDetailsSubviewController;
         }
         else if (controllerClass == TourListSubviewController.class) {
             return tourListSubviewController;
@@ -63,7 +68,7 @@ public class ControllerFactory {
             return new TourListItemController(this.tourListItemModel);
         }
         else if (controllerClass == PictureGalleryController.class){
-            return new PictureGalleryController(this.pictureGalleryModel);
+            return pictureGalleryController;
         }
         else if (controllerClass == LogListItemController.class){
             return new LogListItemController(this.logListItemModel);

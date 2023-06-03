@@ -22,13 +22,17 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     private LogViewController logViewController;
     private TourFormController tourFormController;
     private TourListSubviewController tourListSubviewController;
+    private PictureGalleryController pictureGalleryController;
+    private TourDetailsSubviewController tourDetailsSubviewController;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
-    public MainViewController(MainViewModel mainViewModel, LogViewController logViewController, TourListSubviewController tourListSubviewController, TourFormController tourFormController){
+    public MainViewController(MainViewModel mainViewModel, LogViewController logViewController, TourListSubviewController tourListSubviewController, TourFormController tourFormController, PictureGalleryController pictureGalleryController, TourDetailsSubviewController tourDetailsSubviewController){
         this.mainViewModel = mainViewModel;
         this.logViewController = logViewController;
         this.tourListSubviewController = tourListSubviewController;
+        this.pictureGalleryController = pictureGalleryController;
         this.tourFormController = tourFormController;
+        this.tourDetailsSubviewController = tourDetailsSubviewController;
     }
 
     @Override
@@ -63,6 +67,8 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
         logViewController.setCurrentlySelected(currentlySelected);
         tourFormController.setCurrentlySelected(currentlySelected);
         tourListSubviewController.setCurrentlySelected(currentlySelected);
+        pictureGalleryController.setCurrentlySelected(currentlySelected);
+        tourDetailsSubviewController.setCurrentlySelected(currentlySelected);
         subscription.request(1);
     }
 

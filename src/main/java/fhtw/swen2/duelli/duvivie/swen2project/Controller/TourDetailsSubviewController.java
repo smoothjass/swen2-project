@@ -5,16 +5,21 @@ import fhtw.swen2.duelli.duvivie.swen2project.Models.TourDetailsSubviewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.SubmissionPublisher;
 
 public class TourDetailsSubviewController implements Initializable {
     private TourDetailsSubviewModel tourDetailsSubviewModel;
-    private TourFormController tourFormController;
+    // private TourFormController tourFormController;
+    private SubmissionPublisher<Map<Tour, Image>> publisher;
 
-    private Tour currentlySelectedTour;
+    private Map<Tour, Image> currentlySelected = new HashMap<>();
 
     @FXML
     VBox detailsContentArea;
@@ -23,8 +28,9 @@ public class TourDetailsSubviewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public TourDetailsSubviewController(TourDetailsSubviewModel tourDetailsSubviewModel) {
+    public TourDetailsSubviewController(TourDetailsSubviewModel tourDetailsSubviewModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourDetailsSubviewModel = tourDetailsSubviewModel;
+        this.publisher = publisher;
     }
 
     public void showTourForm(ActionEvent actionEvent) {

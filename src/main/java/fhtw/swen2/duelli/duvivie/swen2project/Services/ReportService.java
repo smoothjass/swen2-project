@@ -1,5 +1,6 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Services;
 import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.*;
@@ -10,10 +11,13 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import com.itextpdf.layout.Document;
 import javafx.stage.FileChooser;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static com.itextpdf.layout.properties.AreaBreakType.NEXT_PAGE;
 
@@ -21,7 +25,7 @@ public class ReportService {
 
     public ReportService() {}
 
-    public void createSingleReport(Tour tour, List<Log> logs, Image image) throws IOException {
+    public void createSingleReport(Tour tour, List<Log> logs) throws IOException {
         String fileName = tour.getName() + "-Report.pdf";
         String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedReports/singleReports/" + fileName;
 
@@ -52,8 +56,15 @@ public class ReportService {
                 .setBold()
                 .setFontColor(ColorConstants.BLACK);
         document.add(imageHeader);
-        document.add(image);
-
+        Object[] array = new Object[3];
+        try {
+            MapService mapService = new MapService();
+            array = mapService.getRoute(tour.from, tour.to, tour.transportType.getType());
+        } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        com.itextpdf.layout.element.Image pdfImage = new com.itextpdf.layout.element.Image(ImageDataFactory.create((BufferedImage) array[2], null));
+        document.add(pdfImage);
         document.add(new AreaBreak(NEXT_PAGE));
 
         Paragraph tableHeader = new Paragraph("Log entries: ")
