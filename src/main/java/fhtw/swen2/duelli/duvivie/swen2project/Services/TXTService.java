@@ -15,12 +15,11 @@ import java.util.List;
 
 public class TXTService {
     public void export(Tour tour, List<Log> logs) throws IOException {
-            String fileName = tour.getName() + "-Export.csv";
+            String fileName = tour.getName() + "-Export.txt";
             String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedCSVs/" + fileName;
 
             FileWriter writer = new FileWriter(DEST);
-            writer.append("Tour_id: " + tour.getTour_id());
-            writer.append("\nTour: " + tour.getName());
+            writer.append("Tour: " + tour.getName());
             writer.append("\nDescription: " + tour.getDescription());
             writer.append("\nFrom: " + tour.getFrom());
             writer.append("\nTo: " + tour.getTo());
@@ -31,15 +30,17 @@ public class TXTService {
             writer.append("\n");
 
             //append each log entry to the csv file
-            for (Log log : logs) {
-                writer.append("Log_id: " + log.getLog_id());
-                writer.append("\nTour_id: " + log.getTour_id());
-                writer.append("\nStarting_time: " + log.getStarting_time());
-                writer.append("\nComment: " + log.getComment());
-                writer.append("\nDifficulty: " + log.getDifficulty());
-                writer.append("\nTotal_time: " + log.getTotal_time());
-                writer.append("\nRating: " + log.getRating());
-                writer.append("\n");
+            if(logs != null && !logs.isEmpty()) {
+                for (Log log : logs) {
+                    if (log != null) {
+                        writer.append("\nStarting_time: " + log.getStarting_time());
+                        writer.append("\nComment: " + log.getComment());
+                        writer.append("\nDifficulty: " + log.getDifficulty());
+                        writer.append("\nTotal_time: " + log.getTotal_time());
+                        writer.append("\nRating: " + log.getRating());
+                        writer.append("\n");
+                    }
+                }
             }
 
             writer.flush();
@@ -62,7 +63,7 @@ public class TXTService {
             generatedFile.delete();
     };
 
-    public Map<Tour, List<Log>> importCSV() throws IOException {
+    public Map<Tour, List<Log>> importData() throws IOException {
 
         Map<Tour, List<Log>> tourData = new HashMap<>();
         Tour tour = new Tour();
@@ -70,9 +71,9 @@ public class TXTService {
 
         // Open the save dialog window
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Import CSV");
+        fileChooser.setTitle("Import TXT");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+                new FileChooser.ExtensionFilter("TXT Files", "*.txt"));
         File file = fileChooser.showOpenDialog(null);
 
         //read the csv file and save the tour data in a tour object and the log data in list of log objects
@@ -82,9 +83,7 @@ public class TXTService {
 
             String[] data = line.split(": ");
 
-            if (data[0].equals("Tour_id")) {
-                    tour.setTour_id(Integer.parseInt(data[1]));
-                    line = reader.readLine();
+            if (data[0].equals("Tour")) {
                     data = line.split(": ");
                     tour.setName(data[1]);
                     line = reader.readLine();
@@ -102,7 +101,7 @@ public class TXTService {
                     TransportType transportType = new TransportType();
 
                     switch (data[1]) {
-                        case "bike":
+                        case "bicycle":
                             transportType.setType("bike");
                             transportType.setTransport_type_id(1);
                             break;

@@ -108,5 +108,19 @@ public class TourListSubviewController implements Initializable {
     public void createSummary(javafx.event.ActionEvent actionEvent) {
         this.tourListSubviewModel.createSummary();
     }
+
+    public void importData(ActionEvent actionEvent) {
+        // TODO
+        // reload
+        this.tourListSubviewModel.importTourData();
+    }
+
+    public void exportData(ActionEvent actionEvent) {
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+
+        if(tour != null){
+            this.tourListSubviewModel.exportTourData(tour);
+        }
+    }
 }
 

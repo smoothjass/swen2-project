@@ -60,17 +60,22 @@ public class TourDetailsSubviewController implements Initializable {
         detailsContentArea.getChildren().get(2).setManaged(true);
     }
 
-    public void setCurrentlySelectedTour(Tour tour) {
-        this.currentlySelectedTour = tour;
+    public void setCurrentlySelected(Map<Tour, Image> item) {
+        this.currentlySelected = item;
     }
 
     public void createSingleReport(ActionEvent actionEvent) {
-        tourDetailsSubviewModel.createSingleReport(currentlySelectedTour);
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        Image image = currentlySelected.entrySet().iterator().next().getValue();
+        tourDetailsSubviewModel.createSingleReport(tour, image);
     }
 
-    public void deleteCurrentTour(ActionEvent actionEvent) {
-        setCurrentlySelectedTour(null);
-
-        tourDetailsSubviewModel.deleteCurrentTour(currentlySelectedTour);
+    public void deleteCurrentlySelected(ActionEvent actionEvent) {
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        currentlySelected.clear();
+        currentlySelected.put(null, null);
+        tourDetailsSubviewModel.deleteCurrentTour(tour);
+        publisher.submit(currentlySelected);
     }
+
 }

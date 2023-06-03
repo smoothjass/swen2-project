@@ -16,6 +16,33 @@ public class LogDao {
         this.entityManagerFactory = entityManagerFactory;
     }
 
+    public Log create(Log log) {
+        // Create a new EntityManager
+        EntityManager manager = this.entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            // Get a transaction
+            transaction = manager.getTransaction();
+            // Begin the transaction
+            transaction.begin();
+            // Save the tour object
+            manager.persist(log);
+            // Commit the transaction
+            transaction.commit();
+        } catch (RollbackException ex) {
+            // Commit failed. Rollback the transaction
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(ex);
+        } finally {
+            // Close the EntityManager
+            manager.close();
+        }
+        return log;
+    }
+
     public List<Log> findAll() {
          // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();

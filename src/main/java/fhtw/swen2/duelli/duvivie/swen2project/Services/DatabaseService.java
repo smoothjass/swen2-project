@@ -41,4 +41,8 @@ public class DatabaseService {
     public void deleteTour(Tour currentlySelectedTour) {
         tourDao.deleteTourById(currentlySelectedTour.tour_id);
     }
+
+    public Log saveLog(Log log){
+       return logDao.create(log);
+    }
 }

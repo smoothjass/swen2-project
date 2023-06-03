@@ -86,10 +86,17 @@ public class PictureGalleryController implements Initializable {
         this.pictureGalleryModel = pictureGalleryModel;
     }
 
-    public void setCurrentlySelectedTour(Tour currentlySelectedTour) {
+    public void setCurrentlySelected(Map<Tour, Image> item) {
+        this.currentlySelected = item;
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         images.clear();
-        this.currentlySelectedTour = currentlySelectedTour;
-        putImages(pictureGalleryModel.getImages(currentlySelectedTour));
+        if(tour != null) {
+            List<Image> images = pictureGalleryModel.getImages(tour);
+            putImages(images);
+        }
+        else {
+            imageView.setImage(null);
+        }
     }
 
     public void deleteAssociatedImages(Tour associatedTour) {
@@ -97,8 +104,8 @@ public class PictureGalleryController implements Initializable {
     }
 
     public void addNewPicture(ActionEvent actionEvent) {
-        Image newImage = pictureGalleryModel.addNewPicture(currentlySelectedTour);
-
+        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        Image newImage = pictureGalleryModel.addNewPicture(tour);
         if(newImage != null) {
             images.add(newImage);
             imageView.setImage(newImage);

@@ -158,7 +158,6 @@ public class ReportService {
                     .setFontColor(ColorConstants.BLACK);
             document.add(tableHeader);
 
-
             //find all logs associated with the current tour in the logList and save them in a list and then remove them from the logList
             List<Log> tourLogs = new ArrayList<>();
             for (Log log : logList) {
