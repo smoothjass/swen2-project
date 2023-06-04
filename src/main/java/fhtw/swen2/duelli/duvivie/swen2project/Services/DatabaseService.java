@@ -34,6 +34,10 @@ public class DatabaseService {
         return logDao.findAll();
     }
 
+    public List<Log> getLogsForTour(Integer tourId) {
+        return logDao.getAllByTourId(tourId);
+    }
+
     public List<Log> getAllLogsForTour(Tour currentlySelectedTour) {
         return logDao.getAllByTourId(currentlySelectedTour.tour_id);
     }
@@ -44,5 +48,14 @@ public class DatabaseService {
 
     public Log saveLog(Log log){
        return logDao.create(log);
+    }
+
+    public Log updateLog(Log log) {
+        logDao.update(log);
+        return logDao.getById(log.log_id);
+    }
+
+    public void deleteLog(Integer logId) {
+        logDao.deleteById(logId);
     }
 }

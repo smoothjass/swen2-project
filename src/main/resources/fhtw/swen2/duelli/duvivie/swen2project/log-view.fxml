@@ -19,17 +19,10 @@
     <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <HBox alignment="BASELINE_RIGHT">
-        <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
+    <HBox style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" alignment="BASELINE_RIGHT">
+        <Label  text="Tour Details"/>
         <Region HBox.hgrow="ALWAYS" />
-        <Button fx:id="saveLogButton" prefHeight="${addNewLogButton.parent.height}">
-            <graphic>
-                <ImageView>
-                    <Image url="@icons/save.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button fx:id="addNewLogButton" minWidth="70"  prefHeight="${addNewLogButton.parent.height}" onAction="#addLog">
+        <Button fx:id="addNewLogButton" minWidth="70"  prefHeight="${addNewLogButton.parent.height}" onAction="#newLog">
             <graphic>
                 <ImageView>
                     <Image url="@icons/add-list.png" />
@@ -38,7 +31,43 @@
             <tooltip>
                 <Tooltip>
                     <graphic>
-                        <Label text="Create new log">
+                        <Label text="Create a new log entry">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="saveLogButton" prefHeight="${addNewLogButton.parent.height}" onAction="#saveLog">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/save.png"/>
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="Save this log entry">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="deleteLogButton" minWidth="70"  prefHeight="${addNewLogButton.parent.height}" onAction="#deleteLog">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/delete.png" />
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="Delete this log entry">
                             <font>
                                 <Font name="Arial" size="15" />
                             </font>
@@ -48,61 +77,74 @@
             </tooltip>
         </Button>
     </HBox>
+
     <HBox alignment="CENTER">
         <ImageView fx:id="imageView" fitHeight="300">
         </ImageView>
     </HBox>
     <VBox>
-
         <HBox spacing="10">
-           <ListView fx:id="logListView" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-                    <TextField>log entry (Comment, start time ... ) : edit | delete </TextField>
-                    <TextField>log entry (Comment, start time ... ) : edit | delete </TextField>
-                    <TextField>log entry (Comment, start time ... ) : edit | delete </TextField>
-           </ListView>
+            <ListView  VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" fx:id="logs" onMouseClicked="#handleMouseClick"/>
 
         <!-- a form to add and edit a log entry-->
-           <VBox maxWidth="200" VBox.vgrow="ALWAYS">
-               <Label text="Date and time:"/>
-               <TextField disable="true" fx:id="timestamp"/>
-               <Label text="Difficulty:"/>
+           <VBox maxWidth="400" VBox.vgrow="ALWAYS" spacing="6">
+               <Label style="-fx-font-weight: bold" text="Timestamp:"/>
+               <Label  fx:id="timestamp"/>
                <!--an input field for a difficulty -->
-               <ChoiceBox prefWidth="${difficulty.parent.width}" fx:id="difficulty">
-                   <items>
-                       <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="1 = very easy"/>
-                           <String fx:value="2"/>
-                           <String fx:value="3"/>
-                           <String fx:value="4"/>
-                           <String fx:value="5 = extremly difficult"/>
-                       </FXCollections>
-                   </items>
-               </ChoiceBox>
+               <HBox spacing="20">
+                   <VBox spacing="5">
+                       <Label style="-fx-font-weight: bold" text="Difficulty:"/>
+                       <ChoiceBox  maxWidth="100" fx:id="difficulty">
+                           <items>
+                               <FXCollections fx:factory="observableArrayList">
+                                   <String  fx:value="1"/>
+                                   <String fx:value="2"/>
+                                   <String fx:value="3"/>
+                                   <String fx:value="4"/>
+                                   <String fx:value="5"/>
+                               </FXCollections>
+                           </items>
+                       </ChoiceBox>
+                       <Label>1 =  very easy</Label>
+                       <Label>5 = very difficult</Label>
+                   </VBox>
 
-               <Label text="Rating:"/>
-               <ChoiceBox prefWidth="${transportType.parent.width}" fx:id="transportType">
-                   <items>
-                       <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="1 star"/>
-                           <String fx:value="2 stars"/>
-                           <String fx:value="3 stars"/>
-                           <String fx:value="4 stars"/>
-                           <String fx:value="5 stars"/>
-                       </FXCollections>
-                   </items>
-               </ChoiceBox>
+                   <VBox spacing="5">
+                   <Label style="-fx-font-weight: bold" text="Rating:"/>
+                   <ChoiceBox maxWidth="100" fx:id="rating">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:value="1"/>
+                               <String fx:value="2"/>
+                               <String fx:value="3"/>
+                               <String fx:value="4"/>
+                               <String fx:value="5"/>
+                           </FXCollections>
+                       </items>
+                   </ChoiceBox>
+                         <Label>1 =  excellent</Label>
+                            <Label>5 = very bad</Label>
+                   </VBox>
+               </HBox>
 
-               <Label text="Days:" />
-               <TextField maxWidth="40" fx:id="days"></TextField>
-
-               <Label text="Hours:"/>
-               <TextField maxWidth="40" fx:id="hours"></TextField>
-
-               <Label text="minutes:"/>
-               <TextField maxWidth="40" fx:id="minutes"></TextField>
-
-               <Label text="Comment:"/>
-               <TextArea fx:id="commentField"/>
+               <HBox spacing="10">
+                   <VBox spacing="5">
+                       <Label style="-fx-font-weight: bold" text="Days:" />
+                       <TextField maxWidth="100" fx:id="days"></TextField>
+                   </VBox>
+                   <VBox spacing="5">
+                       <Label style="-fx-font-weight: bold" text="Hours:"/>
+                       <TextField maxWidth="100" fx:id="hours"></TextField>
+                   </VBox>
+                   <VBox spacing="5">
+                       <Label style="-fx-font-weight: bold" text="Minutes:"/>
+                       <TextField maxWidth="100" fx:id="minutes"></TextField>
+                   </VBox>
+               </HBox>
+               <VBox spacing="5">
+                   <Label style="-fx-font-weight: bold" text="Comment:"/>
+                   <TextArea fx:id="comment"/>
+               </VBox>
             </VBox>
         </HBox>
     </VBox>

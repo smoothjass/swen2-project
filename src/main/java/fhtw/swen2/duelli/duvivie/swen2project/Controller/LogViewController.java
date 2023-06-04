@@ -1,5 +1,6 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.LogViewModel;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 import javafx.util.converter.LocalTimeStringConverter;
 import lombok.Setter;
@@ -15,26 +17,70 @@ import lombok.Setter;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.FormatStyle;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LogViewController implements Initializable {
     public ImageView imageView;
     private LogViewModel logViewModel;
-
     private Map<Tour, Image> currentlySelected = new HashMap<>();
-    @FXML
-    Button saveLogButton;
+    private Log currentlySelectedLog = null;
+    private Map<Integer, Log> logMap = new HashMap<>();
+
+    public ListView<String> logs;
+    public TextArea comment;
+    public ChoiceBox<String> difficulty;
+    public ChoiceBox<String> rating;
+    public TextField days;
+
+    public TextField hours;
+    public TextField minutes;
+
+    public Label timestamp;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.comment.textProperty().bindBidirectional(logViewModel.getComment());
+        this.difficulty.valueProperty().bindBidirectional(logViewModel.getDifficulty());
+        this.rating.valueProperty().bindBidirectional(logViewModel.getRating());
+        this.days.textProperty().bindBidirectional(logViewModel.getDays());
+        this.hours.textProperty().bindBidirectional(logViewModel.getHours());
+        this.minutes.textProperty().bindBidirectional(logViewModel.getMinutes());
+        this.timestamp.textProperty().bindBidirectional(logViewModel.getTimestamp());
+    }
 
     public LogViewController(LogViewModel logViewModel) {
         this.logViewModel = logViewModel;
     }
 
-    public void initialize() {
+    public void loadLogs(Integer tour_id){
+        logs.getItems().clear();
+
+        List<Log> logsList = logViewModel.getLogs(tour_id);
+
+        //sort logs by id
+        logsList.sort(Comparator.comparingInt(o -> o.log_id));
+
+        logsList.forEach(log -> {
+            logs.getItems().add(String.valueOf(log.log_id) +
+                    ": " +
+                    log.comment);
+            logMap.put(log.getLog_id(), log);
+        });
+    }
+
+    public void clearLogs(){
+        logs.getItems().clear();
+        logMap.clear();
+    }
+
+    public void clearForm(){
+        comment.clear();
+        difficulty.getSelectionModel().clearSelection();
+        rating.getSelectionModel().clearSelection();
+        days.clear();
+        hours.clear();
+        minutes.clear();
+        timestamp.setText("");
     }
 
     private void updateImage(Image image) {
@@ -47,10 +93,52 @@ public class LogViewController implements Initializable {
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         updateImage(image);
         if(tour == null) {
-            // TODO clear everything because a new tour is being created
+            currentlySelectedLog = null;
+            clearLogs();
+            clearForm();
+        }
+        else{
+            loadLogs(tour.getTour_id());
         }
     }
 
-    public void addLog(ActionEvent actionEvent) {
+    public void saveLog(ActionEvent actionEvent) {
+        if(!currentlySelected.isEmpty()) {
+            Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+            if(currentlySelectedLog == null) {
+               currentlySelectedLog = logViewModel.addLog(tour.getTour_id());
+               loadLogs(tour.getTour_id());
+            }
+            else{
+                currentlySelectedLog = logViewModel.updateLog(currentlySelectedLog);
+                loadLogs(tour.getTour_id());
+            }
+        }
+    }
+
+    @FXML public void handleMouseClick(MouseEvent mouseEvent) {
+        String selected = logs.getSelectionModel().getSelectedItem();
+        Integer selectedId = Integer.valueOf(selected.split(":")[0]);
+        Log selectedLog = logMap.get(selectedId);
+        this.logViewModel.setInputs(selectedLog);
+        currentlySelectedLog = selectedLog;
+    }
+
+    public void deleteLog(ActionEvent actionEvent) {
+       if(!currentlySelected.isEmpty()) {
+           Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+           if(currentlySelectedLog != null) {
+               this.logViewModel.deleteLog(currentlySelectedLog.log_id);
+               clearLogs();
+               clearForm();
+               currentlySelectedLog = null;
+               loadLogs(tour.getTour_id());
+           }
+       }
+    }
+
+    public void newLog(ActionEvent actionEvent) {
+        clearForm();
+        currentlySelectedLog = null;
     }
 }

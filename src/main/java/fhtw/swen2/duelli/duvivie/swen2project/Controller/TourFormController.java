@@ -49,7 +49,8 @@ public class TourFormController implements Initializable {
 
         Map<Tour, Image> tour = new HashMap<>();
         // currentlySelected tour == null >> create new tour, otherwise update
-        if (currentlySelected.entrySet().iterator().next().getKey() == null){
+        // error when creating first tour
+        if (currentlySelected.isEmpty()){
             // invoke model to request directions & image & save tour to db
             tour = tourFormModel.saveTour();
         }

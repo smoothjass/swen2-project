@@ -20,8 +20,7 @@ CREATE TABLE "logs" (
                       "comment" varchar(1000),
                       "difficulty" smallint,
                       "total_time" int,
-                      "rating" smallint,
-                      "picture_path" varchar(150)
+                      "rating" smallint
 );
 
 CREATE TABLE "transport_types" (

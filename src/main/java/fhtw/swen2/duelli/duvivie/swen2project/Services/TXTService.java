@@ -130,16 +130,8 @@ public class TXTService {
                 Log log = new Log();
 
                 data = line.split(": ");
-                if(data[0].equals("Log_id")){
+                if(data[0].equals("Starting_time")){
 
-                    log.setLog_id(Integer.parseInt(data[1]));
-
-                    line = reader.readLine();
-                    data = line.split(": ");
-                    log.setTour_id(Integer.parseInt(data[1]));
-
-                    line = reader.readLine();
-                    data = line.split(": ");
                     Timestamp timestamp = Timestamp.valueOf(data[1]);
                     log.setStarting_time(timestamp);
 

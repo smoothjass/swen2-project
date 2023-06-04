@@ -34,9 +34,4 @@ public class Log {
 
     @Column(name="rating", nullable = false)
     public int rating;
-
-    @Column(name="picture_path", nullable = false)
-    public String picture_path;
-
-
 }
