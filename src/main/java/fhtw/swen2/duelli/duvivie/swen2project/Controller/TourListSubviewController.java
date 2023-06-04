@@ -1,6 +1,7 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourListSubviewModel;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,26 +54,22 @@ public class TourListSubviewController implements Initializable {
     }
 
     private void reloadList() {
-        // TODO
-        //  it only clears but doen't reload
-        tours.setItems(null);
+        tours.getItems().clear();
         tourMap.clear();
-        //load all tours and create a TourListItemModel for each tour
-        tourListSubviewModel.getTours().forEach(tour -> {
-            /*
-            TourListItemModel tourListItemModel = new TourListItemModel();
-            tourListItemModel.name.setValue(tour.getName());
-            tourListItemModel.id.setValue(tour.getTour_id());
-            tours.getItems().add(String.valueOf(tourListItemModel.getId().getValue()) +
-                    ": " +
-                    String.valueOf(tourListItemModel.getName().getValue()));
-            tourMap.put(tourListItemModel.getId().getValue(), tour);
-             */
-            tours.getItems().add(String.valueOf(tour.getTour_id()) +
-                    ": " +
-                    tour.getName());
+        //load all tours
+        List<Tour> list = tourListSubviewModel.getTours();
+        for (Tour tour : list) {
+            // https://stackoverflow.com/questions/17850191/why-am-i-getting-java-lang-illegalstateexception-not-on-fx-application-thread
+            // runLater to prevent illegal state exception
+            Platform.runLater(
+                () -> {
+                    tours.getItems().add(String.valueOf(tour.getTour_id()) +
+                            ": " +
+                            tour.getName());
+                }
+            );
             tourMap.put(tour.getTour_id(), tour);
-        });
+        }
     }
 
     private void updateList(Tour newTour) {
@@ -95,14 +92,21 @@ public class TourListSubviewController implements Initializable {
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         if (tour == null) {
             tours.getSelectionModel().clearSelection();
-            // reloadList();
+            reloadList(); // something might have been deleted
         }
         else if (!tourMap.containsKey(tour.getTour_id())) {
             updateList(currentlySelected.entrySet().iterator().next().getKey());
         }
-        // TODO
-        //  reload when something was deleted
-        //  or when a name was updated
+        else { // name was updated -> reload list
+            for (Map.Entry<Integer, Tour> entry : tourMap.entrySet()) {
+                if (entry.getKey() == tour.getTour_id()) {
+                    if (!Objects.equals(entry.getValue().getName(), tour.getName())) {
+                        reloadList();
+                        break; // can't update more than one item at a time
+                    }
+                }
+            }
+        }
     }
 
     public void createSummary(javafx.event.ActionEvent actionEvent) {
