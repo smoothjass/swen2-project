@@ -54,28 +54,31 @@ public class TourListSubviewController implements Initializable {
     }
 
     private void reloadList() {
-        tours.getItems().clear();
-        tourMap.clear();
-        //load all tours
-        List<Tour> list = tourListSubviewModel.getTours();
-        for (Tour tour : list) {
-            // https://stackoverflow.com/questions/17850191/why-am-i-getting-java-lang-illegalstateexception-not-on-fx-application-thread
-            // runLater to prevent illegal state exception
-            Platform.runLater(
-                () -> {
+        // https://stackoverflow.com/questions/17850191/why-am-i-getting-java-lang-illegalstateexception-not-on-fx-application-thread
+        // runLater to prevent illegal state exception
+        Platform.runLater(
+            () -> {
+                tours.getItems().clear();
+                tourMap.clear();
+                //load all tours
+                List<Tour> list = tourListSubviewModel.getTours();
+                for (Tour tour : list) {
                     tours.getItems().add(String.valueOf(tour.getTour_id()) +
-                            ": " +
-                            tour.getName());
+                        ": " +
+                        tour.getName());
+                    tourMap.put(tour.getTour_id(), tour);
                 }
-            );
-            tourMap.put(tour.getTour_id(), tour);
-        }
+            }
+        );
     }
 
     private void updateList(Tour newTour) {
-        tours.getItems().add(String.valueOf(newTour.getTour_id()) +
-                ": " +
-                newTour.getName());
+        Platform.runLater(
+                () -> {
+                    tours.getItems().add(String.valueOf(newTour.getTour_id()) +
+                            ": " +
+                            newTour.getName());
+                });
         tourMap.put(newTour.getTour_id(), newTour);
     }
 

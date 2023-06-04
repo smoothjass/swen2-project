@@ -1,5 +1,6 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Models;
 
+import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
@@ -8,19 +9,16 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +34,8 @@ public class TourFormModel {
     public StringProperty from = new SimpleStringProperty();
     public StringProperty description = new SimpleStringProperty();
     public StringProperty transportType = new SimpleStringProperty();
+    public StringProperty childFriendliness = new SimpleStringProperty();
+    public StringProperty popularity = new SimpleStringProperty();
     public ObjectProperty<Image> imageView = new SimpleObjectProperty<>();
 
     private DatabaseService databaseService = new DatabaseService();
@@ -116,5 +116,33 @@ public class TourFormModel {
         //  if to/from/transporttype changed >> request new directions and image, update in db, return new tour and new image
         //  if something else changed >> only update in db, return new tour and null image (image will be reset to the old one in the controller)
         return new HashMap<>();
+    }
+
+    public void calculateValues(Tour tour) {
+        // TODO calculate comupted values
+        // id needed because we need to get the logs from the db
+        List<Log> list = databaseService.getAllLogsForTour(tour);
+        Float avgDifficulty = 0.0F;
+        for (Log log : list) {
+            avgDifficulty = avgDifficulty + log.getDifficulty();
+        }
+        avgDifficulty = avgDifficulty / list.size();
+        if (avgDifficulty > 0 && avgDifficulty <= 1) {
+            this.getChildFriendliness().setValue("very good");
+        }
+        else if (avgDifficulty > 1 && avgDifficulty <= 2.5){
+            this.getChildFriendliness().setValue("ok");
+        }
+        else if (avgDifficulty > 2.5 && avgDifficulty <= 4){
+            this.getChildFriendliness().setValue("probably not suitable for children");
+        }
+        else if (avgDifficulty > 4){
+            this.getChildFriendliness().setValue("not suitable for children");
+        }
+        else {
+            this.getChildFriendliness().setValue("cannot calculate at the moment");
+        }
+        this.getPopularity().setValue(String.valueOf(list.size())); // number of logs = popularity
+        // TODO calculate more elaborate popularity value if there is some time
     }
 }

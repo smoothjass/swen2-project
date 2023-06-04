@@ -25,6 +25,8 @@ public class TourFormController implements Initializable {
 
     private final TourFormModel tourFormModel;
     public ImageView imageView;
+    public TextField popularity;
+    public TextField childFriendliness;
     private SubmissionPublisher<Map<Tour, Image>> publisher;
 
     public TextField name;
@@ -75,6 +77,8 @@ public class TourFormController implements Initializable {
         this.to.textProperty().bindBidirectional(tourFormModel.getTo());
         this.from.textProperty().bindBidirectional(tourFormModel.getFrom());
         this.description.textProperty().bindBidirectional(tourFormModel.getDescription());
+        this.childFriendliness.textProperty().bindBidirectional(tourFormModel.getChildFriendliness());
+        this.popularity.textProperty().bindBidirectional(tourFormModel.getPopularity());
         this.transportType.valueProperty().bindBidirectional(tourFormModel.getTransportType());
         this.imageView.imageProperty().bindBidirectional(tourFormModel.getImageView());
     }
@@ -101,14 +105,16 @@ public class TourFormController implements Initializable {
     }
 
     private void autoFillTourData(Tour tour) {
-        this.to.setText(tour.to);
-        this.from.setText(tour.from);
-        this.description.setText(tour.description);
-        // TODO set transport type, gotta check how
-        // this.transportType.setValue(String.valueOf(tour.transportType.getType()));
-        this.duration.setText(String.valueOf(tour.duration));
-        this.distance.setText(String.valueOf(tour.distance));
-        this.name.setText(tour.name);
+        tourFormModel.getDistance().setValue(String.valueOf(tour.distance));
+        tourFormModel.getName().setValue(tour.name);
+        tourFormModel.getTo().setValue(tour.to);
+        tourFormModel.getFrom().setValue(tour.from);
+        tourFormModel.getDescription().setValue(tour.description);
+        // TODO
+        //  set transport type, idk how.
+        // tourFormModel.getTransportType().setValue(String.valueOf(tour.transportType.getType()));
+        tourFormModel.getDuration().setValue(String.valueOf(tour.duration));
+        tourFormModel.calculateValues(tour);
     }
 
     public void addTour(ActionEvent actionEvent) {
