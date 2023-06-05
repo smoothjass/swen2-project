@@ -73,10 +73,10 @@ public class TourDetailsSubviewController implements Initializable {
 
     public void deleteCurrentlySelected(ActionEvent actionEvent) {
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+        pictureGalleryController.deleteAssociatedImages();
         currentlySelected.clear();
         currentlySelected.put(null, null);
         tourDetailsSubviewModel.deleteCurrentTour(tour);
         publisher.submit(currentlySelected);
-        pictureGalleryController.deleteAssociatedImages();
     }
 }
