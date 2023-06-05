@@ -114,7 +114,7 @@ public class PicturesService {
         }
         return img;
     }
-    public List<Image> getAsscociatedImages(Tour associatedTour){
+    public List<Image> getAsscociatedImages(Tour associatedTour) {
         // check if the folder tourImagesPath+associatedTour.getId() exists
         File folder = new File(tourImagesPath+associatedTour.getTour_id());
         File[] listOfFiles = null;
@@ -174,7 +174,7 @@ public class PicturesService {
         File[] listOfFiles = null;
         if (folder.exists()) {
             listOfFiles = folder.listFiles();
-            // sort the files in a descending order so that the newest file is the first one
+            // sort the files so that the newest file is the first one
             java.util.Arrays.sort(listOfFiles, java.util.Comparator.comparingLong(File::lastModified).reversed());
         }
 

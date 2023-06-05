@@ -17,7 +17,7 @@ public class LogDao {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    public Log create(Log log) {
+    public Log create(Log log) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -44,7 +44,7 @@ public class LogDao {
         return log;
     }
 
-    public List<Log> findAll() {
+    public List<Log> findAll() throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -74,7 +74,7 @@ public class LogDao {
         return logs;
     }
 
-    public List<Log> getAllByTourId(int tourId) {
+    public List<Log> getAllByTourId(int tourId) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -105,7 +105,7 @@ public class LogDao {
         return logs;
     }
 
-  public void delete(int id) {
+  public void delete(int id) throws RollbackException{
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -135,7 +135,7 @@ public class LogDao {
         }
     }
 
-    public Log getById(Integer log_id){
+    public Log getById(Integer log_id) throws RollbackException{
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -166,7 +166,7 @@ public class LogDao {
         return log;
     }
 
-    public void update(Log newLogWithSameId) {
+    public void update(Log newLogWithSameId) throws RuntimeException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;

@@ -60,6 +60,10 @@ public class LogViewController implements Initializable {
 
                 List<Log> logsList = logViewModel.getLogs(tour_id);
 
+                if(logsList.isEmpty()){
+                    return;
+                }
+
                 //sort logs by id
                 logsList.sort(Comparator.comparingInt(o -> o.log_id));
 

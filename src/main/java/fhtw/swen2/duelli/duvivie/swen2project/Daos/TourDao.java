@@ -15,7 +15,7 @@ public class TourDao {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    public List<Tour> findAll() {
+    public List<Tour> findAll() throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -46,7 +46,7 @@ public class TourDao {
         return tours;
     }
 
-    public Tour create(Tour tour) {
+    public Tour create(Tour tour) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -73,7 +73,7 @@ public class TourDao {
         return tour;
     }
 
-    public void update(Tour newTourWithSameId) {
+    public void update(Tour newTourWithSameId) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -112,7 +112,7 @@ public class TourDao {
         }
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -142,7 +142,7 @@ public class TourDao {
         }
     }
 
-    public void deleteAll() {
+    public void deleteAll() throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -169,7 +169,7 @@ public class TourDao {
         }
     }
 
-    public Tour getTourById(int id) {
+    public Tour getTourById(int id) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -203,7 +203,7 @@ public class TourDao {
         return tour;
     }
 
-    public void deleteTourById(int tourId) {
+    public void deleteTourById(int tourId) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;

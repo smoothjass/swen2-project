@@ -1,5 +1,7 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourListSubviewModel;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -12,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.SubmissionPublisher;
@@ -27,11 +30,11 @@ public class TourListSubviewController implements Initializable {
     private TourListSubviewModel tourListSubviewModel;
     private SubmissionPublisher<Map<Tour, Image>> publisher;
     private Map<Tour, Image> currentlySelected = new HashMap<>();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
     public TourListSubviewController(TourListSubviewModel tourListSubviewModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourListSubviewModel = tourListSubviewModel;
         this.publisher = publisher;
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        // reloadList();
@@ -119,7 +122,8 @@ public class TourListSubviewController implements Initializable {
     public void importData(ActionEvent actionEvent) {
         // TODO
         // reload
-        this.tourListSubviewModel.importTourData();
+
+       this.tourListSubviewModel.importTourData();
     }
 
     public void exportData(ActionEvent actionEvent) {

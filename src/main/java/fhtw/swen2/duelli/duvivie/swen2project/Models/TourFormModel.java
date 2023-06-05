@@ -3,6 +3,8 @@ package fhtw.swen2.duelli.duvivie.swen2project.Models;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.MapService;
 import javafx.beans.property.ObjectProperty;
@@ -40,13 +42,18 @@ public class TourFormModel {
 
     private DatabaseService databaseService = new DatabaseService();
     private MapService mapService = new MapService();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+
     public Map<Tour, Image> saveTour() {
         // invoke MapService to get distance, duration and picture
         Object[] array = new Object[3];
         try {
             array = mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
+            logger.debug("Successfully got the route from " + from.getValue() + " to " + to.getValue());
         } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
+            System.out.println("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue());
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue() + " " + e.getMessage());
         }
 
         // build entity for db
@@ -69,7 +76,15 @@ public class TourFormModel {
         System.out.println(newTour.getTransportType().getType());
 
         // give to database service
-        Tour tour = databaseService.saveTour(newTour);
+        Tour tour = null;
+        try {
+            tour = databaseService.saveTour(newTour);
+            logger.debug("Tour saved to database.");
+        } catch (Exception e) {
+            System.out.println("An error occurred while saving the tour to the database.");
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while saving the tour to the database:" + e.getMessage());
+        }
 
         // update bound values
         // TODO convert the time to a reasonable format to display
@@ -121,7 +136,15 @@ public class TourFormModel {
     public void calculateValues(Tour tour) {
         // TODO calculate comupted values
         // id needed because we need to get the logs from the db
-        List<Log> list = databaseService.getAllLogsForTour(tour);
+        List<Log> list = null;
+        try {
+            list = databaseService.getAllLogsForTour(tour);
+            logger.debug("Logs fetched from database for tour with id " + tour.getTour_id() + ".");
+        } catch (Exception e) {
+            System.out.println("An error occurred while fetching the logs from the database.");
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while fetching the logs from the database:" + e.getMessage());
+        }
         Float avgDifficulty = 0.0F;
         for (Log log : list) {
             avgDifficulty = avgDifficulty + log.getDifficulty();

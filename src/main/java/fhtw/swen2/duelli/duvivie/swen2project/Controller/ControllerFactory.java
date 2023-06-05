@@ -18,9 +18,7 @@ public class ControllerFactory {
     private final TourFormModel tourFormModel;
     private final TourListSubviewModel tourListSubviewModel;
     private final LogViewModel logViewModel;
-    private final TourListItemModel tourListItemModel;
     private final PictureGalleryModel pictureGalleryModel;
-    private final LogListItemModel logListItemModel;
     private LogViewController logViewController;
     private TourFormController tourFormController;
     private TourListSubviewController tourListSubviewController;
@@ -35,9 +33,7 @@ public class ControllerFactory {
         this.tourFormModel = new TourFormModel();
         this.tourListSubviewModel = new TourListSubviewModel();
         this.logViewModel = new LogViewModel();
-        this.tourListItemModel = new TourListItemModel();
         this.pictureGalleryModel = new PictureGalleryModel();
-        this.logListItemModel = new LogListItemModel();
         logViewController = new LogViewController(this.logViewModel);
         tourFormController = new TourFormController(this.tourFormModel, publisher);
         tourListSubviewController = new TourListSubviewController(this.tourListSubviewModel, publisher);
@@ -64,14 +60,8 @@ public class ControllerFactory {
         else if (controllerClass == LogViewController.class){
             return logViewController;
         }
-        else if (controllerClass == TourListItemController.class){
-            return new TourListItemController(this.tourListItemModel);
-        }
         else if (controllerClass == PictureGalleryController.class){
             return pictureGalleryController;
-        }
-        else if (controllerClass == LogListItemController.class){
-            return new LogListItemController(this.logListItemModel);
         }
         else {
             throw new Exception("Controller not supported " + controllerClass.getName());

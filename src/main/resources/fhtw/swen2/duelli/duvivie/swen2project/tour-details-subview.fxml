@@ -24,7 +24,7 @@
     </VBox>
 
     <HBox>
-        <Button fx:id="deleteButton" onAction="#deleteCurrentlySelected" prefWidth="${deleteButton.parent.width}" text="Delete"/>
+        <Button fx:id="deleteButton" onAction="#deleteCurrentlySelected" prefWidth="${deleteButton.parent.width}" text="Delete selected tour"/>
         <Button fx:id="singleReportButton" onAction="#createSingleReport" prefWidth="${singleReportButton.parent.width}" text="Create tour report"/>
     </HBox>
 

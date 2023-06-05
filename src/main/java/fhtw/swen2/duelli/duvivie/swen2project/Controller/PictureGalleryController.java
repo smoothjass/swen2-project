@@ -79,8 +79,6 @@ public class PictureGalleryController implements Initializable {
             currentIndex = (currentIndex - 1);
             imageView.setImage(images.get(currentIndex));
         }
-
-        System.out.println("Current Index: " + currentIndex);
     }
 
     @FXML
@@ -98,7 +96,6 @@ public class PictureGalleryController implements Initializable {
             currentIndex = (currentIndex + 1);
             imageView.setImage(images.get(currentIndex));
         }
-        System.out.println("Current Index: " + currentIndex);
     }
 
     public PictureGalleryController(PictureGalleryModel pictureGalleryModel) {
@@ -134,7 +131,6 @@ public class PictureGalleryController implements Initializable {
                 currentIndex = images.size() - 1;
             }
         }
-
         if(images.size() == 2){
             previous.setDisable(false);
             next.setDisable(false);
@@ -143,10 +139,6 @@ public class PictureGalleryController implements Initializable {
 
     public void deleteCurrentImage(ActionEvent actionEvent) {
         if(currentlySelected != null) {
-            System.out.println("Length: " + fileNames.size());
-            //get the current image
-            Image currentImage = imageView.getImage();
-
             //delete the image from the source
             if(currentlySelected != null) {
                 if(images.size() == 1) {

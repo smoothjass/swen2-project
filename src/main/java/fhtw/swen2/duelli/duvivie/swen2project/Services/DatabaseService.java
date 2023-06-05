@@ -6,6 +6,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.RollbackException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,40 +23,40 @@ public class DatabaseService {
         this.logDao = new LogDao(entityManagerFactory);
     }
 
-    public Tour saveTour(Tour newTour) {
+    public Tour saveTour(Tour newTour) throws RollbackException {
         return tourDao.create(newTour);
     }
 
-    public List<Tour> getTours() {
+    public List<Tour> getTours() throws RollbackException {
         return tourDao.findAll();
     }
 
-    public List<Log> getTourLogs() {
+    public List<Log> getTourLogs() throws RollbackException {
         return logDao.findAll();
     }
 
-    public List<Log> getLogsForTour(Integer tourId) {
+    public List<Log> getLogsForTour(Integer tourId) throws RollbackException {
         return logDao.getAllByTourId(tourId);
     }
 
-    public List<Log> getAllLogsForTour(Tour currentlySelectedTour) {
+    public List<Log> getAllLogsForTour(Tour currentlySelectedTour) throws RollbackException {
         return logDao.getAllByTourId(currentlySelectedTour.tour_id);
     }
 
-    public void deleteTour(Tour currentlySelectedTour) {
+    public void deleteTour(Tour currentlySelectedTour) throws RollbackException {
         tourDao.deleteTourById(currentlySelectedTour.tour_id);
     }
 
-    public Log saveLog(Log log){
+    public Log saveLog(Log log) throws RollbackException{
        return logDao.create(log);
     }
 
-    public Log updateLog(Log log) {
+    public Log updateLog(Log log) throws RuntimeException {
         logDao.update(log);
         return logDao.getById(log.log_id);
     }
 
-    public void deleteLog(Integer logId) {
+    public void deleteLog(Integer logId) throws RollbackException {
         logDao.delete(logId);
     }
 }

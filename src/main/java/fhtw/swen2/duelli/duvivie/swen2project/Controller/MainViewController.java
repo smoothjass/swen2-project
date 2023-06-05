@@ -74,7 +74,7 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
 
     @Override
     public void onError(Throwable error) {
-        // TODO log
+        logger.error("Error Occurred: " + error.getMessage());
         System.out.println("Error Occurred: " + error.getMessage());
     }
 
