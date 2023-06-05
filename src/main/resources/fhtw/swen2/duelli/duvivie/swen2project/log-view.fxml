@@ -19,10 +19,10 @@
     <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <HBox style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" alignment="BASELINE_RIGHT">
+    <HBox spacing="10" style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" alignment="BASELINE_RIGHT">
         <Label  text="Tour Details"/>
         <Region HBox.hgrow="ALWAYS" />
-        <Button fx:id="addNewLogButton" minWidth="70"  prefHeight="${addNewLogButton.parent.height}" onAction="#newLog">
+        <Button fx:id="addNewLogButton" minWidth="70" onAction="#newLog">
             <graphic>
                 <ImageView>
                     <Image url="@icons/add-list.png" />
@@ -40,7 +40,7 @@
                 </Tooltip>
             </tooltip>
         </Button>
-        <Button fx:id="saveLogButton" prefHeight="${addNewLogButton.parent.height}" onAction="#saveLog">
+        <Button fx:id="saveLogButton"  minWidth="70" onAction="#saveLog">
             <graphic>
                 <ImageView>
                     <Image url="@icons/save.png"/>
@@ -58,7 +58,7 @@
                 </Tooltip>
             </tooltip>
         </Button>
-        <Button fx:id="deleteLogButton" minWidth="70"  prefHeight="${addNewLogButton.parent.height}" onAction="#deleteLog">
+        <Button fx:id="deleteLogButton" minWidth="70" onAction="#deleteLog">
             <graphic>
                 <ImageView>
                     <Image url="@icons/delete.png" />

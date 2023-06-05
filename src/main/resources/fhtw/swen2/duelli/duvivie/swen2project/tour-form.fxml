@@ -15,10 +15,10 @@
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
-        <HBox alignment="BASELINE_RIGHT">
+        <HBox spacing="10" alignment="BASELINE_RIGHT">
             <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Details"/>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="saveButton" prefHeight="${addNewTourButton.parent.height}" onAction="#saveNewTourData">
+            <Button  minWidth="70" fx:id="saveButton" prefHeight="${addNewTourButton.parent.height}" onAction="#saveNewTourData">
                 <graphic>
                     <ImageView>
                         <Image url="@icons/save.png" />

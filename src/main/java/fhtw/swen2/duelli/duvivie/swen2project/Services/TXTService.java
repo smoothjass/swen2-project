@@ -16,7 +16,7 @@ import java.util.List;
 public class TXTService {
     public void export(Tour tour, List<Log> logs) throws IOException {
             String fileName = tour.getName() + "-Export.txt";
-            String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedCSVs/" + fileName;
+            String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedTXTs/" + fileName;
 
             FileWriter writer = new FileWriter(DEST);
             writer.append("Tour: " + tour.getName());

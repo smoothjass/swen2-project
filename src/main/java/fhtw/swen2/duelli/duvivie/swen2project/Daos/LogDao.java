@@ -105,21 +105,22 @@ public class LogDao {
         return logs;
     }
 
-    public void deleteById(Integer log_id) {
+  public void delete(int id) {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
+
         try {
             // Get a transaction
             transaction = manager.getTransaction();
             // Begin the transaction
             transaction.begin();
-
-            // Note that the SQL is selecting from "Log" entity not the "tours" table
-            manager.createQuery("DELETE FROM Log log WHERE log.log_id = :logId", Log.class)
-                    .setParameter("logId", log_id)
-                    .executeUpdate();
-
+            // First find the student
+            Log log = manager.find(Log.class, id);
+            if (log != null) {
+                // Remove the student
+                manager.remove(log);
+            }
             // Commit the transaction
             transaction.commit();
         } catch (RollbackException ex) {

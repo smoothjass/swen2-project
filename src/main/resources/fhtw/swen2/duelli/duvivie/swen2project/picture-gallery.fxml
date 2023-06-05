@@ -10,28 +10,47 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.PictureGalleryController">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <HBox alignment="BASELINE_RIGHT">
+    <HBox spacing="10" alignment="BASELINE_RIGHT">
             <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Images"/>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="selectNewImage" onAction="#addNewPicture">
+            <Button  minWidth="70" fx:id="selectNewImage" onAction="#addNewPicture">
                 <graphic>
                     <ImageView>
                         <Image url="@icons/add-image.png" />
                     </ImageView>
                 </graphic>
             </Button>
+         <Button fx:id="deleteLogButton" minWidth="70" onAction="#deleteCurrentImage">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/delete.png" />
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="Delete this log entry">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
+        </Button>
     </HBox>
     <VBox alignment="CENTER" spacing="20">
         <ImageView fx:id="imageView"/>
         <HBox alignment="CENTER" spacing="10">
-            <Button text="Previous" onAction="#goToPreviousImage" />
-            <Button text="Next" onAction="#goToNextImage" />
+            <Button text="Previous" disable="true" fx:id="previous" onAction="#goToPreviousImage" />
+            <Button text="Next" disable="true" fx:id="next" onAction="#goToNextImage" />
         </HBox>
     </VBox>
 </VBox>

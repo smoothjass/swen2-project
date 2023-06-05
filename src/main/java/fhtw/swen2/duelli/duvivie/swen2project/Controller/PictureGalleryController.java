@@ -2,6 +2,7 @@ package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -27,15 +28,20 @@ public class PictureGalleryController implements Initializable {
     private int currentIndex = 0;
     @FXML
     private ImageView imageView;
-
+    @FXML
+    Button previous;
+    @FXML
+    Button next;
     private List<Image> images = new ArrayList<>();
+    private List<String> fileNames = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
-    public void putImages(List<Image> tourImages) {
+    public void putImages(List<Image> tourImages, Tour associatedTour) {
         for (Image image : tourImages) {
             images.add(image);
+            fileNames = pictureGalleryModel.getFileNames(associatedTour);
         }
 
         //set the first image as the current image
@@ -45,6 +51,17 @@ public class PictureGalleryController implements Initializable {
         else {
             imageView.setImage(null);
         }
+
+        currentIndex = 0;
+
+        if(!images.isEmpty()){
+            previous.setDisable(false);
+            next.setDisable(false);
+        }else {
+            previous.setDisable(true);
+            next.setDisable(true);
+        }
+
     }
 
     @FXML
@@ -62,6 +79,8 @@ public class PictureGalleryController implements Initializable {
             currentIndex = (currentIndex - 1);
             imageView.setImage(images.get(currentIndex));
         }
+
+        System.out.println("Current Index: " + currentIndex);
     }
 
     @FXML
@@ -74,12 +93,12 @@ public class PictureGalleryController implements Initializable {
         if (currentIndex == (images.size() - 1)) {
             currentIndex = 0;
             imageView.setImage(images.get(currentIndex));
-            return;
         }
         else {
             currentIndex = (currentIndex + 1);
             imageView.setImage(images.get(currentIndex));
         }
+        System.out.println("Current Index: " + currentIndex);
     }
 
     public PictureGalleryController(PictureGalleryModel pictureGalleryModel) {
@@ -92,7 +111,7 @@ public class PictureGalleryController implements Initializable {
         images.clear();
         if(tour != null) {
             List<Image> images = pictureGalleryModel.getImages(tour);
-            putImages(images);
+            putImages(images, tour);
         }
         else {
             imageView.setImage(null);
@@ -104,11 +123,53 @@ public class PictureGalleryController implements Initializable {
     }
 
     public void addNewPicture(ActionEvent actionEvent) {
-        Tour tour = currentlySelected.entrySet().iterator().next().getKey();
-        Image newImage = pictureGalleryModel.addNewPicture(tour);
-        if(newImage != null) {
-            images.add(newImage);
-            imageView.setImage(newImage);
+        if(currentlySelected != null) {
+            Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+            Image newImage = pictureGalleryModel.addNewPicture(tour);
+            String fileName = pictureGalleryModel.getLatestFileName(tour);
+            if(newImage != null) {
+                images.add(newImage);
+                imageView.setImage(newImage);
+                fileNames.add(fileName);
+                currentIndex = images.size() - 1;
+            }
+        }
+
+        if(images.size() == 2){
+            previous.setDisable(false);
+            next.setDisable(false);
+        }
+    }
+
+    public void deleteCurrentImage(ActionEvent actionEvent) {
+        if(currentlySelected != null) {
+            System.out.println("Length: " + fileNames.size());
+            //get the current image
+            Image currentImage = imageView.getImage();
+
+            //delete the image from the source
+            if(currentlySelected != null) {
+                if(images.size() == 1) {
+                    //delete the image from images
+                    pictureGalleryModel.deleteImage(fileNames.get(0));
+                    images.remove(currentIndex);
+                    fileNames.remove(currentIndex);
+                    imageView.setImage(null);
+                }else if(images.size() > 1) {
+                    pictureGalleryModel.deleteImage(fileNames.get(currentIndex));
+                    images.remove(currentIndex);
+                    fileNames.remove(currentIndex);
+                    imageView.setImage(images.get(0));
+                }
+                else {
+                    imageView.setImage(null);
+                }
+            }
+        }
+
+        if(images.size() <= 1){
+            previous.setDisable(true);
+            next.setDisable(true);
         }
     }
 }

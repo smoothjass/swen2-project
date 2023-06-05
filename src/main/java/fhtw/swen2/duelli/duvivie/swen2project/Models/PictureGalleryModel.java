@@ -20,4 +20,16 @@ public class PictureGalleryModel {
     public List<Image> getImages(Tour associatedTour) {
         return picturesService.getAsscociatedImages(associatedTour);
     }
+
+    public void deleteImage(String fileName) {
+        picturesService.deleteImage(fileName);
+    }
+
+    public List<String> getFileNames(Tour associatedTour) {
+        return picturesService.getFileNames(associatedTour);
+    }
+
+    public String getLatestFileName(Tour tour) {
+        return picturesService.getLatestFileName(tour);
+    }
 }

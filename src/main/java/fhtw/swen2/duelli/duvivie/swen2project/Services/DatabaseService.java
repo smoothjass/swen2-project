@@ -56,6 +56,6 @@ public class DatabaseService {
     }
 
     public void deleteLog(Integer logId) {
-        logDao.deleteById(logId);
+        logDao.delete(logId);
     }
 }

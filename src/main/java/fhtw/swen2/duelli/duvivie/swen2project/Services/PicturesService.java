@@ -3,6 +3,7 @@ package fhtw.swen2.duelli.duvivie.swen2project.Services;
 import com.itextpdf.io.image.ImageDataFactory;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
+import jakarta.persistence.Index;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -17,12 +18,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.itextpdf.kernel.xmp.PdfConst.Thumbnails;
 
 public class PicturesService {
-
     private int imageWidth = 600;
     private int imageHeight = 500;
     private String tourImagesPath = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tourImages/";
@@ -43,8 +44,8 @@ public class PicturesService {
             folder.mkdir();
         }
 
-        // save the image to the folder
         String path = tourImagesPath+associatedTour.getTour_id()+"/"+image.hashCode()+".png";
+
         File outputfile = new File(path);
         try {
             ImageIO.write(image, "png", outputfile);
@@ -118,7 +119,9 @@ public class PicturesService {
         File folder = new File(tourImagesPath+associatedTour.getTour_id());
         File[] listOfFiles = null;
         if (folder.exists()) {
+            //get all the files in the folder in a descending order
             listOfFiles = folder.listFiles();
+            java.util.Arrays.sort(listOfFiles, java.util.Comparator.comparingLong(File::lastModified).reversed());
         }
 
         List<Image> images = new java.util.ArrayList<>();
@@ -138,15 +141,47 @@ public class PicturesService {
         }
         return images;
     }
-}
 
-/*
-            // write to disk
-            // https://docs.oracle.com/javase/tutorial/2d/images/saveimage.html
-            String path = "C:\\Users\\jassi\\OneDrive\\Dokumente\\FH\\BIF\\2023_SS\\SWEN2\\swen2-project\\src\\main\\" +
-                    "java\\fhtw\\swen2\\duelli\\duvivie\\swen2project\\Controller\\saved.png";
-            File outputfile = new File(path);
-            ImageIO.write(bufferedImage, "png", outputfile);
-            this.imageProperty.set(new Image(path));
-            this.imageProperty.setValue(new Image(path));
-*/
+    public void deleteImage(String fileName) {
+        // delete the file
+        File file = new File(fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    public List<String> getFileNames(Tour associatedTour) {
+        // check if the folder tourImagesPath+associatedTour.getId() exists
+        File folder = new File(tourImagesPath+associatedTour.getTour_id());
+        File[] listOfFiles = null;
+        if (folder.exists()) {
+            listOfFiles = folder.listFiles();
+        }
+
+        List<String> fileNames = new java.util.ArrayList<>();
+
+        if (listOfFiles != null) {
+            for (File file : listOfFiles) {
+                fileNames.add(file.getAbsolutePath());
+            }
+        }
+        return fileNames;
+    }
+
+    public String getLatestFileName(Tour tour) {
+        // get the name of the newest file
+        File folder = new File(tourImagesPath+tour.getTour_id());
+        File[] listOfFiles = null;
+        if (folder.exists()) {
+            listOfFiles = folder.listFiles();
+            // sort the files in a descending order so that the newest file is the first one
+            java.util.Arrays.sort(listOfFiles, java.util.Comparator.comparingLong(File::lastModified).reversed());
+        }
+
+        if (listOfFiles != null) {
+            return listOfFiles[0].getAbsolutePath();
+        } else {
+            return null;
+        }
+    }
+}
