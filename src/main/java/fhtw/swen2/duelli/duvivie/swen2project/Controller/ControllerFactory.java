@@ -38,7 +38,7 @@ public class ControllerFactory {
         tourFormController = new TourFormController(this.tourFormModel, publisher);
         tourListSubviewController = new TourListSubviewController(this.tourListSubviewModel, publisher);
         pictureGalleryController = new PictureGalleryController(this.pictureGalleryModel);
-        tourDetailsSubviewController = new TourDetailsSubviewController(this.tourDetailsSubviewModel, publisher);
+        tourDetailsSubviewController = new TourDetailsSubviewController(this.tourDetailsSubviewModel, publisher, this.pictureGalleryController);
     }
 
     public Object create(Class<?> controllerClass) throws Exception {

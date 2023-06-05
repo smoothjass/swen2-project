@@ -21,16 +21,18 @@ public class TourDetailsSubviewController implements Initializable {
 
     private Map<Tour, Image> currentlySelected = new HashMap<>();
 
+    private PictureGalleryController pictureGalleryController;
+
     @FXML
     VBox detailsContentArea;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
-    public TourDetailsSubviewController(TourDetailsSubviewModel tourDetailsSubviewModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
+    public TourDetailsSubviewController(TourDetailsSubviewModel tourDetailsSubviewModel, SubmissionPublisher<Map<Tour, Image>> publisher, PictureGalleryController pictureGalleryController) {
         this.tourDetailsSubviewModel = tourDetailsSubviewModel;
         this.publisher = publisher;
+        this.pictureGalleryController = pictureGalleryController;
     }
 
     public void showTourForm(ActionEvent actionEvent) {
@@ -66,8 +68,7 @@ public class TourDetailsSubviewController implements Initializable {
 
     public void createSingleReport(ActionEvent actionEvent) {
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
-        Image image = currentlySelected.entrySet().iterator().next().getValue();
-        tourDetailsSubviewModel.createSingleReport(tour, image);
+        tourDetailsSubviewModel.createSingleReport(tour);
     }
 
     public void deleteCurrentlySelected(ActionEvent actionEvent) {
@@ -76,6 +77,6 @@ public class TourDetailsSubviewController implements Initializable {
         currentlySelected.put(null, null);
         tourDetailsSubviewModel.deleteCurrentTour(tour);
         publisher.submit(currentlySelected);
+        pictureGalleryController.deleteAssociatedImages();
     }
-
 }

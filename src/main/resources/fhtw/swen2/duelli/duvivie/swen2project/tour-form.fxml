@@ -44,38 +44,40 @@
                 </tooltip>
             </Button>
         </HBox>
+
+        <Region minHeight="10"></Region>
         <HBox alignment="CENTER">
             <ImageView fx:id="imageView" fitHeight="300">
             </ImageView>
         </HBox>
-        <!--TODO layout-->
+        <Region minHeight="10"></Region>
 
         <GridPane hgap="10" vgap="10" maxHeight="Infinity" maxWidth="Infinity">
 
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="Tour name:"/>
+                <Label style="-fx-font-weight: bold" text="Tour name:"/>
                 <TextField GridPane.hgrow="always" GridPane.vgrow="always" fx:id="name"/>
             </VBox>
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="To:"/>
+                <Label style="-fx-font-weight: bold" text="To:"/>
                 <TextField fx:id="to"/>
             </VBox>
             <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="From:"/>
+                <Label style="-fx-font-weight: bold" text="From:"/>
                 <TextField fx:id="from"/>
             </VBox>
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="Tour Distance:"/>
+                <Label style="-fx-font-weight: bold" text="Tour Distance:"/>
                 <TextField disable="true" fx:id="distance"/>
             </VBox>
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
-                <Label text="Estimated time:"/>
+                <Label style="-fx-font-weight: bold" text="Estimated time:"/>
                 <TextField disable="true" fx:id="duration"/>
             </VBox>
 
             <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="Transport type:"/>
+                <Label style="-fx-font-weight: bold" text="Transport type:"/>
                 <ChoiceBox fx:id="transportType">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -88,16 +90,16 @@
             </VBox>
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="Popularity:"/>
+                <Label style="-fx-font-weight: bold" text="Popularity:"/>
                 <TextField disable="true" fx:id="popularity"/>
             </VBox>
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
-                <Label text="Child-friendliness:"/>
+                <Label style="-fx-font-weight: bold" text="Child-friendliness:"/>
                 <TextField disable="true" fx:id="childFriendliness"/>
             </VBox>
 
             <VBox GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
-                <Label text="Description"/>
+                <Label style="-fx-font-weight: bold" text="Description:"/>
                 <TextArea fx:id="description"/>
             </VBox>
 

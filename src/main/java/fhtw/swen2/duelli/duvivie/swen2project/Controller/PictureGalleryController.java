@@ -2,6 +2,7 @@ package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
@@ -13,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.animation.Timeline;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.awt.image.BufferedImage;
@@ -23,6 +26,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PictureGalleryController implements Initializable {
+    public VBox pictureGallery;
     private PictureGalleryModel pictureGalleryModel;
     private Map<Tour, Image> currentlySelected;
     private int currentIndex = 0;
@@ -115,8 +119,14 @@ public class PictureGalleryController implements Initializable {
         }
     }
 
-    public void deleteAssociatedImages(Tour associatedTour) {
-        pictureGalleryModel.deleteAssociatedImages(associatedTour);
+    public void deleteAssociatedImages() {
+        if(currentlySelected != null) {
+            Tour tour = currentlySelected.entrySet().iterator().next().getKey();
+            images.clear();
+            imageView.setImage(null);
+            fileNames.clear();
+            pictureGalleryModel.deleteAssociatedImages(tour);
+        }
     }
 
     public void addNewPicture(ActionEvent actionEvent) {

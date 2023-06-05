@@ -13,21 +13,60 @@
 <?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.PictureGalleryController">
+      fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.PictureGalleryController"
+      fx:id="pictureGallery"
+      prefHeight="${pictureGallery.parent.height}"
+>
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
     <HBox spacing="10" alignment="BASELINE_RIGHT">
-            <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Images"/>
-            <Region HBox.hgrow="ALWAYS" />
-            <Button  minWidth="70" fx:id="selectNewImage" onAction="#addNewPicture">
+        <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Images"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="previous" minWidth="70" onAction="#goToPreviousImage" prefHeight="${previous.parent.height}">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/back.png" />
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="Go to the previous picture">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="next" minWidth="70" onAction="#goToNextImage" prefHeight="${next.parent.height}">
+            <graphic>
+                <ImageView>
+                    <Image url="@icons/next.png" />
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="Go to the next picture">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
+        </Button>
+            <Button  minWidth="70" fx:id="selectNewImage" onAction="#addNewPicture" prefHeight="${selectNewImage.parent.height}">
                 <graphic>
                     <ImageView>
                         <Image url="@icons/add-image.png" />
                     </ImageView>
                 </graphic>
             </Button>
-         <Button fx:id="deleteLogButton" minWidth="70" onAction="#deleteCurrentImage">
+         <Button fx:id="deleteLogButton" minWidth="70" onAction="#deleteCurrentImage" prefHeight="${deleteLogButton.parent.height}">
             <graphic>
                 <ImageView>
                     <Image url="@icons/delete.png" />
@@ -46,11 +85,7 @@
             </tooltip>
         </Button>
     </HBox>
-    <VBox alignment="CENTER" spacing="20">
-        <ImageView fx:id="imageView"/>
-        <HBox alignment="CENTER" spacing="10">
-            <Button text="Previous" disable="true" fx:id="previous" onAction="#goToPreviousImage" />
-            <Button text="Next" disable="true" fx:id="next" onAction="#goToNextImage" />
-        </HBox>
-    </VBox>
+    <HBox fx:id="pictureHbox" prefHeight="${pictureHbox.parent.height}" alignment="CENTER">
+    <ImageView fx:id="imageView"/>
+    </HBox>
 </VBox>

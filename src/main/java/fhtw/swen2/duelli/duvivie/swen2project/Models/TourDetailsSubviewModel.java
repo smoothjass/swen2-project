@@ -21,7 +21,7 @@ public class TourDetailsSubviewModel {
         this.reportService = new ReportService();
     }
 
-    public void createSingleReport(Tour currentlySelectedTour, Image image) {
+    public void createSingleReport(Tour currentlySelectedTour) {
         try {
             reportService.createSingleReport(currentlySelectedTour, databaseService.getAllLogsForTour(currentlySelectedTour));
             logger.debug("Created report for tour with id " + currentlySelectedTour.getTour_id());
