@@ -83,8 +83,8 @@ public class TourDao {
             transaction = manager.getTransaction();
             // Begin the transaction
             transaction.begin();
-            // First find the student to update the object
-            // You cannot insert a new student with the same id since it will be treated as a duplicate entry
+            // First find the tour to update the object
+            // You cannot insert a new tour with the same id since it will be treated as a duplicate entry
             Tour tour = manager.find(Tour.class, newTourWithSameId.getTour_id());
             if (tour != null) {
                 // Note that the id cannot be changed

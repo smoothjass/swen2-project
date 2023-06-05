@@ -45,7 +45,12 @@ public class MapService {
             // System.out.print(".");
             Thread.sleep(250);
         }
-        // System.out.println("Fact received :" + yieldDirections);
+        System.out.println("Fact received :" + yieldDirections.get().getRoute());
+
+        if (Objects.equals(yieldDirections.get().getRoute().toString(), "{\"routeError\":{\"errorCode\":2,\"message\":\"\"}}")) {
+            // error while retrieving directions
+            return null;
+        }
 
         // get bounding box, session id, distance and duration (time) from the response
         JsonNode tempBoundingBox= yieldDirections.get().getRoute().get("boundingBox");

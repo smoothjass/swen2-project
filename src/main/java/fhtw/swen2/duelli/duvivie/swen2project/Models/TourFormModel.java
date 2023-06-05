@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 @Getter
@@ -48,6 +49,10 @@ public class TourFormModel {
             Object[] array = new Object[3];
             try {
                 array = mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
+                if (array == null) {
+                    alert("Error", "Cannot calculate this route", "Please review your input");
+                    return null;
+                }
             } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
             }
@@ -68,8 +73,8 @@ public class TourFormModel {
                 case "pedestrian" -> newTransportType.setTransport_type_id(3);
             }
             newTour.setTransportType(newTransportType);
-            System.out.println(newTour.getTransportType().getTransport_type_id());
-            System.out.println(newTour.getTransportType().getType());
+            // System.out.println(newTour.getTransportType().getTransport_type_id());
+            // System.out.println(newTour.getTransportType().getType());
 
             // give to database service
             Tour tour = databaseService.saveTour(newTour);
@@ -114,21 +119,77 @@ public class TourFormModel {
         return convertToFxImage((BufferedImage) array[2]);
     }
 
-    public Map<Tour, Image> updateTour(int tour_id) {
+    public Map<Tour, Image> updateTour(Tour tour) {
+        // validate input
         if (validateInput()) {
+            // get the old tour from the db
+            Tour oldTour = databaseService.getTourById(tour.getTour_id());
+            // build the updated tour from the inputs
+            Tour newTour = new Tour();
+            newTour.setTour_id(oldTour.getTour_id());
+            newTour.setName(name.getValue());
+            newTour.setTo(to.getValue());
+            newTour.setDistance(Float.valueOf(distance.getValue()));
+            newTour.setDuration(oldTour.getDuration());
+            newTour.setFrom(from.getValue());
+            newTour.setDescription(description.getValue());
+            TransportType newTransportType = new TransportType();
+            newTransportType.setType(transportType.getValue());
+            switch (newTransportType.getType()) {
+                case "bicycle" -> newTransportType.setTransport_type_id(1);
+                case "car" -> newTransportType.setTransport_type_id(2);
+                case "pedestrian" -> newTransportType.setTransport_type_id(3);
+            }
+            newTour.setTransportType(newTransportType);
 
+            // compare
+            // if to/from/transporttype changed >> request new directions and image, return new tour and new image
+            if (!Objects.equals(oldTour.getTo(), newTour.getTo()) ||
+                    !Objects.equals(oldTour.getFrom(), newTour.getFrom()) ||
+                    !Objects.equals(oldTour.getTransportType().getType(), newTour.getTransportType().getType())) {
+                // invoke MapService to get distance, duration and picture
+                Object[] array = new Object[3];
+                try {
+                    array = mapService.getRoute(this.getFrom().getValue(), this.getTo().getValue(), this.getTransportType().getValue());
+                    if (array == null) {
+                        alert("Error", "Cannot calculate this route", "Please review your input");
+                        return null;
+                    }
+                    // update bound values and tour values
+                    newTour.setDistance((Float) array[0]);
+                    newTour.setDuration((Integer) array[1]);
+                    this.getDistance().setValue(Float.toString((Float) array[0]) + " km");
+                    //calculate the number of days, hours and minutes from the duration (seconds)
+                    calculateDuration(newTour);
+                    Image image = convertToFxImage((BufferedImage) array[2]);
+                    this.getImageView().setValue(image);
+
+                    // update and get the updated tour
+                    Tour updatedTour = databaseService.updateTour(newTour);
+
+                    // return the tour so it can be updated whereever needed
+                    Map<Tour, Image> tourImageMap = new HashMap<>();
+                    tourImageMap.put(updatedTour, image);
+                    return tourImageMap;
+                } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            // if something else changed >> only update in db, return new tour and null image (image will be reset to the old one in the controller)
+            else {
+                // update and get the updated tour
+                Tour updatedTour = databaseService.updateTour(newTour);
+
+                // return the tour so it can be updated whereever needed
+                Map<Tour, Image> tourImageMap = new HashMap<>();
+                tourImageMap.put(updatedTour, null);
+                return tourImageMap;
+            }
         }
         return null;
-        // TODO
-        //  validate input
-        //  fetch tour with id from db
-        //  compare
-        //  if to/from/transporttype changed >> request new directions and image, update in db, return new tour and new image
-        //  if something else changed >> only update in db, return new tour and null image (image will be reset to the old one in the controller)
     }
 
     public void calculateValues(Tour tour) {
-        // TODO calculate comupted values
         // id needed because we need to get the logs from the db
         List<Log> list = databaseService.getAllLogsForTour(tour);
         Float avgDifficulty = 0.0F;

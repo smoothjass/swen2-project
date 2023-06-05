@@ -63,7 +63,7 @@ public class TourFormController implements Initializable {
         else {
             // temporarily save image here
             Image image = currentlySelected.entrySet().iterator().next().getValue();
-            tour = tourFormModel.updateTour(currentlySelected.entrySet().iterator().next().getKey().getTour_id());
+            tour = tourFormModel.updateTour(currentlySelected.entrySet().iterator().next().getKey());
             if (tour != null){ // tour == null >> invalid input
                 if(tour.entrySet().iterator().next().getValue() == null) {
                     tour.entrySet().iterator().next().setValue(image);

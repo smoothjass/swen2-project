@@ -58,4 +58,13 @@ public class DatabaseService {
     public void deleteLog(Integer logId) {
         logDao.delete(logId);
     }
+
+    public Tour updateTour(Tour tour) {
+        tourDao.update(tour);
+        return tourDao.getTourById(tour.getTour_id());
+    }
+
+    public Tour getTourById(int tour_id) {
+        return tourDao.getTourById(tour_id);
+    }
 }

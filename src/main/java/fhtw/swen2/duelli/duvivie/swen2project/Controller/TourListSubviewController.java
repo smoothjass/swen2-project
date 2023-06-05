@@ -100,7 +100,7 @@ public class TourListSubviewController implements Initializable {
         else if (!tourMap.containsKey(tour.getTour_id())) {
             updateList(currentlySelected.entrySet().iterator().next().getKey());
         }
-        else { // name was updated -> reload list
+        else { // something was updated -> reload list
             for (Map.Entry<Integer, Tour> entry : tourMap.entrySet()) {
                 if (entry.getKey() == tour.getTour_id()) {
                     if (!Objects.equals(entry.getValue().getName(), tour.getName())) {
