@@ -60,7 +60,6 @@ public class ReportService {
         try {
             MapService mapService = new MapService();
             array = mapService.getRoute(tour.from, tour.to, tour.transportType.getType());
-            // TODO array is null?
         } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
