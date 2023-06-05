@@ -85,6 +85,7 @@
             </tooltip>
         </Button>
     </HBox>
+    <Region minHeight="10"></Region>
     <HBox fx:id="pictureHbox" prefHeight="${pictureHbox.parent.height}" alignment="CENTER">
     <ImageView fx:id="imageView"/>
     </HBox>
