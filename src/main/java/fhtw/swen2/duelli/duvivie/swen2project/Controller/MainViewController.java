@@ -44,10 +44,10 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     public void onSubscribe(Flow.Subscription subscription) {
         this.subscription = subscription;
         // testing loger
-        logger.debug("subscribed");
-        logger.warn("warning");
-        logger.error("error");
-        logger.fatal("fatal");
+        // logger.debug("subscribed");
+        // logger.warn("warning");
+        // logger.error("error");
+        // logger.fatal("fatal");
         subscription.request(1);
     }
 

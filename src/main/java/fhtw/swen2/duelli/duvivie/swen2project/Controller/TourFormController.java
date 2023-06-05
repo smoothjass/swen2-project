@@ -57,17 +57,23 @@ public class TourFormController implements Initializable {
             // invoke model to request directions & image & save tour to db
             tour = tourFormModel.saveTour();
         }
+        else if (currentlySelected.entrySet().iterator().next().getKey() == null) {
+            tour = tourFormModel.saveTour();
+        }
         else {
             // temporarily save image here
             Image image = currentlySelected.entrySet().iterator().next().getValue();
-            tour = tourFormModel.updateTour(currentlySelected.entrySet().iterator().next().getKey().getTour_id());
-            if(tour.entrySet().iterator().next().getValue() == null) {
-                tour.entrySet().iterator().next().setValue(image);
+            tour = tourFormModel.updateTour(currentlySelected.entrySet().iterator().next().getKey());
+            if (tour != null){ // tour == null >> invalid input
+                if(tour.entrySet().iterator().next().getValue() == null) {
+                    tour.entrySet().iterator().next().setValue(image);
+                }
             }
         }
         // fire event so that mainview controller updates currentlySelectedTour
-        publisher.submit(tour);
-
+        if (tour != null){ // tour == null >> invalid input
+            publisher.submit(tour);
+        }
         // TODO remove spinner
     }
 
@@ -99,25 +105,11 @@ public class TourFormController implements Initializable {
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         updateImage(image);
         if (tour != null) {
-            autoFillTourData(tour);
+            tourFormModel.autoFillTourData(tour);
         }
         else {
-            autoFillTourData(new Tour());
+            tourFormModel.autoFillTourData(new Tour());
         }
-    }
-
-    private void autoFillTourData(Tour tour) {
-        Platform.runLater(
-            () -> {
-                tourFormModel.getDistance().setValue(String.valueOf(tour.distance));
-                tourFormModel.getName().setValue(tour.name);
-                tourFormModel.getTo().setValue(tour.to);
-                tourFormModel.getFrom().setValue(tour.from);
-                tourFormModel.getDescription().setValue(tour.description);
-                tourFormModel.getTransportType().setValue(tour.transportType.getType());
-                tourFormModel.getDuration().setValue(String.valueOf(tour.duration));
-                tourFormModel.calculateValues(tour);
-            });
     }
 
     public void addTour(ActionEvent actionEvent) {
