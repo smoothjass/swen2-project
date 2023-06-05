@@ -3,6 +3,7 @@ package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.LogViewModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,34 +54,43 @@ public class LogViewController implements Initializable {
     }
 
     public void loadLogs(Integer tour_id){
-        logs.getItems().clear();
+        Platform.runLater(
+            () -> {
+                logs.getItems().clear();
 
-        List<Log> logsList = logViewModel.getLogs(tour_id);
+                List<Log> logsList = logViewModel.getLogs(tour_id);
 
-        //sort logs by id
-        logsList.sort(Comparator.comparingInt(o -> o.log_id));
+                //sort logs by id
+                logsList.sort(Comparator.comparingInt(o -> o.log_id));
 
-        logsList.forEach(log -> {
-            logs.getItems().add(String.valueOf(log.log_id) +
-                    ": " +
-                    log.comment);
-            logMap.put(log.getLog_id(), log);
-        });
+                logsList.forEach(log -> {
+                    logs.getItems().add(String.valueOf(log.log_id) +
+                            ": " +
+                            log.comment);
+                    logMap.put(log.getLog_id(), log);
+                });
+            });
     }
 
     public void clearLogs(){
-        logs.getItems().clear();
-        logMap.clear();
+        Platform.runLater(
+            () -> {
+                logs.getItems().clear();
+                logMap.clear();
+            });
     }
 
     public void clearForm(){
-        comment.clear();
-        difficulty.getSelectionModel().clearSelection();
-        rating.getSelectionModel().clearSelection();
-        days.clear();
-        hours.clear();
-        minutes.clear();
-        timestamp.setText("");
+        Platform.runLater(
+            () -> {
+                comment.clear();
+                difficulty.getSelectionModel().clearSelection();
+                rating.getSelectionModel().clearSelection();
+                days.clear();
+                hours.clear();
+                minutes.clear();
+                timestamp.setText("");
+            });
     }
 
     private void updateImage(Image image) {

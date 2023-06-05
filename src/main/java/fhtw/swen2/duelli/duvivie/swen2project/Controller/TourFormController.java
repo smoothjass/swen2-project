@@ -4,6 +4,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourFormModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -106,16 +107,17 @@ public class TourFormController implements Initializable {
     }
 
     private void autoFillTourData(Tour tour) {
-        tourFormModel.getDistance().setValue(String.valueOf(tour.distance));
-        tourFormModel.getName().setValue(tour.name);
-        tourFormModel.getTo().setValue(tour.to);
-        tourFormModel.getFrom().setValue(tour.from);
-        tourFormModel.getDescription().setValue(tour.description);
-        // TODO
-        //  set transport type, idk how.
-        // tourFormModel.getTransportType().setValue(String.valueOf(tour.transportType.getType()));
-        tourFormModel.getDuration().setValue(String.valueOf(tour.duration));
-        tourFormModel.calculateValues(tour);
+        Platform.runLater(
+            () -> {
+                tourFormModel.getDistance().setValue(String.valueOf(tour.distance));
+                tourFormModel.getName().setValue(tour.name);
+                tourFormModel.getTo().setValue(tour.to);
+                tourFormModel.getFrom().setValue(tour.from);
+                tourFormModel.getDescription().setValue(tour.description);
+                tourFormModel.getTransportType().setValue(tour.transportType.getType());
+                tourFormModel.getDuration().setValue(String.valueOf(tour.duration));
+                tourFormModel.calculateValues(tour);
+            });
     }
 
     public void addTour(ActionEvent actionEvent) {
