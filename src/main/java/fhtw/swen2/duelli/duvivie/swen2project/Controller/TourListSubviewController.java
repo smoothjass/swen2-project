@@ -74,11 +74,11 @@ public class TourListSubviewController implements Initializable {
 
     private void updateList(Tour newTour) {
         Platform.runLater(
-                () -> {
-                    tours.getItems().add(String.valueOf(newTour.getTour_id()) +
-                            ": " +
-                            newTour.getName());
-                });
+            () -> {
+                tours.getItems().add(String.valueOf(newTour.getTour_id()) +
+                        ": " +
+                        newTour.getName());
+            });
         tourMap.put(newTour.getTour_id(), newTour);
     }
 
@@ -117,9 +117,8 @@ public class TourListSubviewController implements Initializable {
     }
 
     public void importData(ActionEvent actionEvent) {
-        // TODO
-        // reload
         this.tourListSubviewModel.importTourData();
+        reloadList();
     }
 
     public void exportData(ActionEvent actionEvent) {
