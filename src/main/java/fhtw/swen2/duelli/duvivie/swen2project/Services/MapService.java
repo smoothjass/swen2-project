@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -23,7 +25,9 @@ import java.util.concurrent.ExecutionException;
 public class MapService {
     private String URL;
     private static final String key = "9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK";
-
+            // back up key "0fpJuKUjoz6RWEX8UipQQuOLFJgEG8ep";
+            // old key "9fgvtkSKGNbYZZEQpGdNlPENFlQWhvEK";
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
     public Object[] getRoute(String from, String to, String transportType) throws IOException, URISyntaxException, InterruptedException, ExecutionException{
         // replace white spaces
         from = from.replaceAll("\\s", "");
@@ -47,8 +51,13 @@ public class MapService {
         }
         System.out.println("Fact received :" + yieldDirections.get().getRoute());
 
-        if (Objects.equals(yieldDirections.get().getRoute().toString(), "{\"routeError\":{\"errorCode\":2,\"message\":\"\"}}")) {
-            // error while retrieving directions
+        if(yieldDirections.get().getRoute() != null) {
+            if (Objects.equals(yieldDirections.get().getRoute().toString(), "{\"routeError\":{\"errorCode\":2,\"message\":\"\"}}")) {
+                // error while retrieving directions
+                return null;
+            }
+        }
+        else {
             return null;
         }
 
@@ -97,6 +106,9 @@ public class MapService {
             try {
                 return ImageIO.read(stringHttpResponse.body());
             } catch (IOException e) {
+                System.out.println("An error occurred while requesting an image");
+                System.out.println(e.getMessage());
+                logger.error("An error occurred while requesting an image" + e.getMessage());
                 e.printStackTrace();
             }
             return null;
@@ -110,6 +122,9 @@ public class MapService {
             try {
                 return parseDirectionsResponse(stringHttpResponse.body());
             } catch (JsonProcessingException e) {
+                System.out.println("An error occurred while requesting a rout");
+                System.out.println(e.getMessage());
+                logger.error("An error occurred while requesting a route" + e.getMessage());
                 e.printStackTrace();
             }
             return null;

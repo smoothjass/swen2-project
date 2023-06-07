@@ -3,6 +3,8 @@ package fhtw.swen2.duelli.duvivie.swen2project.Services;
 import com.itextpdf.io.image.ImageDataFactory;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import jakarta.persistence.Index;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +29,7 @@ public class PicturesService {
     private int imageWidth = 600;
     private int imageHeight = 500;
     private String tourImagesPath = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/tourImages/";
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
     public void deleteAssociatedImages(Tour associatedTour){
         // delete the folder tourImagesPath+associatedTour.getId()
@@ -50,6 +53,9 @@ public class PicturesService {
         try {
             ImageIO.write(image, "png", outputfile);
         } catch (IOException e) {
+            System.out.println("An error occurred while writing an image to the disk");
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while writing an image to the disk" + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -87,6 +93,9 @@ public class PicturesService {
         try {
             bufferedImage = ImageIO.read(file);
         } catch (IOException e) {
+            System.out.println("An error occurred while reading an image from the disk");
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while reading an image from the disk" + e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -134,6 +143,9 @@ public class PicturesService {
                     bufferedImage = scale(bufferedImage, imageWidth, imageHeight);
 
                 } catch (IOException e) {
+                    System.out.println("An error occurred while reading an image from the disk");
+                    System.out.println(e.getMessage());
+                    logger.error("An error occurred while reading an image from the disk" + e.getMessage());
                     throw new RuntimeException(e);
                 }
                 images.add(convertToFxImage(bufferedImage));

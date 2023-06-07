@@ -45,9 +45,6 @@ public class TourFormController implements Initializable {
     }
 
     public void saveNewTourData(ActionEvent actionEvent) {
-        // TODO input validation
-        // display error, if applicable
-
         // TODO display spinner
 
         Map<Tour, Image> tour = new HashMap<>();
