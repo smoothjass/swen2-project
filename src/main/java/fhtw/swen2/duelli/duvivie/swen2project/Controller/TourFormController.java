@@ -49,9 +49,6 @@ public class TourFormController implements Initializable {
     }
 
     public void saveNewTourData(ActionEvent actionEvent) {
-        // TODO input validation
-        // display error, if applicable
-        
         loadingSpinnerService.showSpinnerWindow();
         Map<Tour, Image> tour = new HashMap<>();
         // currentlySelected tour == null >> create new tour, otherwise update

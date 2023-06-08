@@ -1,6 +1,8 @@
 package fhtw.swen2.duelli.duvivie.swen2project;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Controller.ControllerFactory;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
@@ -9,6 +11,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+
     @Override
     public void start(Stage stage) throws IOException {
         ControllerFactory factory = new ControllerFactory();
@@ -32,6 +36,7 @@ public class Application extends javafx.application.Application {
                                 return factory.create(controller);
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                logger.error("An error occurred while creating Controllers" + e.getMessage());
                             }
                             return null;
                         });

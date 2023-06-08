@@ -9,6 +9,8 @@ import com.itextpdf.layout.properties.UnitValue;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import com.itextpdf.layout.Document;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
+import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import javafx.stage.FileChooser;
 
 import java.awt.image.BufferedImage;
@@ -24,6 +26,7 @@ import static com.itextpdf.layout.properties.AreaBreakType.NEXT_PAGE;
 public class ReportService {
 
     public ReportService() {}
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
     public void createSingleReport(Tour tour, List<Log> logs) throws IOException {
         String fileName = tour.getName() + "-Report.pdf";
@@ -61,6 +64,9 @@ public class ReportService {
             MapService mapService = new MapService();
             array = mapService.getRoute(tour.from, tour.to, tour.transportType.getType());
         } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+            System.out.println("An error occurred while getting the route from " + tour.from + " to " + tour.to);
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while getting the route from " + tour.from + " to " + tour.to + " " + e.getMessage());
             throw new RuntimeException(e);
         }
         com.itextpdf.layout.element.Image pdfImage = new com.itextpdf.layout.element.Image(ImageDataFactory.create((BufferedImage) array[2], null));

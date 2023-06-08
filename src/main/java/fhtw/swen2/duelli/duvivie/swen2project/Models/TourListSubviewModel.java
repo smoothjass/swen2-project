@@ -55,6 +55,9 @@ public class TourListSubviewModel {
         try {
             data = TXTService.importData();
         } catch (IOException e) {
+            System.out.println("An error occurred while importing data");
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while importing data" + e.getMessage());
             throw new RuntimeException(e);
         }
 

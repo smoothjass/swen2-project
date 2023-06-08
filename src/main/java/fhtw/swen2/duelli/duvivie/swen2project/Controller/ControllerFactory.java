@@ -34,7 +34,7 @@ public class ControllerFactory {
         this.tourListSubviewModel = new TourListSubviewModel();
         this.logViewModel = new LogViewModel();
         this.pictureGalleryModel = new PictureGalleryModel();
-        logViewController = new LogViewController(this.logViewModel);
+        logViewController = new LogViewController(this.logViewModel, publisher);
         tourFormController = new TourFormController(this.tourFormModel, publisher);
         tourListSubviewController = new TourListSubviewController(this.tourListSubviewModel, publisher);
         pictureGalleryController = new PictureGalleryController(this.pictureGalleryModel);

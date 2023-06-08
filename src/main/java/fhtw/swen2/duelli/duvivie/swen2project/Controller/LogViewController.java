@@ -11,14 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.util.StringConverter;
-import javafx.util.converter.LocalTimeStringConverter;
-import lombok.Setter;
 
 import java.net.URL;
-import java.time.LocalTime;
-import java.time.format.FormatStyle;
 import java.util.*;
+import java.util.concurrent.SubmissionPublisher;
 
 public class LogViewController implements Initializable {
     public ImageView imageView;
@@ -37,6 +33,7 @@ public class LogViewController implements Initializable {
     public TextField minutes;
 
     public Label timestamp;
+    private SubmissionPublisher<Map<Tour, Image>> publisher;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,8 +46,9 @@ public class LogViewController implements Initializable {
         this.timestamp.textProperty().bindBidirectional(logViewModel.getTimestamp());
     }
 
-    public LogViewController(LogViewModel logViewModel) {
+    public LogViewController(LogViewModel logViewModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.logViewModel = logViewModel;
+        this.publisher = publisher;
     }
 
     public void loadLogs(Integer tour_id){
@@ -128,6 +126,7 @@ public class LogViewController implements Initializable {
                 loadLogs(tour.getTour_id());
             }
         }
+        publisher.submit(currentlySelected);
     }
 
     @FXML public void handleMouseClick(MouseEvent mouseEvent) {

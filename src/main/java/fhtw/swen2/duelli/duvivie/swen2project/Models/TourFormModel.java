@@ -54,7 +54,7 @@ public class TourFormModel {
             try {
                 array = mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
                 if (array == null) {
-                    alert("Error", "Cannot calculate this route", "Please review your input");
+                    alert("Error", "Cannot calculate this route", "Please review your input or try again later");
                     return null;
                 }
                 logger.debug("Successfully got the route from " + from.getValue() + " to " + to.getValue());
@@ -131,6 +131,9 @@ public class TourFormModel {
         try {
             array = mapService.getRoute(tour.from, tour.to, tour.transportType.getType());
         } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+            System.out.println("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue());
+            System.out.println(e.getMessage());
+            logger.error("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue() + " " + e.getMessage());
             throw new RuntimeException(e);
         }
         return convertToFxImage((BufferedImage) array[2]);
@@ -169,7 +172,7 @@ public class TourFormModel {
                 try {
                     array = mapService.getRoute(this.getFrom().getValue(), this.getTo().getValue(), this.getTransportType().getValue());
                     if (array == null) {
-                        alert("Error", "Cannot calculate this route", "Please review your input");
+                        alert("Error", "Cannot calculate this route", "Please review your input or try again later");
                         return null;
                     }
                     // update bound values and tour values
@@ -189,6 +192,9 @@ public class TourFormModel {
                     tourImageMap.put(updatedTour, image);
                     return tourImageMap;
                 } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
+                    System.out.println("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue());
+                    System.out.println(e.getMessage());
+                    logger.error("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue() + " " + e.getMessage());
                     throw new RuntimeException(e);
                 }
             }
@@ -218,10 +224,13 @@ public class TourFormModel {
             logger.error("An error occurred while fetching the logs from the database:" + e.getMessage());
         }
         Float avgDifficulty = 0.0F;
+        Float avgRating = 0.0F;
         for (Log log : list) {
             avgDifficulty = avgDifficulty + log.getDifficulty();
+            avgRating = avgRating + log.getRating();
         }
         avgDifficulty = avgDifficulty / list.size();
+        avgRating = avgRating / list.size();
         if (avgDifficulty > 0 && avgDifficulty <= 1) {
             this.getChildFriendliness().setValue("very good");
         }
@@ -237,8 +246,7 @@ public class TourFormModel {
         else {
             this.getChildFriendliness().setValue("cannot calculate at the moment");
         }
-        this.getPopularity().setValue(String.valueOf(list.size())); // number of logs = popularity
-        // TODO calculate more elaborate popularity value if there is some time
+        this.getPopularity().setValue(String.valueOf(avgRating)); // average rating = popularity
     }
 
     private Boolean validateInput() {
@@ -295,7 +303,7 @@ public class TourFormModel {
             });
     }
 
-    private void calculateDuration(Tour tour) {
+    public void calculateDuration(Tour tour) {
         if (tour.getDuration() != null){
             int days = tour.getDuration()/ 86400;
             int hours = (tour.getDuration() % 86400 ) / 3600 ;
