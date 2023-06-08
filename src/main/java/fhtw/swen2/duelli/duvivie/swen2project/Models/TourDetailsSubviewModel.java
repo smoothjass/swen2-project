@@ -5,10 +5,6 @@ import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.ReportService;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-
-import java.io.IOException;
 
 public class TourDetailsSubviewModel {
 
@@ -16,8 +12,8 @@ public class TourDetailsSubviewModel {
     private ReportService reportService;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
-    public TourDetailsSubviewModel() {
-        this.databaseService = new DatabaseService();
+    public TourDetailsSubviewModel(DatabaseService databaseService) {
+        this.databaseService = databaseService;
         this.reportService = new ReportService();
     }
 

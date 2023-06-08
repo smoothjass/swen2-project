@@ -43,9 +43,13 @@ public class TourFormModel {
     public StringProperty popularity = new SimpleStringProperty();
     public ObjectProperty<Image> imageView = new SimpleObjectProperty<>();
 
-    private DatabaseService databaseService = new DatabaseService();
+    private DatabaseService databaseService;
     private MapService mapService = new MapService();
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+
+    public TourFormModel(DatabaseService databaseService) {
+        this.databaseService = databaseService;
+    }
 
     public Map<Tour, Image> saveTour() {
         if (validateInput()) {
@@ -111,7 +115,7 @@ public class TourFormModel {
         return null;
     }
 
-    private static Image convertToFxImage(BufferedImage image) {
+    public static Image convertToFxImage(BufferedImage image) {
         // https://stackoverflow.com/questions/30970005/bufferedimage-to-javafx-image
         WritableImage wr = null;
         if (image != null) {
@@ -230,7 +234,12 @@ public class TourFormModel {
             avgRating = avgRating + log.getRating();
         }
         avgDifficulty = avgDifficulty / list.size();
-        avgRating = avgRating / list.size();
+        if (list.size() != 0){
+            avgRating = avgRating / list.size();
+        }
+        else { // no logs
+            getPopularity().setValue("cannot calculate at the moment");
+        }
         if (avgDifficulty > 0 && avgDifficulty <= 1) {
             this.getChildFriendliness().setValue("very good");
         }
@@ -246,7 +255,9 @@ public class TourFormModel {
         else {
             this.getChildFriendliness().setValue("cannot calculate at the moment");
         }
-        this.getPopularity().setValue(String.valueOf(avgRating)); // average rating = popularity
+        if (avgRating != 0.0) {
+            this.getPopularity().setValue(String.valueOf(avgRating)); // average rating = popularity
+        }
     }
 
     private Boolean validateInput() {

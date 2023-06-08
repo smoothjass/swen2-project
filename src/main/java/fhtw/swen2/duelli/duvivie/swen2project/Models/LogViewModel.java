@@ -1,11 +1,9 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Models;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
-import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
@@ -13,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.ArrayDeque;
 import java.util.List;
 
 @Getter
@@ -30,8 +27,8 @@ public class LogViewModel {
     private DatabaseService databaseService;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
-    public LogViewModel() {
-        this.databaseService = new DatabaseService();
+    public LogViewModel(DatabaseService databaseService) {
+        this.databaseService = databaseService;
     }
     public List<Log> getLogs(Integer tour_id) {
         try {
