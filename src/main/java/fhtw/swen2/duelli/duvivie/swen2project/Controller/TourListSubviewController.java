@@ -1,4 +1,5 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
+import com.itextpdf.layout.element.ListItem;
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
@@ -6,11 +7,16 @@ import fhtw.swen2.duelli.duvivie.swen2project.Models.TourListSubviewModel;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -25,38 +31,37 @@ public class TourListSubviewController implements Initializable {
     public VBox tourListButtons;
 
     @FXML
+    TextField searchBox;
+
+    @FXML
     public ListView<String> tours;
     private Map<Integer, Tour> tourMap = new HashMap<>();
     private TourListSubviewModel tourListSubviewModel;
     private SubmissionPublisher<Map<Tour, Image>> publisher;
     private Map<Tour, Image> currentlySelected = new HashMap<>();
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private List<String> tourNames = new ArrayList<>();
     public TourListSubviewController(TourListSubviewModel tourListSubviewModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourListSubviewModel = tourListSubviewModel;
         this.publisher = publisher;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        makeFieldSearchable();
        // reloadList();
         //load all tours and create a TourListItemModel for each tour
         tourListSubviewModel.getTours().forEach(tour -> {
-            /*
-            TourListItemModel tourListItemModel = new TourListItemModel();
-            tourListItemModel.name.setValue(tour.getName());
-            tourListItemModel.id.setValue(tour.getTour_id());
-            tours.getItems().add(String.valueOf(tourListItemModel.getId().getValue()) +
-                    ": " +
-                    String.valueOf(tourListItemModel.getName().getValue()));
-            tourMap.put(tourListItemModel.getId().getValue(), tour);
-             */
             tours.getItems().add(String.valueOf(tour.getTour_id()) +
                     ": " +
                     tour.getName());
             tourMap.put(tour.getTour_id(), tour);
+            tourNames.add(tour.getName());
         });
     }
 
     private void reloadList() {
+        tourNames.clear();
+
         // https://stackoverflow.com/questions/17850191/why-am-i-getting-java-lang-illegalstateexception-not-on-fx-application-thread
         // runLater to prevent illegal state exception
         Platform.runLater(
@@ -70,12 +75,14 @@ public class TourListSubviewController implements Initializable {
                         ": " +
                         tour.getName());
                     tourMap.put(tour.getTour_id(), tour);
+                    tourNames.add(tour.getName());
                 }
             }
         );
     }
 
     private void updateList(Tour newTour) {
+        tourNames.add(newTour.getName());
         Platform.runLater(
             () -> {
                 tours.getItems().add(String.valueOf(newTour.getTour_id()) +
@@ -130,6 +137,28 @@ public class TourListSubviewController implements Initializable {
         if(tour != null){
             this.tourListSubviewModel.exportTourData(tour);
         }
+    }
+
+    private void makeFieldSearchable(){
+        searchBox.setOnKeyReleased(event -> {
+                String search = searchBox.getText();
+
+                tours.getItems().clear();
+                List<Tour> list = tourListSubviewModel.getTours();
+                for (Tour tour : list) {
+
+                    String currentNameAndId = String.valueOf(tour.getTour_id()) +
+                            ": " +
+                            tour.getName();
+
+                    if(currentNameAndId.toLowerCase().contains(search.toLowerCase())){
+                        tours.getItems().add(String.valueOf(tour.getTour_id()) +
+                                ": " +
+                                tour.getName());
+                        tourMap.put(tour.getTour_id(), tour);
+                    }
+                }
+        });
     }
 }
 

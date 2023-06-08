@@ -27,7 +27,7 @@
                 </ImageView>
             </graphic>
         </Label>
-        <TextField styleClass="search-field" promptText="Search..." />
+        <TextField fx:id="searchBox" styleClass="search-field" promptText="Search..." />
         </HBox>
     </HBox>
 
