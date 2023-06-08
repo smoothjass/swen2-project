@@ -162,6 +162,7 @@ public class PictureGalleryController implements Initializable {
                     images.remove(currentIndex);
                     fileNames.remove(currentIndex);
                     imageView.setImage(images.get(0));
+                    currentIndex = 0;
                 }
                 else {
                     imageView.setImage(null);
