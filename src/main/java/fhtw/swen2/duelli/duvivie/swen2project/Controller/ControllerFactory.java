@@ -5,6 +5,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.*;
 
+import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
 import javafx.scene.image.Image;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +27,14 @@ public class ControllerFactory {
     private TourDetailsSubviewController tourDetailsSubviewController;
     public SubmissionPublisher<Map<Tour, Image>> publisher = new SubmissionPublisher<>();
     private MainViewController mainViewController;
+    private DatabaseService databaseService = new DatabaseService();
 
     public ControllerFactory() {
         this.mainViewModel = new MainViewModel();
-        this.tourDetailsSubviewModel = new TourDetailsSubviewModel();
-        this.tourFormModel = new TourFormModel();
-        this.tourListSubviewModel = new TourListSubviewModel();
-        this.logViewModel = new LogViewModel();
+        this.tourDetailsSubviewModel = new TourDetailsSubviewModel(databaseService);
+        this.tourFormModel = new TourFormModel(databaseService);
+        this.tourListSubviewModel = new TourListSubviewModel(databaseService);
+        this.logViewModel = new LogViewModel(databaseService);
         this.pictureGalleryModel = new PictureGalleryModel();
         logViewController = new LogViewController(this.logViewModel, publisher);
         tourFormController = new TourFormController(this.tourFormModel, publisher);

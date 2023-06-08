@@ -22,8 +22,8 @@ public class TourListSubviewModel {
     private TXTService TXTService;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
-    public TourListSubviewModel() {
-        this.databaseService = new DatabaseService();
+    public TourListSubviewModel(DatabaseService databaseService) {
+        this.databaseService = databaseService;
         this.reportService = new ReportService();
         this.TXTService = new TXTService();
     }
