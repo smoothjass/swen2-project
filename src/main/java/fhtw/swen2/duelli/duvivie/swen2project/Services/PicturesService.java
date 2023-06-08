@@ -1,9 +1,6 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Services;
 
-import com.itextpdf.io.image.ImageDataFactory;
-
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
-import jakarta.persistence.Index;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -11,17 +8,10 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.itextpdf.kernel.xmp.PdfConst.Thumbnails;
 
 public class PicturesService {
     private int imageWidth = 600;
@@ -69,7 +59,7 @@ public class PicturesService {
         return new ImageView(wr).getImage();
     }
 
-    public Image getNewPicture(Tour associatedTour) {
+    public Image selectNewPicture(Tour associatedTour) {
 
         // Open the save dialog window
         FileChooser fileChooser = new FileChooser();
@@ -83,7 +73,7 @@ public class PicturesService {
         }
 
         // convert the file to a buffered image
-        BufferedImage bufferedImage = null;
+        BufferedImage bufferedImage;
         try {
             bufferedImage = ImageIO.read(file);
         } catch (IOException e) {
@@ -98,6 +88,10 @@ public class PicturesService {
     public static BufferedImage scale(BufferedImage src, int w, int h)
     //https://stackoverflow.com/questions/9417356/bufferedimage-resize
     {
+        if(src == null || w <= 0 || h <= 0) {
+            return null;
+        }
+
         BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         int x, y;
         int ww = src.getWidth();
@@ -119,7 +113,7 @@ public class PicturesService {
         File folder = new File(tourImagesPath+associatedTour.getTour_id());
         File[] listOfFiles = null;
         if (folder.exists()) {
-            //get all the files in the folder in a descending order
+            //get all the files in the folder in descending order
             listOfFiles = folder.listFiles();
             java.util.Arrays.sort(listOfFiles, java.util.Comparator.comparingLong(File::lastModified).reversed());
         }

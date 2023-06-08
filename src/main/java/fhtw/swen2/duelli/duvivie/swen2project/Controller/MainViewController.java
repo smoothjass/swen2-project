@@ -4,6 +4,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.MainViewModel;
+import fhtw.swen2.duelli.duvivie.swen2project.Services.LoadingSpinnerService;
 import javafx.fxml.Initializable;
 
 import javafx.scene.image.Image;
@@ -25,6 +26,7 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     private PictureGalleryController pictureGalleryController;
     private TourDetailsSubviewController tourDetailsSubviewController;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final LoadingSpinnerService loadingSpinnerService = new LoadingSpinnerService();
 
     public MainViewController(MainViewModel mainViewModel, LogViewController logViewController, TourListSubviewController tourListSubviewController, TourFormController tourFormController, PictureGalleryController pictureGalleryController, TourDetailsSubviewController tourDetailsSubviewController){
         this.mainViewModel = mainViewModel;
@@ -36,9 +38,7 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
@@ -53,6 +53,8 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
 
     @Override
     public void onNext(Map<Tour, Image> item) {
+        logger.debug("Received Tour: " + item);
+        this.loadingSpinnerService.showSpinnerWindow();
         System.out.println("Received Tour: " + item);
         // TODO check if tour/image are null and invoke respectively
         Tour tour = item.entrySet().iterator().next().getKey();
@@ -70,6 +72,7 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
         pictureGalleryController.setCurrentlySelected(currentlySelected);
         tourDetailsSubviewController.setCurrentlySelected(currentlySelected);
         subscription.request(1);
+        this.loadingSpinnerService.hideSpinnerWindow();
     }
 
     @Override

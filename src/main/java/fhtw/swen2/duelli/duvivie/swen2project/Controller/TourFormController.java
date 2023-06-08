@@ -4,6 +4,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.TourFormModel;
+import fhtw.swen2.duelli.duvivie.swen2project.Services.LoadingSpinnerService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -13,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +41,7 @@ public class TourFormController implements Initializable {
     public TextArea description;
     public ChoiceBox<String> transportType;
     private Map<Tour, Image> currentlySelected = new HashMap<>();
+    private LoadingSpinnerService loadingSpinnerService = new LoadingSpinnerService();
 
     public TourFormController(TourFormModel tourFormModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourFormModel = tourFormModel;
@@ -47,9 +51,8 @@ public class TourFormController implements Initializable {
     public void saveNewTourData(ActionEvent actionEvent) {
         // TODO input validation
         // display error, if applicable
-
-        // TODO display spinner
-
+        
+        loadingSpinnerService.showSpinnerWindow();
         Map<Tour, Image> tour = new HashMap<>();
         // currentlySelected tour == null >> create new tour, otherwise update
         // error when creating first tour
@@ -74,7 +77,7 @@ public class TourFormController implements Initializable {
         if (tour != null){ // tour == null >> invalid input
             publisher.submit(tour);
         }
-        // TODO remove spinner
+        loadingSpinnerService.hideSpinnerWindow();
     }
 
     @Override
