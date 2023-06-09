@@ -10,13 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TXTServiceTest {
 
@@ -43,9 +39,7 @@ class TXTServiceTest {
         Mockito.doReturn(file).when(txtService).getFile();
 
         // Verify that the txtService throws an exception
-        Assertions.assertThrows(IOException.class, () -> {
-            txtService.importData();
-        });
+        Assertions.assertThrows(IOException.class, () -> txtService.importData());
     }
 
     @Test
@@ -58,9 +52,7 @@ class TXTServiceTest {
         Mockito.doReturn(file).when(txtService).getFile();
 
         // Verify that the txtService throws an exception
-        Assertions.assertThrows(IOException.class, () -> {
-            txtService.importData();
-        });
+        Assertions.assertThrows(IOException.class, () -> txtService.importData());
 
         //delete the dummy file
         file.delete();
@@ -74,9 +66,7 @@ class TXTServiceTest {
         // Create a null log list
         List<Log> logList = null;
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            txtService.export(tour, logList);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> txtService.export(tour, logList));
     }
 
     @Test
@@ -88,8 +78,6 @@ class TXTServiceTest {
         // Create a dummy log list
         List<Log> logList = new ArrayList<>();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            txtService.export(tour, logList);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> txtService.export(tour, logList));
     }
 }

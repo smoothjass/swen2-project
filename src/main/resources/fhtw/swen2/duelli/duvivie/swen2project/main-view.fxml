@@ -17,14 +17,12 @@
     </stylesheets>
 
     <ScrollPane fitToHeight="true" fitToWidth="true">
-    <SplitPane orientation="HORIZONTAL" VBox.vgrow="ALWAYS">
-        <items>
-            <fx:include minWidth="200" maxWidth="500" source="tour-list-subview.fxml"> </fx:include>
+        <SplitPane VBox.vgrow="ALWAYS">
+            <fx:include minWidth="200" maxWidth="500" source="tour-list-subview.fxml"></fx:include>
             <SplitPane orientation="VERTICAL">
                 <fx:include source="tour-details-subview.fxml"></fx:include>
             </SplitPane>
-        </items>
-    </SplitPane>
+        </SplitPane>
     </ScrollPane>
 
 </VBox>

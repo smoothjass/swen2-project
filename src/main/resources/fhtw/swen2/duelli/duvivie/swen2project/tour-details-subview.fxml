@@ -12,9 +12,9 @@
     </HBox>
 
     <VBox fx:id="detailsContentArea" VBox.vgrow="ALWAYS">
-        <fx:include visible="true" managed="true" source="tour-form.fxml"></fx:include>
-        <fx:include visible="false" managed="false" source="log-view.fxml"></fx:include>
-        <fx:include visible="false" managed="false" source="picture-gallery.fxml"></fx:include>
+        <fx:include visible="true" managed="true" source="tour-form.fxml"/>
+        <fx:include visible="false" managed="false" source="log-view.fxml"/>
+        <fx:include visible="false" managed="false" source="picture-gallery.fxml"/>
     </VBox>
 
     <HBox>
