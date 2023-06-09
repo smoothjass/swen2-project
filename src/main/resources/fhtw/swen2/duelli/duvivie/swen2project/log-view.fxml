@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.SpinnerValueFactory.LocalTimeSpinnerValueFactory?>
 <?import javafx.geometry.Insets?>
-<?import java.net.URL?>
 <?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -82,13 +76,13 @@
         <ImageView fx:id="imageView" fitHeight="300">
         </ImageView>
     </HBox>
-    <Region minHeight="10"></Region>
+    <Region minHeight="15"></Region>
     <VBox>
         <HBox spacing="10">
             <ListView  VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" fx:id="logs" onMouseClicked="#handleMouseClick"/>
 
         <!-- a form to add and edit a log entry-->
-           <VBox maxWidth="400" VBox.vgrow="ALWAYS" spacing="6">
+           <VBox maxWidth="400" VBox.vgrow="ALWAYS" spacing="14">
                <Label style="-fx-font-weight: bold" text="Timestamp:"/>
                <Label  fx:id="timestamp"/>
                <!--an input field for a difficulty -->

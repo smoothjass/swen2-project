@@ -1,15 +1,11 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Controller;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
-import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
-import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Models.*;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
 import javafx.scene.image.Image;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
 public class ControllerFactory {

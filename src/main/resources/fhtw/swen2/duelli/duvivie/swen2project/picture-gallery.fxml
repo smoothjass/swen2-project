@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
@@ -23,7 +17,7 @@
     <HBox spacing="10" alignment="BASELINE_RIGHT">
         <Label style="-fx-font-size: 18; -fx-padding: 0 0 10 0;" text="Tour Images"/>
         <Region HBox.hgrow="ALWAYS" />
-        <Button fx:id="previous" minWidth="70" onAction="#goToPreviousImage" prefHeight="${previous.parent.height}">
+        <Button fx:id="previous" minWidth="70" disable="true" onAction="#goToPreviousImage" prefHeight="${previous.parent.height}">
             <graphic>
                 <ImageView>
                     <Image url="@icons/back.png" />
@@ -41,7 +35,7 @@
                 </Tooltip>
             </tooltip>
         </Button>
-        <Button fx:id="next" minWidth="70" onAction="#goToNextImage" prefHeight="${next.parent.height}">
+        <Button fx:id="next" minWidth="70" disable="true" onAction="#goToNextImage" prefHeight="${next.parent.height}">
             <graphic>
                 <ImageView>
                     <Image url="@icons/next.png" />
@@ -65,6 +59,17 @@
                         <Image url="@icons/add-image.png" />
                     </ImageView>
                 </graphic>
+                 <tooltip>
+                <Tooltip>
+                    <graphic>
+                        <Label text="add a new image">
+                            <font>
+                                <Font name="Arial" size="15" />
+                            </font>
+                        </Label>
+                    </graphic>
+                </Tooltip>
+            </tooltip>
             </Button>
          <Button fx:id="deleteLogButton" minWidth="70" onAction="#deleteCurrentImage" prefHeight="${deleteLogButton.parent.height}">
             <graphic>
@@ -75,7 +80,7 @@
             <tooltip>
                 <Tooltip>
                     <graphic>
-                        <Label text="Delete this log entry">
+                        <Label text="Delete this image">
                             <font>
                                 <Font name="Arial" size="15" />
                             </font>

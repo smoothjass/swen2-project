@@ -105,7 +105,7 @@ public class TourListSubviewModel {
         }
         try {
             TXTService.export(tour, logs);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("An error occurred while exporting the tour with id " + tour.getTour_id());
             System.out.println(e.getMessage());
             logger.error("An error occurred while exporting the tour with id " + tour.getTour_id() + " " + e.getMessage());

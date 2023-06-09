@@ -1,12 +1,10 @@
 package fhtw.swen2.duelli.duvivie.swen2project.Daos;
 
 import fhtw.swen2.duelli.duvivie.swen2project.Entities.Log;
-import fhtw.swen2.duelli.duvivie.swen2project.Entities.Tour;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.RollbackException;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 
@@ -188,6 +186,40 @@ public class LogDao {
                     log.setRating(newLogWithSameId.getRating());
                 // Save the changes
                 manager.persist(log);
+            }
+            // Commit the transaction
+            transaction.commit();
+        } catch (RollbackException ex) {
+            // Commit failed. Rollback the transaction
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(ex);
+        } finally {
+            // Close the EntityManager
+            manager.close();
+        }
+    }
+
+    public void deleteAllLogsByTourId(int tourId) {
+        // Create a new EntityManager
+        EntityManager manager = this.entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            // Get a transaction
+            transaction = manager.getTransaction();
+            // Begin the transaction
+            transaction.begin();
+            // First find the student
+            List<Log> logs = manager.createQuery("SELECT log FROM Log log WHERE log.tour_id = :tourId", Log.class)
+                    .setParameter("tourId", tourId)
+                    .getResultList();
+            if (logs != null) {
+                // Remove the student
+                for (Log log : logs) {
+                    manager.remove(log);
+                }
             }
             // Commit the transaction
             transaction.commit();

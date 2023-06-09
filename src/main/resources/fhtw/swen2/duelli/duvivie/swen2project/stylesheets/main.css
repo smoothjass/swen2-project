@@ -1,0 +1,11 @@
+.root {
+    /* the minimum font-size should be 10 */
+    -fx-font-size: 11pt;
+    /* the default font should be sans-serif */
+    -fx-font-family: sans-serif;
+}
+
+
+.button {
+    -fx-background-radius: 0;
+}

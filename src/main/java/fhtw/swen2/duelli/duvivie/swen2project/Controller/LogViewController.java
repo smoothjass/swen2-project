@@ -100,6 +100,7 @@ public class LogViewController implements Initializable {
     }
 
     public void setCurrentlySelected(Map<Tour, Image> item) {
+        clearForm();
         currentlySelected = item;
         Image image = currentlySelected.entrySet().iterator().next().getValue();
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
@@ -126,7 +127,6 @@ public class LogViewController implements Initializable {
                 loadLogs(tour.getTour_id());
             }
         }
-        publisher.submit(currentlySelected);
     }
 
     @FXML public void handleMouseClick(MouseEvent mouseEvent) {

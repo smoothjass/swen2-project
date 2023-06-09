@@ -213,10 +213,10 @@ public class TourDao {
             transaction = manager.getTransaction();
             // Begin the transaction
             transaction.begin();
-            // First find the student
+            // First find the tour
             Tour tour = manager.find(Tour.class, tourId);
             if (tour != null) {
-                // Remove the student
+                // Remove the tour
                 manager.remove(tour);
             }
             // Commit the transaction

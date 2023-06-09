@@ -2,13 +2,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.text.Font?>
-
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.TourFormController">
@@ -24,6 +22,17 @@
                         <Image url="@icons/save.png" />
                     </ImageView>
                 </graphic>
+                 <tooltip>
+                    <Tooltip>
+                        <graphic>
+                            <Label text="save the current tour">
+                                <font>
+                                    <Font name="Arial" size="15" />
+                                </font>
+                            </Label>
+                        </graphic>
+                    </Tooltip>
+                </tooltip>
             </Button>
             <Button fx:id="addNewTourButton" minWidth="70"  prefHeight="${addNewTourButton.parent.height}" onAction="#addTour">
                 <graphic>
@@ -50,9 +59,9 @@
             <ImageView fx:id="imageView" fitHeight="300">
             </ImageView>
         </HBox>
-        <Region minHeight="10"></Region>
+        <Region minHeight="15"></Region>
 
-        <GridPane hgap="10" vgap="10" maxHeight="Infinity" maxWidth="Infinity">
+        <GridPane hgap="15" vgap="15" maxHeight="Infinity" maxWidth="Infinity">
 
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label style="-fx-font-weight: bold" text="Tour name:"/>
@@ -69,11 +78,11 @@
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label style="-fx-font-weight: bold" text="Tour Distance:"/>
-                <TextField disable="true" fx:id="distance"/>
+                <Label fx:id="distance"/>
             </VBox>
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
                 <Label style="-fx-font-weight: bold" text="Estimated time:"/>
-                <TextField disable="true" fx:id="duration"/>
+                <Label fx:id="duration"/>
             </VBox>
 
             <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
@@ -91,11 +100,11 @@
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">
                 <Label style="-fx-font-weight: bold" text="Popularity:"/>
-                <TextField disable="true" fx:id="popularity"/>
+                <Label fx:id="popularity"/>
             </VBox>
             <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15;">
                 <Label style="-fx-font-weight: bold" text="Child-friendliness:"/>
-                <TextField disable="true" fx:id="childFriendliness"/>
+                <Label fx:id="childFriendliness"/>
             </VBox>
 
             <VBox GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.hgrow="always" GridPane.vgrow="always" style="-fx-spacing: 15">

@@ -8,7 +8,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.RollbackException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseService {
@@ -44,6 +43,7 @@ public class DatabaseService {
     }
 
     public void deleteTour(Tour currentlySelectedTour) throws RollbackException {
+        logDao.deleteAllLogsByTourId(currentlySelectedTour.tour_id);
         tourDao.deleteTourById(currentlySelectedTour.tour_id);
     }
 

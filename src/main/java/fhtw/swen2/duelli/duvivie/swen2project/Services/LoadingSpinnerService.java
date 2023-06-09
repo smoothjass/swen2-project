@@ -2,7 +2,6 @@ package fhtw.swen2.duelli.duvivie.swen2project.Services;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class LoadingSpinnerService {
 

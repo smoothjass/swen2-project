@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ScrollPane?>
+<?import java.net.URL?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="fhtw.swen2.duelli.duvivie.swen2project.Controller.MainViewController"
       fx:id="mainView">
@@ -11,12 +12,16 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
+    <stylesheets>
+        <URL value="@stylesheets/main.css"/>
+    </stylesheets>
+
     <ScrollPane fitToHeight="true" fitToWidth="true">
     <SplitPane orientation="HORIZONTAL" VBox.vgrow="ALWAYS">
         <items>
-            <fx:include fx:id="tourListSubview" minWidth="200" maxWidth="500" source="tour-list-subview.fxml"> </fx:include>
+            <fx:include minWidth="200" maxWidth="500" source="tour-list-subview.fxml"> </fx:include>
             <SplitPane orientation="VERTICAL">
-                <fx:include fx:id="tourDetailsSubview" source="tour-details-subview.fxml"></fx:include>
+                <fx:include source="tour-details-subview.fxml"></fx:include>
             </SplitPane>
         </items>
     </SplitPane>

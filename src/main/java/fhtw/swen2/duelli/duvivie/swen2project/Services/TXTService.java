@@ -11,10 +11,19 @@ import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
-
 public class TXTService {
-    public void export(Tour tour, List<Log> logs) throws IOException {
+    public void export(Tour tour, List<Log> logs) throws IOException, IllegalArgumentException {
+
+            //if the tour is null, throw an exception
+            if(tour == null) {
+                throw new IllegalArgumentException("Tour is null");
+            }
+
+            //if one of the tour attributes is null, throw an exception
+            if(tour.getName() == null || tour.getDescription() == null || tour.getFrom() == null || tour.getTo() == null || tour.getTransportType() == null || tour.getDistance() == null || tour.getDuration() == null) {
+                throw new IllegalArgumentException("Tour attributes are null");
+            }
+
             String fileName = tour.getName() + "-Export.txt";
             String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedTXTs/" + fileName;
 
@@ -47,10 +56,7 @@ public class TXTService {
             writer.close();
 
             // Open the save dialog window
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save " + fileName);
-            fileChooser.setInitialFileName(fileName);
-            File file = fileChooser.showSaveDialog(null);
+            File file = saveFile(fileName);
 
             // Move the generated PDF file to the chosen location
             if (file != null) {
@@ -61,7 +67,24 @@ public class TXTService {
             //delete the generated file
             File generatedFile = new File(DEST);
             generatedFile.delete();
-    };
+    }
+
+
+    public File saveFile(String fileName) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save " + fileName);
+        fileChooser.setInitialFileName(fileName);
+        File file = fileChooser.showSaveDialog(null);
+        return file;
+    }
+
+    public File getFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Import TXT");
+        fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("TXT Files", "*.txt"));
+        return fileChooser.showOpenDialog(null);
+    }
 
     public Map<Tour, List<Log>> importData() throws IOException {
 
@@ -70,11 +93,7 @@ public class TXTService {
         List<Log> logs = new ArrayList<>();
 
         // Open the save dialog window
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Import TXT");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT Files", "*.txt"));
-        File file = fileChooser.showOpenDialog(null);
+        File file = getFile();
 
         //read the csv file and save the tour data in a tour object and the log data in list of log objects
         if (file != null) {
@@ -154,8 +173,19 @@ public class TXTService {
                     logs.add(log);
                 }
             }
+        } else {
+            //throw an exception
+            Throwable e = new Throwable("No file selected");
+            throw new IOException(e);
         }
+
         tourData.put(tour, logs);
+
+        if(tourData.isEmpty()){
+            Throwable e = new Throwable("No data found");
+            throw new IOException(e);
+        }
+
         return tourData;
     }
 }
