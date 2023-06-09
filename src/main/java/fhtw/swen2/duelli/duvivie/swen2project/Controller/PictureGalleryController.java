@@ -143,7 +143,6 @@ public class PictureGalleryController implements Initializable {
     }
 
     public void deleteCurrentImage(ActionEvent actionEvent) {
-        if(currentlySelected != null) {
             //delete the image from the source
             if(currentlySelected != null) {
                 if(images.size() == 1) {
@@ -162,7 +161,6 @@ public class PictureGalleryController implements Initializable {
                 else {
                     imageView.setImage(null);
                 }
-            }
         }
 
         if(images.size() <= 1){

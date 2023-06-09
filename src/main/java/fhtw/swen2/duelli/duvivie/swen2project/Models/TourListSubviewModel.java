@@ -50,7 +50,7 @@ public class TourListSubviewModel {
     }
 
     public void importTourData() {
-        Map<Tour, List<Log>> data = null;
+        Map<Tour, List<Log>> data;
 
         try {
             data = TXTService.importData();

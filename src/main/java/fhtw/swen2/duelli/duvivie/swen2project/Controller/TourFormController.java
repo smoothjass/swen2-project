@@ -17,11 +17,11 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.SubmissionPublisher;
 
 public class TourFormController implements Initializable {
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
     private final TourFormModel tourFormModel;
     public ImageView imageView;
@@ -47,7 +47,7 @@ public class TourFormController implements Initializable {
 
     public void saveNewTourData(ActionEvent actionEvent) {
         loadingSpinnerService.showSpinnerWindow();
-        Map<Tour, Image> tour = new HashMap<>();
+        Map<Tour, Image> tour;
         // currentlySelected tour == null >> create new tour, otherwise update
         // error when creating first tour
         if (currentlySelected.isEmpty()){
@@ -101,12 +101,7 @@ public class TourFormController implements Initializable {
         Image image = currentlySelected.entrySet().iterator().next().getValue();
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         updateImage(image);
-        if (tour != null) {
-            tourFormModel.autoFillTourData(tour);
-        }
-        else {
-            tourFormModel.autoFillTourData(new Tour());
-        }
+        tourFormModel.autoFillTourData(Objects.requireNonNullElseGet(tour, Tour::new));
     }
 
     public void addTour(ActionEvent actionEvent) {

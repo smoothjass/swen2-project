@@ -28,13 +28,13 @@ public class TXTService {
             String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedTXTs/" + fileName;
 
             FileWriter writer = new FileWriter(DEST);
-            writer.append("Tour: " + tour.getName());
-            writer.append("\nDescription: " + tour.getDescription());
-            writer.append("\nFrom: " + tour.getFrom());
-            writer.append("\nTo: " + tour.getTo());
-            writer.append("\nTransport Type: " + tour.getTransportType().getType());
-            writer.append("\nDistance: " + tour.getDistance());
-            writer.append("\nDuration: " + tour.getDuration());
+            writer.append("Tour: ").append(tour.getName());
+            writer.append("\nDescription: ").append(tour.getDescription());
+            writer.append("\nFrom: ").append(tour.getFrom());
+            writer.append("\nTo: ").append(tour.getTo());
+            writer.append("\nTransport Type: ").append(tour.getTransportType().getType());
+            writer.append("\nDistance: ").append(String.valueOf(tour.getDistance()));
+            writer.append("\nDuration: ").append(String.valueOf(tour.getDuration()));
             writer.append("\n");
             writer.append("\n");
 

@@ -142,33 +142,6 @@ public class TourDao {
         }
     }
 
-    public void deleteAll() throws RollbackException {
-        // Create a new EntityManager
-        EntityManager manager = this.entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-
-        try {
-            // Get a transaction
-            transaction = manager.getTransaction();
-            // Begin the transaction
-            transaction.begin();
-            // Delete all students
-            manager.createQuery("DELETE FROM Tour")
-                    .executeUpdate();
-            // Commit the transaction
-            transaction.commit();
-        } catch (RollbackException ex) {
-            // Commit failed. Rollback the transaction
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new RuntimeException(ex);
-        } finally {
-            // Close the EntityManager
-            manager.close();
-        }
-    }
-
     public Tour getTourById(int id) throws RollbackException {
         // Create a new EntityManager
         EntityManager manager = this.entityManagerFactory.createEntityManager();

@@ -66,7 +66,7 @@ public class LogViewController implements Initializable {
                 logsList.sort(Comparator.comparingInt(o -> o.log_id));
 
                 logsList.forEach(log -> {
-                    logs.getItems().add(String.valueOf(log.log_id) +
+                    logs.getItems().add((log.log_id) +
                             ": " +
                             log.comment);
                     logMap.put(log.getLog_id(), log);
