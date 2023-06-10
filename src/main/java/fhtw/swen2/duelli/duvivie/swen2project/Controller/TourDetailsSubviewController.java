@@ -67,6 +67,11 @@ public class TourDetailsSubviewController implements Initializable {
     }
 
     public void createSingleReport(ActionEvent actionEvent) {
+        if(currentlySelected == null) {
+            return;
+        } else if (currentlySelected.isEmpty()) {
+            return;
+        }
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         tourDetailsSubviewModel.createSingleReport(tour);
     }

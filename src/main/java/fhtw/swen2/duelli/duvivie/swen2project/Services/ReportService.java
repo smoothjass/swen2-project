@@ -27,8 +27,10 @@ public class ReportService {
 
     public ReportService() {}
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final LoadingSpinnerService loadingSpinnerService = new LoadingSpinnerService();
 
     public void createSingleReport(Tour tour, List<Log> logs) throws IOException {
+        loadingSpinnerService.showSpinnerWindow();
         String fileName = tour.getName() + "-Report.pdf";
         String DEST = "src/main/resources/fhtw/swen2/duelli/duvivie/swen2project/generatedReports/singleReports/" + fileName;
 
@@ -44,12 +46,18 @@ public class ReportService {
 
         document.add(tourInfo);
 
+        int days = tour.getDuration()/ 86400;
+        int hours = (tour.getDuration() % 86400 ) / 3600 ;
+        int minutes = ((tour.getDuration() % 86400 ) % 3600 ) / 60 ;
+
+        String time = days + " days " + hours + " hours " + minutes + " minutes";
+
         String tourData = "Description: " + tour.getDescription()
                 + "\nFrom: " + tour.getFrom()
                 + "\nTo: " + tour.getTo()
                 + "\nTransport Type: " + tour.getTransportType().getType()
-                + "\nDistance: " + tour.getDistance()
-                + "\nDuration: " + tour.getDuration();
+                + "\nDistance in km: " + tour.getDistance()
+                + "\nDuration: " + time;
 
         document.add(new Paragraph(tourData));
 
@@ -93,15 +101,24 @@ public class ReportService {
 
             //for each log entry add a row to the table
             for (Log log : logs) {
+
+                int log_days = (log.getTotal_time() / 86400);
+                int log_hours = ((log.getTotal_time() % 86400 ) / 3600);
+                int log_minutes = (((log.getTotal_time() % 86400 ) % 3600 ) / 60);
+
+                String log_time = log_days + " days " + log_hours + " hours " + log_minutes + " minutes";
+
                 table.addCell(log.getStarting_time().toString());
                 table.addCell(log.getComment());
                 table.addCell(String.valueOf(log.getDifficulty()));
-                table.addCell(String.valueOf(log.getTotal_time()));
+                table.addCell(log_time);
                 table.addCell(String.valueOf(log.getRating()));
             }
             document.add(table);
         }
         document.close();
+
+        loadingSpinnerService.hideSpinnerWindow();
 
         // Open the save dialog window
         FileChooser fileChooser = new FileChooser();
@@ -129,8 +146,6 @@ public class ReportService {
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
 
-        List<Log> logList = logs;
-
         Paragraph summaryHeader = new Paragraph("Summary Report: ")
                 .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
                 .setFontSize(18)
@@ -152,7 +167,7 @@ public class ReportService {
                     + "\nFrom: " + tour.getFrom()
                     + "\nTo: " + tour.getTo()
                     + "\nTransport Type: " + tour.getTransportType().getType()
-                    + "\nDistance: " + tour.getDistance()
+                    + "\nDistance in km: " + tour.getDistance()
                     + "\nDuration: " + tour.getDuration();
 
             document.add(new Paragraph(tourData));
@@ -164,47 +179,56 @@ public class ReportService {
                     .setFontColor(ColorConstants.BLACK);
             document.add(tableHeader);
 
-            //find all logs associated with the current tour in the logList and save them in a list and then remove them from the logList
+
             List<Log> tourLogs = new ArrayList<>();
-            for (Log log : logList) {
-                if (log.tour_id == tour.getTour_id()) {
+            //find all logs associated with the current tour in the logList and save them in a list and then remove them from the logList
+            for (Log log : logs) {
+                if (log.getTour_id() == tour.getTour_id()) {
                     tourLogs.add(log);
                 }
             }
-            logList.removeAll(tourLogs);
 
-            if(tourLogs.isEmpty()){
+            if(!tourLogs.isEmpty()){
 
-            // calculate the average time, -distance and rating over all associated tour-logs
-            double averageTime = 0;
-            double averageDistance = 0;
-            double averageRating = 0;
+                // calculate the average time, -distance and rating over all associated tour-logs
+                double averageTime = 0;
+                double averageDistance = 0;
+                double averageRating = 0;
 
-            for (Log log : tourLogs) {
-                averageTime += log.getTotal_time();
-                averageDistance += tour.getDistance();
-                averageRating += log.getRating();
-            }
+                for (Log log : tourLogs) {
+                    averageTime += log.getTotal_time();
+                    averageDistance += tour.getDistance();
+                    averageRating += log.getRating();
+                }
 
-            averageTime = averageTime / tourLogs.size();
-            averageDistance = averageDistance / tourLogs.size();
-            averageRating = averageRating / tourLogs.size();
+                averageTime = averageTime / tourLogs.size();
+                averageDistance = averageDistance / tourLogs.size();
+                averageRating = averageRating / tourLogs.size();
 
-            // add the calculated values to the summary report
-            Table table = new Table(UnitValue.createPercentArray(3)).useAllAvailableWidth();
-            table.addHeaderCell("Average Time");
-            table.addHeaderCell("Average Distance");
-            table.addHeaderCell("Average Rating");
-            table.setFontSize(14).setBackgroundColor(ColorConstants.WHITE);
-            table.addCell(String.valueOf(averageTime));
-            table.addCell(String.valueOf(averageDistance));
-            table.addCell(String.valueOf(averageRating));
-            document.add(table);
+                int days = (int) (averageTime / 86400);
+                int hours = (int) ((averageTime % 86400 ) / 3600);
+                int minutes = (int) (((averageTime % 86400 ) % 3600 ) / 60);
 
-            document.add(new AreaBreak(NEXT_PAGE));
-            }
+                String averageTimeString = days + " days " + hours + " hours " + minutes + " minutes";
+
+                // add the calculated values to the summary report
+                Table table = new Table(UnitValue.createPercentArray(3)).useAllAvailableWidth();
+                table.addHeaderCell("Average duration");
+                table.addHeaderCell("Average distance in km");
+                table.addHeaderCell("Average rating");
+                table.setFontSize(14).setBackgroundColor(ColorConstants.WHITE);
+                table.addCell(averageTimeString);
+                table.addCell(String.valueOf(averageDistance));
+                table.addCell(String.valueOf(averageRating));
+                document.add(table);
+                }
             else {
-                document.add(new Paragraph("No logs found for this tour!"));
+                    document.add(new Paragraph("No logs found for this tour!"));
+
+            }
+
+            //if the are still tours left add a page break
+            if(tours.indexOf(tour) != tours.size()-1){
                 document.add(new AreaBreak(NEXT_PAGE));
             }
         }
