@@ -107,6 +107,15 @@ public class PictureGalleryController implements Initializable {
         else {
             imageView.setImage(null);
         }
+
+        if(images.size() <= 1){
+            previous.setDisable(true);
+            next.setDisable(true);
+        }
+        else {
+            previous.setDisable(false);
+            next.setDisable(false);
+        }
     }
 
     public void deleteAssociatedImages() {
