@@ -52,12 +52,17 @@ public class ReportService {
 
         String time = days + " days " + hours + " hours " + minutes + " minutes";
 
+        String childFriendliness = calculateChildFriendliness(logs);
+        String avgRating = calculateAvgRating(logs);
+
         String tourData = "Description: " + tour.getDescription()
                 + "\nFrom: " + tour.getFrom()
                 + "\nTo: " + tour.getTo()
                 + "\nTransport Type: " + tour.getTransportType().getType()
                 + "\nDistance in km: " + tour.getDistance()
-                + "\nDuration: " + time;
+                + "\nDuration: " + time
+                + "\nChild Friendliness: " + childFriendliness
+                + "\nAverage Rating: " + avgRating;
 
         document.add(new Paragraph(tourData));
 
@@ -135,6 +140,45 @@ public class ReportService {
         //delete the generated file
         File generatedFile = new File(DEST);
         generatedFile.delete();
+    }
+
+    public String calculateAvgRating(List<Log> logs) {
+        Float avgRating = 0.0F;
+        for (Log log : logs) {
+            avgRating = avgRating + log.getRating();
+        }
+        if (logs.size() != 0){
+            avgRating = avgRating / logs.size();
+        }
+        if (avgRating != 0.0) {
+            return String.valueOf(avgRating);
+        }
+        else { // no logs
+            return "cannot calculate without logs";
+        }
+    }
+
+    public String calculateChildFriendliness(List<Log> logs) {
+        Float avgDifficulty = 0.0F;
+        for (Log log : logs) {
+            avgDifficulty = avgDifficulty + log.getDifficulty();
+        }
+        avgDifficulty = avgDifficulty / logs.size();
+        if (avgDifficulty > 0 && avgDifficulty <= 1) {
+            return "very good";
+        }
+        else if (avgDifficulty > 1 && avgDifficulty <= 2.5){
+            return "ok";
+        }
+        else if (avgDifficulty > 2.5 && avgDifficulty <= 4){
+            return "probably not suitable for children";
+        }
+        else if (avgDifficulty > 4){
+            return "not suitable for children";
+        }
+        else {
+            return "cannot calculate without logs";
+        }
     }
 
     public void createSummaryReport(List<Tour> tours, List<Log> logs) throws IOException {

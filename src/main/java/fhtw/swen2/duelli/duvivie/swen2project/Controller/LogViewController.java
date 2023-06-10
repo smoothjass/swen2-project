@@ -120,14 +120,20 @@ public class LogViewController implements Initializable {
             Tour tour = currentlySelected.entrySet().iterator().next().getKey();
             if(currentlySelectedLog == null) {
                currentlySelectedLog = logViewModel.addLog(tour.getTour_id());
+               if (currentlySelectedLog == null) {
+                   return;
+               }
                loadLogs(tour.getTour_id());
             }
             else{
                 currentlySelectedLog = logViewModel.updateLog(currentlySelectedLog);
+                if (currentlySelectedLog == null) {
+                    return;
+                }
                 loadLogs(tour.getTour_id());
             }
+            publisher.submit(currentlySelected);
         }
-        publisher.submit(currentlySelected);
     }
 
     @FXML public void handleMouseClick(MouseEvent mouseEvent) {

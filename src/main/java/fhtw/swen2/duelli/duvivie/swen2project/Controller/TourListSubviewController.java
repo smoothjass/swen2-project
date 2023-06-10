@@ -94,6 +94,9 @@ public class TourListSubviewController implements Initializable {
 
     @FXML public void handleMouseClick(MouseEvent mouseEvent) {
         String selected = tours.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            return;
+        }
         Integer selectedId = Integer.valueOf(selected.split(":")[0]);
         currentlySelected.clear();
         currentlySelected.put(tourMap.get(selectedId), null);
@@ -132,6 +135,11 @@ public class TourListSubviewController implements Initializable {
     }
 
     public void exportData(ActionEvent actionEvent) {
+        if(currentlySelected == null) {
+            return;
+        } else if (currentlySelected.isEmpty()) {
+            return;
+        }
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
 
         if(tour != null){

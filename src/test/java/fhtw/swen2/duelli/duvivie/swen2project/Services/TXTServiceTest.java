@@ -31,7 +31,7 @@ class TXTServiceTest {
 
     @Test
     @DisplayName("Test importing with null file")
-    void testImportWithNullFile() {
+    void testImportWithNullFile() throws IOException {
         // Create a dummy file
         File file = null;
 
@@ -39,7 +39,7 @@ class TXTServiceTest {
         Mockito.doReturn(file).when(txtService).getFile();
 
         // Verify that the txtService throws an exception
-        Assertions.assertThrows(IOException.class, () -> txtService.importData());
+        Assertions.assertEquals(null, txtService.importData());
     }
 
     @Test

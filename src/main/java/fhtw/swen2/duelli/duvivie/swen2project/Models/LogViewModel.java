@@ -89,7 +89,9 @@ public class LogViewModel {
             logger.warn("Input validation failed while adding a new log entry for tour with id " + tour_id + " because time was negative");
             return false;
         }
-        return true;
+        else{
+            return true;
+        }
     }
 
     public Log addLog(Integer tour_id) {

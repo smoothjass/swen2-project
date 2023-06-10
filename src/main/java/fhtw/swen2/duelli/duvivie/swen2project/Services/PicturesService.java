@@ -26,6 +26,11 @@ public class PicturesService {
         // delete the folder tourImagesPath+associatedTour.getId()
         File folder = new File(tourImagesPath+associatedTour.getTour_id());
         if (folder.exists()) {
+            String[]entries = folder.list();
+            for(String s: entries){
+                File currentFile = new File(folder.getPath(),s);
+                currentFile.delete();
+            }
             folder.delete();
         }
     }

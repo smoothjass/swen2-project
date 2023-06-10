@@ -38,7 +38,6 @@ public class TourFormController implements Initializable {
     public TextArea description;
     public ChoiceBox<String> transportType;
     private Map<Tour, Image> currentlySelected = new HashMap<>();
-    private LoadingSpinnerService loadingSpinnerService = new LoadingSpinnerService();
 
     public TourFormController(TourFormModel tourFormModel, SubmissionPublisher<Map<Tour, Image>> publisher) {
         this.tourFormModel = tourFormModel;
@@ -46,7 +45,6 @@ public class TourFormController implements Initializable {
     }
 
     public void saveNewTourData(ActionEvent actionEvent) {
-        loadingSpinnerService.showSpinnerWindow();
         Map<Tour, Image> tour;
         // currentlySelected tour == null >> create new tour, otherwise update
         // error when creating first tour
@@ -71,7 +69,6 @@ public class TourFormController implements Initializable {
         if (tour != null){ // tour == null >> invalid input
             publisher.submit(tour);
         }
-        loadingSpinnerService.hideSpinnerWindow();
     }
 
     @Override

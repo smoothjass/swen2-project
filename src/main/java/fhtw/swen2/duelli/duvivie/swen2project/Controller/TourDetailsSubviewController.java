@@ -77,6 +77,11 @@ public class TourDetailsSubviewController implements Initializable {
     }
 
     public void deleteCurrentlySelected(ActionEvent actionEvent) {
+        if(currentlySelected == null) {
+            return;
+        } else if (currentlySelected.isEmpty()) {
+            return;
+        }
         Tour tour = currentlySelected.entrySet().iterator().next().getKey();
         pictureGalleryController.deleteAssociatedImages();
         currentlySelected.clear();

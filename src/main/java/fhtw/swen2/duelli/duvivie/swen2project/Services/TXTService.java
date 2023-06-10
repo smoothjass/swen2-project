@@ -174,9 +174,8 @@ public class TXTService {
                 }
             }
         } else {
-            //throw an exception
-            Throwable e = new Throwable("No file selected");
-            throw new IOException(e);
+            // no file selected
+            return null;
         }
 
         tourData.put(tour, logs);

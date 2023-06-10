@@ -60,7 +60,9 @@ public class TourListSubviewModel {
             logger.error("An error occurred while importing data" + e.getMessage());
             throw new RuntimeException(e);
         }
-
+        if (data == null) {
+            return;
+        }
         Tour currentTour = data.entrySet().iterator().next().getKey();
         List<Log> newLogs = data.entrySet().iterator().next().getValue();
 

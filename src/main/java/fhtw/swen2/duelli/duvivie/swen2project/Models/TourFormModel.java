@@ -6,6 +6,7 @@ import fhtw.swen2.duelli.duvivie.swen2project.Entities.TransportType;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.ILoggerWrapper;
 import fhtw.swen2.duelli.duvivie.swen2project.Logger.LoggerFactory;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.DatabaseService;
+import fhtw.swen2.duelli.duvivie.swen2project.Services.LoadingSpinnerService;
 import fhtw.swen2.duelli.duvivie.swen2project.Services.MapService;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -42,6 +43,7 @@ public class TourFormModel {
     public StringProperty childFriendliness = new SimpleStringProperty();
     public StringProperty popularity = new SimpleStringProperty();
     public ObjectProperty<Image> imageView = new SimpleObjectProperty<>();
+    private LoadingSpinnerService loadingSpinnerService = new LoadingSpinnerService();
 
     private DatabaseService databaseService;
     private MapService mapService = new MapService();
@@ -53,20 +55,22 @@ public class TourFormModel {
 
     public Map<Tour, Image> saveTour() {
         if (validateInput()) {
+            loadingSpinnerService.showSpinnerWindow();
             // invoke MapService to get distance, duration and picture
             Object[] array = new Object[3];
             try {
                 array = mapService.getRoute(from.getValue(), to.getValue(), transportType.getValue());
                 if (array == null) {
+                    loadingSpinnerService.hideSpinnerWindow();
                     alert("Error", "Cannot calculate this route", "Please review your input or try again later");
                     return null;
                 }
                 logger.debug("Successfully got the route from " + from.getValue() + " to " + to.getValue());
-
             } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
                 System.out.println("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue());
                 System.out.println(e.getMessage());
                 logger.error("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue() + " " + e.getMessage());
+                loadingSpinnerService.hideSpinnerWindow();
             }
 
 
@@ -98,6 +102,7 @@ public class TourFormModel {
             System.out.println("An error occurred while saving the tour to the database.");
             System.out.println(e.getMessage());
             logger.error("An error occurred while saving the tour to the database:" + e.getMessage());
+            loadingSpinnerService.hideSpinnerWindow();
         }
 
             // update bound values
@@ -110,6 +115,7 @@ public class TourFormModel {
             // return the tour so it can be updated whereever needed
             Map<Tour, Image> tourImageMap = new HashMap<>();
             tourImageMap.put(tour, image);
+            loadingSpinnerService.hideSpinnerWindow();
             return tourImageMap;
         }
         return null;
@@ -146,6 +152,7 @@ public class TourFormModel {
     public Map<Tour, Image> updateTour(Tour tour) {
         // validate input
         if (validateInput()) {
+            loadingSpinnerService.showSpinnerWindow();
             // get the old tour from the db
             Tour oldTour = databaseService.getTourById(tour.getTour_id());
             // build the updated tour from the inputs
@@ -176,6 +183,7 @@ public class TourFormModel {
                 try {
                     array = mapService.getRoute(this.getFrom().getValue(), this.getTo().getValue(), this.getTransportType().getValue());
                     if (array == null) {
+                        loadingSpinnerService.hideSpinnerWindow();
                         alert("Error", "Cannot calculate this route", "Please review your input or try again later");
                         return null;
                     }
@@ -194,11 +202,13 @@ public class TourFormModel {
                     // return the tour so it can be updated whereever needed
                     Map<Tour, Image> tourImageMap = new HashMap<>();
                     tourImageMap.put(updatedTour, image);
+                    loadingSpinnerService.hideSpinnerWindow();
                     return tourImageMap;
                 } catch (IOException | URISyntaxException | InterruptedException | ExecutionException e) {
                     System.out.println("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue());
                     System.out.println(e.getMessage());
                     logger.error("An error occurred while getting the route from " + from.getValue() + " to " + to.getValue() + " " + e.getMessage());
+                    loadingSpinnerService.hideSpinnerWindow();
                     throw new RuntimeException(e);
                 }
             }
@@ -210,6 +220,7 @@ public class TourFormModel {
                 // return the tour so it can be updated whereever needed
                 Map<Tour, Image> tourImageMap = new HashMap<>();
                 tourImageMap.put(updatedTour, null);
+                loadingSpinnerService.hideSpinnerWindow();
                 return tourImageMap;
             }
         }
