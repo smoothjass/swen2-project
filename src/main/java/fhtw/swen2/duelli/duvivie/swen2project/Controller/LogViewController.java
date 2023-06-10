@@ -127,6 +127,7 @@ public class LogViewController implements Initializable {
                 loadLogs(tour.getTour_id());
             }
         }
+        publisher.submit(currentlySelected);
     }
 
     @FXML public void handleMouseClick(MouseEvent mouseEvent) {

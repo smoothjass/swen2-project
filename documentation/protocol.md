@@ -1,2 +1,0 @@
-einige models verwenden nur services -> kann man nicht wirklich für sich testen (außer calculations in zb tourformmodel)
-die controller binden großteils nur, also könnte man die auch nur mit frontend tests testen

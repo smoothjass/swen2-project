@@ -56,7 +56,6 @@ public class MainViewController implements Initializable, Flow.Subscriber<Map<To
         logger.debug("Received Tour: " + item);
         this.loadingSpinnerService.showSpinnerWindow();
         System.out.println("Received Tour: " + item);
-        // TODO check if tour/image are null and invoke respectively
         Tour tour = item.entrySet().iterator().next().getKey();
         Image image = item.get(currentlySelected);
         if(image == null & tour != null) {
